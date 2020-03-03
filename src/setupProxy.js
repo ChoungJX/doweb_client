@@ -8,9 +8,9 @@ module.exports = function(app) {
     })
   );
   app.use(
-    '/sys',
+    '/api',
     createProxyMiddleware({
-      target: 'http://localhost:5001',
+      target: 'http://10.12.127.111:4000',
       changeOrigin: true,
     })
   );

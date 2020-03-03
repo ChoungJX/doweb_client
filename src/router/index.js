@@ -29,7 +29,7 @@ export default function AuthExample() {
   return (
     <Router>
         <Switch>
-        <Route exact path="/">
+        <Route exact path="/control">
             <Index />
         </Route>
         <Route path="/login">

@@ -39,6 +39,7 @@ export default class Index extends React.Component{
             </Menu>
         </Header>
         <IndexSider />
+        <ServerTable />
       </Layout>
     )
   }
