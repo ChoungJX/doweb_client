@@ -36,7 +36,7 @@ export class LoginForm extends React.Component{
             password: values.password,
         }).then(data => {
             if (data.data.status === 0){
-                window.location.replace('/')
+                window.location.replace('/control')
             }else{
                 message.info('用户或密码错误！');
             }

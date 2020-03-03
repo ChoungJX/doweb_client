@@ -1,13 +1,13 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, } from 'react-router-dom'
+import { Layout } from 'antd';
+
 import Index from '../pages/index'
 import Login from '../pages/login'
 
+import './index.css';
 
+const { Content } = Layout;
 
 
 // This example has 3 pages: a public page, a protected
@@ -26,16 +26,12 @@ import Login from '../pages/login'
 // just *before* logging in, the public page.
 
 export default function AuthExample() {
+
   return (
     <Router>
-        <Switch>
-        <Route exact path="/control">
-            <Index />
+        <Route  path='/control' component={Index} >
         </Route>
-        <Route path="/login">
-            <Login />
-        </Route>
-        </Switch>
-    </Router>
+        <Route path='/login' component={Login} />
+  </Router>
   );
 }

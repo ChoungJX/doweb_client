@@ -54,7 +54,6 @@ export class IndexSider extends React.Component {
 
   render() {
     return (
-        <Layout>
         <Sider width={200} className="site-layout-background">
         <Menu
             mode="inline"
@@ -112,35 +111,6 @@ export class IndexSider extends React.Component {
                 </SubMenu>
             </Menu>
         </Sider>
-        <Layout style={{ padding: '0 24px 24px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
-          <Switch>
-          <Content
-            className="site-layout-background"
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-            }}
-          >
-              {routes.map((route, index) => (
-              // Render more <Route>s with the same paths as
-              // above, but different components this time.
-              <Route
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                children={<route.main />}
-              />
-            ))}
-          </Content>
-          </Switch>
-        </Layout>
-      </Layout>
     );
   }
 }
