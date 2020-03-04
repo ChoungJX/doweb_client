@@ -10,36 +10,24 @@ import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/ico
 import { Layout, Menu, Breadcrumb, } from 'antd';
 
 const { SubMenu } = Menu;
-const { Content, Sider } = Layout;
-
-const routes = [
-    {
-      path: "/",
-      exact: true,
-      sidebar: () => <div>home!</div>,
-      main: () => <h2>Home</h2>
-    },
-    {
-      path: "/test",
-      sidebar: () => <div>bubblegum!</div>,
-      main: () => <h2>Bubblegum</h2>
-    },
-    {
-      path: "/shoelaces",
-      sidebar: () => <div>shoelaces!</div>,
-      main: () => <h2>Shoelaces</h2>
-    }
-  ];
+const {  Sider } = Layout;
 
 
 
 export class IndexSider extends React.Component {
   // submenu keys of first level
-  rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
 
-  state = {
-    openKeys: ['sub1'],
-  };
+    constructor(props){
+      super(props);
+      this.rootSubmenuKeys = ['sub1', 'sub2', 'sub3','sub4'];
+      this.state = {
+        openKeys: [this.props. openKey],
+        openOptions: [this.props.selectOptins],
+      };
+    }
+
+  
+
 
   onOpenChange = openKeys => {
     const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
@@ -57,7 +45,8 @@ export class IndexSider extends React.Component {
         <Sider width={200} className="site-layout-background">
         <Menu
             mode="inline"
-            openKeys={this.state.openKeys}
+            defaultOpenKeys={this.state.openKeys}
+            defaultSelectedKeys={this.state.openOptions}
             onOpenChange={this.onOpenChange}
             style={{ width: 200 }}
             >
@@ -71,7 +60,7 @@ export class IndexSider extends React.Component {
                 }
                 >
                 <Menu.Item key="1">
-                    <Link to='/'>集群总览</Link>
+                    <Link to='/control/serverinfo'>集群总览</Link>
                 </Menu.Item>
                 <Menu.Item key="2">
                     <Link to='/test'>集群密钥管理</Link>
@@ -84,11 +73,13 @@ export class IndexSider extends React.Component {
                 title={
                     <span>
                     <AppstoreOutlined />
-                    <span>Navigation Two</span>
+                    <span>容器管理</span>
                     </span>
                 }
                 >
-                <Menu.Item key="5">Option 5</Menu.Item>
+                <Menu.Item key="5">
+                  <Link to='/control/containerinfo'>容器总览</Link>
+                </Menu.Item>
                 <Menu.Item key="6">Option 6</Menu.Item>
                 <SubMenu key="sub3" title="Submenu">
                     <Menu.Item key="7">Option 7</Menu.Item>

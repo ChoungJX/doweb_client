@@ -7,6 +7,7 @@ import { Layout, Menu, Breadcrumb, } from 'antd';
 import { AllHeader } from '../../components/header'
 import { IndexSider } from '../../components/index_menu'
 import { ServerTable } from '../../components/server_table'
+import { ContainerTable } from '../../components/container_table'
 
 
 const { SubMenu } = Menu;
@@ -20,7 +21,17 @@ export default function Index(){
       <Layout>
           <AllHeader  number={'1'}/>
           <Layout>
-              <IndexSider />
+          <Switch>
+                <Route exact path={`${url}`}>
+                    <IndexSider />
+                </Route>
+                <Route path={`${url}/serverinfo`}>
+                    <IndexSider  openKey='sub1' selectOptins='1' />
+                </Route>
+                <Route path={`${url}/containerinfo`}>
+                <IndexSider  openKey='sub2' selectOptins='5' />
+                </Route>
+            </Switch>
               <Layout style={{ padding: '0 24px 24px' }}>
                   <Content
                       className="site-layout-background"
@@ -36,6 +47,9 @@ export default function Index(){
                               </Route>
                               <Route path={`${url}/serverinfo`}>
                                   <ServerTable />
+                              </Route>
+                              <Route path={`${url}/containerinfo`}>
+                                  <ContainerTable />
                               </Route>
                           </Switch>
 
