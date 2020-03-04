@@ -1,13 +1,10 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link
   } from "react-router-dom";
 import 'antd/dist/antd.css';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { Layout, Menu, Breadcrumb, } from 'antd';
+import { Layout, Menu,} from 'antd';
 
 const { SubMenu } = Menu;
 const {  Sider } = Layout;

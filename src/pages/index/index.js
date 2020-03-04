@@ -1,21 +1,21 @@
 import React from 'react';
-import { Switch, Route, useRouteMatch, Link} from 'react-router-dom'
+import { Switch, Route, useRouteMatch} from 'react-router-dom'
 import 'antd/dist/antd.css';
 import './index.css';
-import { Layout, Menu, Breadcrumb, } from 'antd';
+import { Layout,} from 'antd';
 
 import { AllHeader } from '../../components/header'
 import { IndexSider } from '../../components/index_menu'
 import { ServerTable } from '../../components/server_table'
 import { ContainerTable } from '../../components/container_table'
+import { ContainerInfo } from '../../components/container_info'
 
 
-const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+const { Content } = Layout;
 
 
 export default function Index(){
-    let {path, url} = useRouteMatch();
+    let {url} = useRouteMatch();
 
     return(
       <Layout>
@@ -48,8 +48,11 @@ export default function Index(){
                               <Route path={`${url}/serverinfo`}>
                                   <ServerTable />
                               </Route>
-                              <Route path={`${url}/containerinfo`}>
+                              <Route exact path={`${url}/containerinfo`}>
                                   <ContainerTable />
+                              </Route>
+                              <Route  path={`${url}/containerinfo/:server_ip/:id`}>
+                                  <ContainerInfo />
                               </Route>
                           </Switch>
 

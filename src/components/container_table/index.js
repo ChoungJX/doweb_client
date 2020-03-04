@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useRouteMatch } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import './index.css';
 import { Table,Button,Popconfirm, notification,Modal,Input } from 'antd';
@@ -24,7 +25,7 @@ class ContainerDeleteButton extends React.Component{
 
         await axios.post('/api',
         {
-        api: 'server_delete',
+        api: 'container_delete',
         id: this.props.id,
         }).then(data => {
             //message.info('删除成功!');
@@ -63,6 +64,15 @@ class ContainerDeleteButton extends React.Component{
             </span>
         )
     }
+}
+
+export function ContainerInfoButton(props){
+  let {url} = useRouteMatch();
+  return(
+    <Link to={`${url}/${props.server_ip}/${props.id}`} >
+        <Button type="primary" shape="circle" icon={<EditOutlined />} />
+    </Link>
+  );
 }
 
 
@@ -179,18 +189,23 @@ export class ContainerTable extends React.Component {
 
   columns = [
     {
-      title: '节点名字',
+      title: '容器名字',
       dataIndex: 'name',
       width: '20%',
     },
     {
-      title: '节点ip',
+      title: '容器ip',
       dataIndex: 'ip',
       width: '20%',
     },
     {
       title: '状态',
       dataIndex: 'status',
+      width: '20%'
+    },
+    {
+      title: '对应集群ip',
+      dataIndex: 'server_ip',
       width: '20%'
     },
     {
@@ -204,7 +219,12 @@ export class ContainerTable extends React.Component {
                     id={record.id}
                     onClick= {() => this.handleRefresh({id:record.id})}
                 />
+                <ContainerInfoButton 
+                    server_ip={record.server_ip}
+                    id={record.id}
+                />
               </span>
+
           )
       }
     }
@@ -250,7 +270,7 @@ export class ContainerTable extends React.Component {
     
     axios.post('/api',
     {
-      api: 'server_info',
+      api: 'container_info',
       page_current: params.page,
       need: params.results,
     }).then(data => {
