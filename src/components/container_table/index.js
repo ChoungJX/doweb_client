@@ -2,11 +2,11 @@ import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import './index.css';
-import { Table,Button,Popconfirm, notification,Modal,Input } from 'antd';
-import { DeleteOutlined,SmileOutlined, EditOutlined,AppstoreAddOutlined,FormOutlined,CloudServerOutlined } from '@ant-design/icons';
+import { Table,Button,Popconfirm, notification,Modal,Input,Select,Spin,Switch,Divider,} from 'antd';
+import { DeleteOutlined,SmileOutlined, EyeOutlined,AppstoreAddOutlined,FormOutlined,PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
-
+const { Option } = Select;
 
 
 class ContainerDeleteButton extends React.Component{
@@ -70,11 +70,148 @@ export function ContainerInfoButton(props){
   let {url} = useRouteMatch();
   return(
     <Link to={`${url}/${props.server_ip}/${props.id}`} >
-        <Button type="primary" shape="circle" icon={<EditOutlined />} />
+        <Button type="primary" shape="circle" icon={<EyeOutlined />} />
     </Link>
   );
 }
 
+
+class ContainerAddSearchServer extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            loading: true,
+            data: []
+        }
+    }
+
+    get_server_list(){
+        this.setState({
+            loading: true,
+        })
+        axios.post('/api',
+        {
+            api: 'server_info_all',
+        }).then(data => {
+                this.setState({
+                    loading: false,
+                    data: data.data.data,
+                })
+            });
+    }
+
+    render(){
+        const { data,loading } = this.state;
+        return(
+            <Select
+                labelInValue
+                placeholder="请选择节点"
+                notFoundContent={loading ? <Spin size="small" /> : null}
+                style={{ width: '100%' }}
+                loading={loading}
+                onDropdownVisibleChange={()=>this.get_server_list()}
+                onChange={value=>this.props.push_value(value)}
+            >
+                {data.map(d => (
+                <Option key={d.ip}>{d.name}</Option>
+                ))}
+            </Select>
+        )
+    }
+}
+
+class ContainerAddPorts extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            checked: false,
+            items: ["443:443","3306:3306","80.80"],
+            server_port: '',
+            local_port:'',
+
+            need_value:[]
+        }
+    }
+
+    onServerPortChange = event => {
+        this.setState({
+            server_port: event.target.value,
+        });
+      };
+
+      onLocalPortChange = event => {
+        this.setState({
+            local_port:event.target.value,
+        });
+      };
+
+      addItem = () => {
+        const { items, server_port,local_port } = this.state;
+
+        if(server_port !== '' && local_port!==''){
+            let name = `${server_port}:${local_port}`
+            this.setState({
+                items: [...items, name],
+                server_port: '',
+                local_port:'',
+              });
+        }
+      };
+
+    change_switch(){
+        if (this.state.checked){
+            this.setState({
+                checked: false,
+            })
+            this.props.push_args([]);
+        }else{
+            this.setState({
+                checked: true,
+            })
+        }
+    }
+
+    render(){
+        const { items, server_port,local_port,checked } = this.state;
+        return(
+            <div>
+                是否映射端口<Switch 
+                                                checked={checked} 
+                                                onClick={()=>this.change_switch()}
+                                            />
+                <Select
+                    mode="multiple"
+                    style={{ width: 240 }}
+                    placeholder="请选择端口转发规则"
+                    disabled={checked ? false : true}
+                    onChange={value=>this.props.push_args(value)}
+                    dropdownRender={menu => (
+                    <div>
+                        {menu}
+                        <Divider style={{ margin: '4px 0' }} />
+                        <div style={{ display: 'flex', flexWrap: 'nowrap', padding: 4 }}>
+                        <Input addonBefore="节点端口" style={{ flex: 'auto' }} value={server_port} onChange={this.onServerPortChange} />
+                        </div>
+                        <div style={{ display: 'flex', flexWrap: 'nowrap', padding: 4 }}>
+                        <Input addonBefore="容器端口" style={{ flex: 'auto' }} value={local_port} onChange={this.onLocalPortChange} />
+                        </div>
+                        <a
+                            style={{ flex: 'none', padding: '8px', display: 'block', cursor: 'pointer' }}
+                            onClick={this.addItem}
+                        >
+                            <PlusOutlined /> 添加规则
+                        </a>
+                    </div>
+                    )}
+                >
+                    {items.map(item => (
+                    <Option key={item}>{item}</Option>
+                    ))}
+                </Select>
+            </div>
+        )
+    }
+}
 
 class ContainerAddButton extends React.Component{
   constructor(props){
@@ -82,8 +219,10 @@ class ContainerAddButton extends React.Component{
     this.state = {
         loading: false,
         visible: false,
+        input_server: '',
         input_name: '',
         input_ip: '',
+        input_ports:''
     };
 }
 
@@ -98,6 +237,16 @@ class ContainerAddButton extends React.Component{
         input_ip:e.target.value
     })
   }
+
+    handelInputServer(value){
+        this.setState({
+            input_server: value.value,
+        })
+    }
+
+    handelInputPorts(value){
+        console.log(value)
+    }
 
   showModal = () => {
     this.setState({
@@ -141,10 +290,10 @@ class ContainerAddButton extends React.Component{
               shape="round" 
               icon={<AppstoreAddOutlined />} 
               onClick={this.showModal}
-          >添加新节点</Button> 
+          >创建新容器</Button> 
         <Modal
           visible={visible}
-          title="节点添加"
+          title="容器创建"
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           footer={[
@@ -156,24 +305,23 @@ class ContainerAddButton extends React.Component{
             </Button>,
           ]}
         >
-          <p>
+            <div>
+                <ContainerAddSearchServer  push_value={value=>this.handelInputServer(value)}/>
+            </div>
+            <br />
+          <div>
             <Input 
-                size="large" 
+                addonBefore="名字"
                 prefix={<FormOutlined />} 
-                placeholder="请输入节点名字..." 
+                placeholder="为容器设置名字(可选)" 
                 onChange={this.handleInpulName.bind(this)}
                 value={this.state.input_name}
             />
-          </p>
-          <p>
-            <Input 
-                size="large" 
-                prefix={<CloudServerOutlined />} 
-                placeholder="请输入节点ip..." 
-                onChange={this.handleInpulIp.bind(this)}
-                value={this.state.input_ip}
-            />
-          </p>
+          </div>
+          <br />
+          <div>
+              <ContainerAddPorts push_args={value=>this.handelInputPorts(value)}/>
+          </div>
         </Modal>
       </div>
     );
@@ -214,11 +362,11 @@ export class ContainerTable extends React.Component {
       render: (text, record, index)=>{
           return(
               <span>
-                <ContainerDeleteButton 
-                    loading={Boolean(false)}
-                    id={record.id}
-                    onClick= {() => this.handleRefresh({id:record.id})}
-                />
+                  <ContainerDeleteButton 
+                      loading={Boolean(false)}
+                      id={record.id}
+                      onClick= {() => this.handleRefresh({id:record.id})}
+                  />
                 <ContainerInfoButton 
                     server_ip={record.server_ip}
                     id={record.id}

@@ -60,7 +60,7 @@ export class IndexSider extends React.Component {
                     <Link to='/control/serverinfo'>集群总览</Link>
                 </Menu.Item>
                 <Menu.Item key="2">
-                    <Link to='/test'>集群密钥管理</Link>
+                    <Link to='/control/server_secret'>集群密钥管理</Link>
                 </Menu.Item>
                 <Menu.Item key="3">Option 3</Menu.Item>
                 <Menu.Item key="4">Option 4</Menu.Item>
@@ -78,24 +78,19 @@ export class IndexSider extends React.Component {
                   <Link to='/control/containerinfo'>容器总览</Link>
                 </Menu.Item>
                 <Menu.Item key="6">Option 6</Menu.Item>
-                <SubMenu key="sub3" title="Submenu">
-                    <Menu.Item key="7">Option 7</Menu.Item>
-                    <Menu.Item key="8">Option 8</Menu.Item>
-                </SubMenu>
                 </SubMenu>
                 <SubMenu
                 key="sub4"
                 title={
                     <span>
                     <SettingOutlined />
-                    <span>Navigation Three</span>
+                    <span>镜像管理</span>
                     </span>
                 }
                 >
-                <Menu.Item key="9">Option 9</Menu.Item>
-                <Menu.Item key="10">Option 10</Menu.Item>
-                <Menu.Item key="11">Option 11</Menu.Item>
-                <Menu.Item key="12">Option 12</Menu.Item>
+                <Menu.Item key="9">
+                  <Link to='/control/image'>镜像列表</Link>
+                </Menu.Item>
                 </SubMenu>
             </Menu>
         </Sider>
