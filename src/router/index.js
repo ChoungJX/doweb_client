@@ -25,11 +25,11 @@ import './index.css';
 
 export default function AuthExample() {
 
-  return (
-    <Router>
-        <Route  path='/control' component={Index} >
-        </Route>
-        <Route path='/login' component={Login} />
-  </Router>
-  );
+    return (
+        <Router>
+            <Route path='/control' component={Index} >
+            </Route>
+            <Route path='/login' component={Login} />
+        </Router>
+    );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { 
+import {
     Row,
     Col,
     Calendar,
@@ -14,25 +14,25 @@ function onPanelChange(value, mode) {
 }
 
 
-export default class Login extends React.Component{
+export default class Login extends React.Component {
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <Row>
-                <Col span={24}><br></br></Col>
+                    <Col span={24}><br></br></Col>
                 </Row>
                 <Row align={'middle'}>
-                <Col span={1} />
-                <Col span={12}>
-                    <Calendar onPanelChange={onPanelChange} />
-                </Col>
-                <Col span={9}>
-                    <LoginForm />
-                </Col>
-                <Col span={2} />
+                    <Col span={1} />
+                    <Col span={12}>
+                        <Calendar onPanelChange={onPanelChange} />
+                    </Col>
+                    <Col span={9}>
+                        <LoginForm />
+                    </Col>
+                    <Col span={2} />
                 </Row>
-          </div>
+            </div>
         )
     }
 }
