@@ -1,8 +1,8 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import axios from 'axios';
-import { Table, Button, notification, Popconfirm } from 'antd';
-import { AppstoreAddOutlined, DeleteOutlined, SmileOutlined } from '@ant-design/icons';
+import { Table, Button, notification, Popconfirm, Modal, Input } from 'antd';
+import { AppstoreAddOutlined, DeleteOutlined, SmileOutlined, FormOutlined } from '@ant-design/icons';
 
 
 class OneImageTable extends React.Component {
@@ -105,11 +105,92 @@ class OneImageTable extends React.Component {
     }
 }
 
-function AddImageButton(props) {
+class AddImageButton extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false,
+            visible: false,
+            input_value: '',
+        }
+    }
 
-    return (
-        <Button type="primary" shape="circle" icon={<AppstoreAddOutlined />} />
-    )
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+
+    async handleOk() {
+        this.setState({ loading: true });
+
+        const { input_value } = this.state;
+        await axios.post('/api',
+            {
+                api: 'image_add',
+                server_ip: this.props.server_ip,
+                name: input_value
+            }).then(data => {
+                //message.info('删除成功!');
+                notification.open({
+                    message: '添加成功!',
+                    description:
+                        '镜像:' + data.data.id + '  添加成功!',
+                    icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                });
+            });
+        this.props.onClick();
+        this.setState({ loading: false, visible: false });
+    }
+
+    handleCancel = () => {
+        this.setState({ visible: false });
+    };
+
+    handleInput(e) {
+        this.setState({
+            input_value: e.target.value
+        })
+    }
+
+    render() {
+        const { visible, loading } = this.state;
+        return (
+            <span>
+                <Button
+                    type="primary"
+                    shape="circle"
+                    icon={<AppstoreAddOutlined />}
+                    onClick={() => this.showModal()}
+                />
+                <Modal
+                    visible={visible}
+                    title="镜像添加"
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    footer={[
+                        <Button key="back" onClick={this.handleCancel}>
+                            返回
+                    </Button>,
+                        <Button key="submit" type="primary" loading={loading} onClick={() => this.handleOk()}>
+                            提交
+                    </Button>,
+                    ]}
+                >
+                    <p>你可以从docker官方镜像网站查询镜像名字</p>
+                    <p>
+                        <Input
+                            size="large"
+                            placeholder="请输入镜像名字..."
+                            prefix={<FormOutlined />}
+                            defaultValue={this.props.name}
+                            onChange={this.handleInput.bind(this)}
+                        />
+                    </p>
+                </Modal>
+            </span>
+        )
+    }
 }
 
 class DeleteImageButton extends React.Component {
@@ -192,7 +273,7 @@ export class ImageTable extends React.Component {
                 render: (text, record, index) => {
                     return (
                         <span>
-                            <AddImageButton server_ip={record.ip} />
+                            <AddImageButton onClick={() => this.handleUpdate()} server_ip={record.ip} />
                         </span>
                     )
                 }
@@ -201,6 +282,14 @@ export class ImageTable extends React.Component {
     }
 
     componentDidMount() {
+        const { pageSize, current } = this.state.pagination;
+        this.fetch({
+            page: current,
+            results: pageSize,
+        })
+    }
+
+    handleUpdate() {
         const { pageSize, current } = this.state.pagination;
         this.fetch({
             page: current,
