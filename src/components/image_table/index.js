@@ -140,7 +140,7 @@ class AddImageButton extends React.Component {
                 });
             });
         this.props.onClick();
-        this.setState({ loading: false, visible: false });
+        this.setState({ loading: false, visible: false, input_value: '' });
     }
 
     handleCancel = () => {
@@ -154,7 +154,7 @@ class AddImageButton extends React.Component {
     }
 
     render() {
-        const { visible, loading } = this.state;
+        const { visible, loading, input_value } = this.state;
         return (
             <span>
                 <Button
@@ -181,6 +181,7 @@ class AddImageButton extends React.Component {
                     <p>
                         <Input
                             size="large"
+                            value={input_value}
                             placeholder="请输入镜像名字..."
                             prefix={<FormOutlined />}
                             defaultValue={this.props.name}
@@ -255,6 +256,8 @@ export class ImageTable extends React.Component {
                 pageSize: 8,
                 current: 1,
             },
+
+            one_image_key: Math.random(),
         }
         this.columns = [
             {
@@ -325,11 +328,13 @@ export class ImageTable extends React.Component {
                     loading: false,
                     data: data.data.data,
                     pagination,
+                    one_image_key: Math.random(),
                 });
             });
     };
 
     render() {
+        const { one_image_key } = this.state;
         return (
             <Table
                 columns={this.columns}
@@ -338,7 +343,7 @@ export class ImageTable extends React.Component {
                 pagination={this.state.pagination}
                 loading={this.state.loading}
                 onChange={this.handleTableChange}
-                expandedRowRender={record => { return (<OneImageTable server_ip={record.ip} />) }}
+                expandedRowRender={record => { return (<OneImageTable key={one_image_key} server_ip={record.ip} />) }}
             />
         );
     }
