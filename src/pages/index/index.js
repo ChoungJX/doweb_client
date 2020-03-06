@@ -9,6 +9,7 @@ import { IndexSider } from '../../components/index_menu'
 import { ServerTable } from '../../components/server_table'
 import { ContainerTable } from '../../components/container_table'
 import { ContainerOne } from '../../components/container_info'
+import { ImageTable } from '../../components/image_table'
 
 
 const { Content } = Layout;
@@ -64,6 +65,9 @@ export default function Index() {
                             </Route>
                             <Route path={`${url}/containerinfo/:server_ip/:id`}>
                                 <ContainerOne />
+                            </Route>
+                            <Route path={`${url}/image`}>
+                                <ImageTable />
                             </Route>
                         </Switch>
 

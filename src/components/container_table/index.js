@@ -611,6 +611,10 @@ class ContainerAddButton extends React.Component {
             ifT: true,
             ifI: true,
             ifRestart: false,
+            input_server: '',
+            input_image:'',
+            input_network:'',
+            input_ports:'',
 
             server_key: Math.random(),
             image_key: Math.random(),
