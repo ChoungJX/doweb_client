@@ -1,8 +1,8 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import axios from 'axios';
-import { Table, Button, } from 'antd';
-import { AppstoreAddOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Table, Button, notification, Popconfirm } from 'antd';
+import { AppstoreAddOutlined, DeleteOutlined, SmileOutlined } from '@ant-design/icons';
 
 
 class OneImageTable extends React.Component {
@@ -26,10 +26,14 @@ class OneImageTable extends React.Component {
             {
                 title: '操作',
                 dataIndex: "tags",
-                render: (record) => {
+                render: (text, record, index) => {
                     return (
                         <span>
-                            <DeleteImageButton server_ip={this.props.server_ip} />
+                            <DeleteImageButton
+                                server_ip={this.props.server_ip}
+                                id={record.id}
+                                onClick={() => this.handleUpdate()}
+                            />
                         </span>
                     )
                 }
@@ -38,6 +42,14 @@ class OneImageTable extends React.Component {
     }
 
     componentDidMount() {
+        const { pageSize, current } = this.state.pagination;
+        this.fetch({
+            page: current,
+            results: pageSize,
+        })
+    }
+
+    handleUpdate() {
         const { pageSize, current } = this.state.pagination;
         this.fetch({
             page: current,
@@ -100,11 +112,56 @@ function AddImageButton(props) {
     )
 }
 
-function DeleteImageButton(props) {
+class DeleteImageButton extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false,
+        }
+    }
 
-    return (
-        <Button type="primary" shape="circle" icon={<DeleteOutlined />} danger />
-    )
+    async deleteImage() {
+        this.setState({
+            loading: true,
+        })
+        await axios.post('/api',
+            {
+                api: 'image_delete',
+                id: this.props.id,
+                server_ip: this.props.server_ip,
+            }).then(data => {
+                //message.info('删除成功!');
+                notification.open({
+                    message: '删除成功!',
+                    description:
+                        '镜像:' + this.props.id + ' 删除成功!',
+                    icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                });
+            });
+        this.setState({
+            loading: false,
+        });
+        this.props.onClick();
+    }
+
+    render() {
+        return (
+            <Popconfirm
+                placement="right"
+                title={'您确定要删除该节点吗？'}
+                onConfirm={() => this.deleteImage()}
+                okText="是"
+                cancelText="否">
+                <Button
+                    type="primary"
+                    shape="circle"
+                    icon={<DeleteOutlined />}
+                    danger
+                    loading={this.state.loading}
+                />
+            </Popconfirm>
+        )
+    }
 }
 
 export class ImageTable extends React.Component {
