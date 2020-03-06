@@ -40,11 +40,38 @@ export default function Index() {
                     </Route>
                 </Switch>
                 <Layout style={{ padding: '0 24px 24px' }}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>
+                    <Switch>
+                        <Route exact path={`${url}`}>
+                            <Breadcrumb style={{ margin: '16px 0' }}>
+                                <Breadcrumb.Item>主页</Breadcrumb.Item>
+                            </Breadcrumb>
+                        </Route>
+                        <Route path={`${url}/serverinfo`}>
+                            <Breadcrumb style={{ margin: '16px 0' }}>
+                                <Breadcrumb.Item>主页</Breadcrumb.Item>
+                                <Breadcrumb.Item>集群信息</Breadcrumb.Item>
+                            </Breadcrumb>
+                        </Route>
+                        <Route exact path={`${url}/containerinfo`}>
+                            <Breadcrumb style={{ margin: '16px 0' }}>
+                                <Breadcrumb.Item>主页</Breadcrumb.Item>
+                                <Breadcrumb.Item>容器总览</Breadcrumb.Item>
+                            </Breadcrumb>
+                        </Route>
+                        <Route path={`${url}/containerinfo/:server_ip/:id`}>
+                            <Breadcrumb style={{ margin: '16px 0' }}>
+                                <Breadcrumb.Item>主页</Breadcrumb.Item>
+                                <Breadcrumb.Item>容器总览</Breadcrumb.Item>
+                                <Breadcrumb.Item>容器详情</Breadcrumb.Item>
+                            </Breadcrumb>
+                        </Route>
+                        <Route path={`${url}/image`}>
+                            <Breadcrumb style={{ margin: '16px 0' }}>
+                                <Breadcrumb.Item>主页</Breadcrumb.Item>
+                                <Breadcrumb.Item>镜像总览</Breadcrumb.Item>
+                            </Breadcrumb>
+                        </Route>
+                    </Switch>
                     <Content
                         className="site-layout-background"
                         style={{
