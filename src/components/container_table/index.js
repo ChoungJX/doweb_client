@@ -27,12 +27,13 @@ class ContainerDeleteButton extends React.Component {
             {
                 api: 'container_delete',
                 id: this.props.id,
+                server_ip: this.props.server_ip,
             }).then(data => {
                 //message.info('删除成功!');
                 notification.open({
                     message: '删除成功!',
                     description:
-                        '节点:' + this.props.id + '  删除成功!',
+                        '容器:' + this.props.id + '  删除成功!',
                     icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                 });
             });
@@ -191,7 +192,7 @@ class ContainerAddNetwork extends React.Component {
         axios.post('/api',
             {
                 api: 'server_network_info',
-                ip: server_ip,
+                server_ip: server_ip,
             }).then(data => {
                 this.setState({
                     items: data.data.data,
@@ -589,7 +590,8 @@ class ContainerAddButton extends React.Component {
         console.log(send_args);
         await axios.post('/api',
             {
-                api: 'container_add',
+                //api: 'container_add',
+                api: 'test',
                 info: send_args,
             }).then(data => {
                 //message.info('删除成功!');
@@ -739,6 +741,7 @@ export class ContainerTable extends React.Component {
                             loading={Boolean(false)}
                             id={record.id}
                             onClick={() => this.handleRefresh({ id: record.id })}
+                            server_ip={record.server_ip}
                         />
                         <ContainerInfoButton
                             server_ip={record.server_ip}
