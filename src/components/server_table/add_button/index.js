@@ -1,7 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Button, Modal, Input, Radio } from 'antd';
-import { DatabaseOutlined, ApiTwoTone, EditTwoTone } from '@ant-design/icons';
+import { Button, Modal, Input, Radio, notification } from 'antd';
+import { DatabaseOutlined, ApiTwoTone, EditTwoTone, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 
@@ -38,6 +38,12 @@ export default class ServerAddButton extends React.Component {
                     input_server_type: "http",
                     visible: false
                 })
+                notification.open({
+                    message: '创建成功！',
+                    description:
+                        `节点:${input_server_name}创建成功！`,
+                    icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                });
             });
         this.props.onFresh();
     }

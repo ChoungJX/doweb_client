@@ -10,6 +10,7 @@ import { ServerTable } from '../../components/server_table'
 import { ContainerTable } from '../../components/container_table'
 import { ContainerOne } from '../../components/container_info'
 import { ImageTable } from '../../components/image_table'
+import ContainerOneServer from '../../components/container_table/one_container_table'
 
 
 const { Content } = Layout;
@@ -89,6 +90,9 @@ export default function Index() {
                             </Route>
                             <Route exact path={`${url}/containerinfo`}>
                                 <ContainerTable />
+                            </Route>
+                            <Route path={`${url}/containerinfo/:server_ip`}>
+                                <ContainerOneServer />
                             </Route>
                             <Route path={`${url}/containerinfo/:server_ip/:id`}>
                                 <ContainerOne />

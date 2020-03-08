@@ -1,7 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
-import { Table, Tag } from 'antd';
+import { Table } from 'antd';
 import axios from 'axios';
 
 import ServerAddButton from './add_button'
@@ -36,7 +36,7 @@ export class ServerTable extends React.Component {
                 key: 'action',
                 render: (text, record) => (
                     <span>
-                        <ServerDeleteButton server_id={record.id} onFresh={() => this.handleRefresh()}/>
+                        <ServerDeleteButton server_id={record.id} onFresh={() => this.handleRefresh()} />
                     </span>
                 ),
             },
@@ -65,11 +65,11 @@ export class ServerTable extends React.Component {
     }
 
     render() {
-        const {data, loading } = this.state;
+        const { data, loading } = this.state;
         return (
             <div>
                 <ServerAddButton onFresh={() => this.handleRefresh()} />
-                <Table loading={loading} rowKey={record => record.id} columns={this.columns} dataSource={data} size="middle"/>
+                <Table loading={loading} rowKey={record => record.id} columns={this.columns} dataSource={data} size="middle" />
             </div>
         );
     }
