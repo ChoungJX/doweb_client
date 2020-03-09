@@ -19,13 +19,22 @@ export default class ImageDeleteButton extends React.Component {
                     server_ip: this.props.server_ip,
                     image_id: this.props.selected[i],
                 }).then(data => {
-                    console.log(data.data);
-                    notification.open({
-                        message: '删除成功！',
-                        description:
-                            `镜像删除成功！`,
-                        icon: <SmileOutlined style={{ color: '#108ee9' }} />,
-                    });
+                    console.log(data.data.data.data);
+                    if (!data.data.data.data.message) {
+                        notification.open({
+                            message: '删除成功！',
+                            description:
+                                `镜像删除成功！`,
+                            icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                        });
+                    } else {
+                        notification.open({
+                            message: '删除失败！',
+                            description:
+                                `${data.data.data.data.message}`,
+                            icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                        });
+                    }
                 });
         }
         this.props.onFresh();
@@ -40,7 +49,7 @@ export default class ImageDeleteButton extends React.Component {
                 danger
                 disabled={this.props.disabled}
                 loading={this.props.loading}
-                onClick={()=>this.delete_image()}
+                onClick={() => this.delete_image()}
             >
                 删除所选镜像
             </Button>
