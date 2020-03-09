@@ -15,6 +15,7 @@ import ContainerCreate from '../../components/container_create'
 import ImageOneServer from '../../components/image_table/one_server_image'
 import { NetworkTable } from '../../components/network_table'
 import NetworkOneServer from '../../components/network_table/one_network'
+import NetworkCreate from '../../components/network_create'
 
 
 
@@ -213,6 +214,23 @@ export default function Index() {
                                 }}
                             >
                                 <NetworkOneServer />
+                            </Content>
+                        </Route>
+                        <Route exact path={`${url}/network/:server_ip/create`}>
+                            <Breadcrumb style={{ margin: '16px 0' }}>
+                                <Breadcrumb.Item>主页</Breadcrumb.Item>
+                                <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
+                                <Breadcrumb.Item>创建新网络</Breadcrumb.Item>
+                            </Breadcrumb>
+                            <Content
+                                className="site-layout-background"
+                                style={{
+                                    padding: 24,
+                                    margin: 0,
+                                    minHeight: 280,
+                                }}
+                            >
+                                <NetworkCreate />
                             </Content>
                         </Route>
                     </Switch>

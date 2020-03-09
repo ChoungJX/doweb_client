@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useRouteMatch, useParams } from 'react-router-dom'
 import 'antd/dist/antd.css';
-import { PageHeader, Tag, Table, Card } from 'antd';
-import { ControlTwoTone } from '@ant-design/icons';
+import { PageHeader, Button, Tag, Table, Card } from 'antd';
+import { ApartmentOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 export default function NetworkOneServer(props) {
@@ -40,7 +40,7 @@ class NetworlOneServerTable extends React.Component {
                 title: '网络类型',
                 key: 'type',
                 render: (text, record) => (
-                    record.Driver
+                    <Tag color="#2db7f5">{record.Driver}</Tag>
                 )
             },
             {
@@ -91,7 +91,15 @@ class NetworlOneServerTable extends React.Component {
         const hasSelected = selectedRowKeys.length > 0;
         return (
             <div>
-                <Card title="网络一览" extra={<div></div>} >
+                <Card title="网络一览"
+                    extra={
+                        <Link to={`${this.props.url}/create`}>
+                            <Button type="primary" shape="round" icon={<ApartmentOutlined />} >
+                                添加新网络
+                        </Button>
+                        </Link>
+                    }
+                >
                     <div style={{ marginBottom: 16 }}>
                         {/* <ImageDeleteButton disabled={!hasSelected} loading={loading} server_ip={this.props.server_ip} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} /> */}
                     </div>
