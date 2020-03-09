@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link, useRouteMatch, useParams } from 'react-router-dom'
 import 'antd/dist/antd.css';
-import { Table, Button, Tag, PageHeader } from 'antd';
+import { Table, Button, Tag, PageHeader, Card } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import moment from "moment";
+
+import OneContainerActionButton from './one_container_action_button'
 
 function ContainerPageHeader() {
     let { server_ip } = useParams();
@@ -35,6 +38,7 @@ class ContainerOneServerTable extends React.Component {
         this.state = {
             data: [],
             loading: true,
+            selectedRowKeys: [],
         }
 
         this.columns = [
@@ -65,6 +69,13 @@ class ContainerOneServerTable extends React.Component {
                 )
             },
             {
+                title: '创建时间',
+                key: 'time',
+                render: (text, record) => (
+                    moment(record.Created * 1000).format('YYYY-MM-DD HH:mm:ss')
+                )
+            },
+            {
                 title: '操作',
                 key: 'action',
                 render: (text, record) => (
@@ -82,7 +93,14 @@ class ContainerOneServerTable extends React.Component {
 
     handleRefresh() {
         this.fetch();
+        this.setState({
+            selectedRowKeys: [],
+        })
     }
+
+    onSelectChange = selectedRowKeys => {
+        this.setState({ selectedRowKeys });
+    };
 
     fetch() {
         axios.post('/api',
@@ -99,10 +117,17 @@ class ContainerOneServerTable extends React.Component {
     }
 
     render() {
-        const { data, loading } = this.state;
+        const { data, loading, selectedRowKeys } = this.state;
+        const rowSelection = {
+            selectedRowKeys,
+            onChange: this.onSelectChange,
+        };
+        const hasSelected = selectedRowKeys.length > 0;
         return (
             <div>
-                <Table loading={loading} rowKey={record => record.Id} columns={this.columns} dataSource={data} size="middle" />
+                <Card title="容器一览" extra={<OneContainerActionButton disabled={!hasSelected} loading={loading} server_ip={this.props.server_ip} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} />} >
+                    <Table loading={loading} rowSelection={rowSelection} rowKey={record => record.Id} columns={this.columns} dataSource={data} size="middle" />
+                </Card>
             </div>
         );
     }
@@ -112,11 +137,11 @@ class ContainerOneServerTable extends React.Component {
 
 export default function ContainerOneServer() {
     let { server_ip } = useParams();
-
+    let { url } = useRouteMatch();
     return (
         <div>
             <ContainerPageHeader />
-            <ContainerOneServerTable server_ip={server_ip} />
+            <ContainerOneServerTable server_ip={server_ip} url={url} />
         </div>
     )
 }

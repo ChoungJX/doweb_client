@@ -95,6 +95,7 @@ export default class ServerAddButton extends React.Component {
             <div>
                 <Button
                     type="primary"
+                    shape="round"
                     icon={<DatabaseOutlined />}
                     onClick={this.showModal}
                 >

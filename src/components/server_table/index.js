@@ -1,7 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
-import { Table } from 'antd';
+import { Table, Card } from 'antd';
 import axios from 'axios';
 
 import ServerAddButton from './add_button'
@@ -68,8 +68,9 @@ export class ServerTable extends React.Component {
         const { data, loading } = this.state;
         return (
             <div>
-                <ServerAddButton onFresh={() => this.handleRefresh()} />
-                <Table loading={loading} rowKey={record => record.id} columns={this.columns} dataSource={data} size="middle" />
+                <Card title="服务器一览" extra={<ServerAddButton onFresh={() => this.handleRefresh()} />} >
+                    <Table loading={loading} rowKey={record => record.id} columns={this.columns} dataSource={data} size="middle" />
+                </Card>
             </div>
         );
     }

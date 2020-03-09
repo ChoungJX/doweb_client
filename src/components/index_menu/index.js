@@ -16,7 +16,7 @@ export class IndexSider extends React.Component {
 
     constructor(props) {
         super(props);
-        this.rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4'];
+        this.rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4','sub5'];
         this.state = {
             openKeys: [this.props.openKey],
             openOptions: [this.props.selectOptins],
@@ -90,6 +90,19 @@ export class IndexSider extends React.Component {
                     >
                         <Menu.Item key="9">
                             <Link to='/control/image'>镜像列表</Link>
+                        </Menu.Item>
+                    </SubMenu>
+                    <SubMenu
+                        key="sub5"
+                        title={
+                            <span>
+                                <SettingOutlined />
+                                <span>网络管理</span>
+                            </span>
+                        }
+                    >
+                        <Menu.Item key="10">
+                            <Link to='/control/network'>网卡一览</Link>
                         </Menu.Item>
                     </SubMenu>
                 </Menu>

@@ -1,81 +1,16 @@
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import './index.css';
-import { Table, Button } from 'antd';
-import { ControlTwoTone } from '@ant-design/icons';
-import axios from 'axios';
 
-function ContainerIntoButton(props) {
-    let { url } = useRouteMatch();
-    return (
-        <Link to={`${url}/${props.server_ip}`} >
-            <Button type="primary" shape="circle" icon={<ControlTwoTone />} />
-        </Link>
-    );
+
+import { CommonTable } from '../choose_server_table'
+
+
+
+export function ContainerTable(props) {
+    return (<CommonTable />);
 }
 
-export class ContainerTable extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [],
-            loading: true,
-        }
-
-        this.columns = [
-            {
-                title: '节点名字',
-                dataIndex: 'server_name',
-                key: 'name',
-            },
-            {
-                title: '节点ip',
-                dataIndex: 'server_ip',
-                key: 'age',
-            },
-            {
-                title: '操作',
-                key: 'action',
-                render: (text, record) => (
-                    <span>
-                        <ContainerIntoButton server_ip={record.server_ip} />
-                    </span>
-                ),
-            },
-        ];
-    }
-
-    componentDidMount() {
-        this.fetch();
-    }
-
-    handleRefresh() {
-        this.fetch();
-    }
-
-    fetch() {
-        axios.post('/api',
-            {
-                api: 'server_info',
-            }).then(data => {
-                console.log(data.data.data)
-                this.setState({
-                    data: data.data.data,
-                    loading: false,
-                })
-            });
-    }
-
-    render() {
-        const { data, loading } = this.state;
-        return (
-            <div>
-                <Table loading={loading} rowKey={record => record.id} columns={this.columns} dataSource={data} size="middle" />
-            </div>
-        );
-    }
-}
 
 
 // import { Table, Button, Popconfirm, notification, Modal, Input, Select, Spin, Switch, Divider, message } from 'antd';
