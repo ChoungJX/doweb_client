@@ -44,7 +44,7 @@ export default class OneContainerActionButton extends React.Component {
             return;
         }
         if (this.props.selected.length === 0) {
-            message.error('您没有选中任何服务器');
+            message.error('您没有选中任何容器');
             return;
         }
         if (e.key === '1') {

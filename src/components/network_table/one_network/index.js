@@ -5,6 +5,8 @@ import { PageHeader, Button, Tag, Table, Card } from 'antd';
 import { ApartmentOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
+import NetworkDeleteButton from './delete_button'
+
 export default function NetworkOneServer(props) {
     let { server_ip } = useParams();
     let { url } = useRouteMatch();
@@ -101,7 +103,7 @@ class NetworlOneServerTable extends React.Component {
                     }
                 >
                     <div style={{ marginBottom: 16 }}>
-                        {/* <ImageDeleteButton disabled={!hasSelected} loading={loading} server_ip={this.props.server_ip} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} /> */}
+                        {<NetworkDeleteButton disabled={!hasSelected} server_ip={this.props.server_ip} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} /> }
                     </div>
                     <Table loading={loading} rowSelection={rowSelection} rowKey={record => record.Id} columns={this.columns} dataSource={data} size="middle" />
                 </Card>

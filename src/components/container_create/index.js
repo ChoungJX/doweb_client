@@ -31,7 +31,7 @@ class ContainerCreate_page extends React.Component {
                         label="名字"
                         name="container_name"
                     >
-                        <Input placeholder="Basic usage" />
+                        <Input placeholder="为新网络起个名字吧~" style={{ width: '450px' }}/>
                     </Form.Item>
                 </Form>
             </div>
