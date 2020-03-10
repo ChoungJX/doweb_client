@@ -27,6 +27,7 @@ class NetworkCreate_page extends React.Component {
         super(props);
 
         this.state = {
+            loading: false,
 
             network_name_input: "",
             network_type_input: "bridge",
@@ -91,6 +92,9 @@ class NetworkCreate_page extends React.Component {
     // =====================================================
 
     async handleUpload() {
+        this.setState({
+            loading: true
+        })
         const {
             network_name_input,
             network_type_input,
@@ -137,10 +141,14 @@ class NetworkCreate_page extends React.Component {
                     icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                 });
             });
+        this.setState({
+            loading: false
+        })
     }
 
     render() {
         const { Option } = Select;
+        const { loading } = this.state;
         return (
             <div>
                 <NetworkPageHeader />
@@ -204,7 +212,7 @@ class NetworkCreate_page extends React.Component {
                     </Form.Item>
                 </Form>
                 <Divider orientation="left">操作</Divider>
-                <Button type="primary" icon={<UploadOutlined />} shape="round" onClick={() => this.handleUpload()}>
+                <Button type="primary" icon={<UploadOutlined />} shape="round" onClick={() => this.handleUpload()} loading={loading} >
                     创建网络
                 </Button>
             </div>

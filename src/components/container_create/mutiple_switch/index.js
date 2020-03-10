@@ -4,7 +4,7 @@ import { Select, Divider, Input } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 
-export default class NetworkTypeOption extends React.Component {
+export default class MultipleSwitch extends React.Component {
     state = {
         items: [],
         items_value: {},
