@@ -46,6 +46,7 @@ export class IndexSider extends React.Component {
                     defaultSelectedKeys={this.state.openOptions}
                     onOpenChange={this.onOpenChange}
                     style={{ width: 200 }}
+                    defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4','sub5']}
                 >
                     <SubMenu
                         key="sub1"

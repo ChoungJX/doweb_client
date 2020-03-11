@@ -1,7 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
-import { Table, Card } from 'antd';
+import { Table, Card, Tag } from 'antd';
 import axios from 'axios';
 
 import ServerAddButton from './add_button'
@@ -28,8 +28,14 @@ export class ServerTable extends React.Component {
             },
             {
                 title: '状态',
-                dataIndex: 'server_status',
-                key: 'address',
+                key: 'server_status',
+                render: (text, record) => {
+                    if (record.server_status === 0) {
+                        return (<Tag color="green">在线</Tag>)
+                    }else{
+                        return (<Tag color="red">离线</Tag>)
+                    }
+                }
             },
             {
                 title: '操作',
@@ -55,14 +61,27 @@ export class ServerTable extends React.Component {
         axios.post('/api',
             {
                 api: 'server_info',
-            }).then(data => {
-                console.log(data.data.data)
+            }).then(d => {
                 this.setState({
-                    data: data.data.data,
+                    data: d.data.data,
                     loading: false,
                 })
+                for (let i = 0; i < d.data.data.length; i++) {
+                    axios.post('/api',
+                        {
+                            api: 'server_check',
+                            server_ip: d.data.data[i].server_ip,
+                        }).then(d2 => {
+                            const { data } = this.state;
+                            data[i]["server_status"] = d2.data.status
+                            this.setState({
+                                data: data,
+                            })
+                        });
+                }
             });
     }
+
 
     render() {
         const { data, loading } = this.state;

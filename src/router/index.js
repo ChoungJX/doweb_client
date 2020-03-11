@@ -1,8 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, } from 'react-router-dom'
+import { BrowserRouter as Router, Route, useHistory, useLocation, Redirect } from 'react-router-dom'
 
 import Index from '../pages/index'
 import Login from '../pages/login'
+import { Spin } from 'antd';
+import axios from 'axios';
 
 import './index.css';
 
@@ -23,13 +25,92 @@ import './index.css';
 // and you'll see you go back to the page you visited
 // just *before* logging in, the public page.
 
-export default function AuthExample() {
+export default class AuthExample extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isAuthenticated: false,
+            isSend: false
+        }
+    }
+
+    componentDidMount() {
+        axios.post('/api',
+            {
+                api: 'check_login',
+            }).then(d => {
+                this.setState({
+                    isSend: true,
+                    isAuthenticated: d.data.isLogin
+                })
+            });
+    }
+
+    authenticate() {
+        this.setState({
+            isAuthenticated: true,
+            isSend: true
+        })
+    }
+
+    render() {
+        const { isAuthenticated, isSend } = this.state
+        return (
+            <Router>
+                <PrivateRoute path='/control' isAuthenticated={isAuthenticated} isSend={isSend} >
+                    <Index />
+                </PrivateRoute>
+                <Route path='/login' >
+                    <Login Login={() => this.authenticate()} />
+                </Route>
+            </Router>
+        );
+    }
+}
+
+
+function LoginPage(props) {
+    let history = useHistory();
+    let location = useLocation();
+
+    let { from } = location.state || { from: { pathname: "/" } };
+    let login = () => {
+        props.Login(() => {
+            history.replace(from);
+        });
+    };
 
     return (
-        <Router>
-            <Route path='/control' component={Index} >
-            </Route>
-            <Route path='/login' component={Login} />
-        </Router>
+        <div>
+            <p>You must log in to view the page at {from.pathname}</p>
+            <button onClick={login}>Log in</button>
+        </div>
+    );
+}
+
+function PrivateRoute({ children, ...rest }) {
+    console.log(rest.isSend)
+    return (
+        <Route
+            {...rest}
+            render={({ location }) =>
+                rest.isSend ? (
+                    rest.isAuthenticated ? (
+                        children
+                    ) : (
+                            <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    state: { from: location }
+                                }}
+                            />
+                        )
+                ) : (
+                        <div align="center">
+                            <Spin size="large" />
+                        </div>
+                    )
+            }
+        />
     );
 }

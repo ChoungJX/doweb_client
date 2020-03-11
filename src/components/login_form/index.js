@@ -35,7 +35,9 @@ export class LoginForm extends React.Component {
                 username: values.username,
                 password: values.password,
             }).then(data => {
+                console.log(data.data)
                 if (data.data.status === 0) {
+                    this.props.Login()
                     window.location.replace('/control')
                 } else {
                     message.info('用户或密码错误！');

@@ -15,6 +15,9 @@ function onPanelChange(value, mode) {
 
 
 export default class Login extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
     render() {
         return (
@@ -28,7 +31,7 @@ export default class Login extends React.Component {
                         <Calendar onPanelChange={onPanelChange} />
                     </Col>
                     <Col span={9}>
-                        <LoginForm />
+                        <LoginForm Login={()=>this.props.Login()}/>
                     </Col>
                     <Col span={2} />
                 </Row>
