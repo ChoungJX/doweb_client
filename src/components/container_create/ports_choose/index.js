@@ -10,10 +10,11 @@ export default class PortsChoose extends React.Component {
         this.state = {
             items: [],
             items_value: {},
+            items2: [],
 
             input_cport: '',
             input_type: 'tcp',
-            input_hip: '',
+            input_hip: '0.0.0.0',
             input_hport: '',
             selected: [],
         };
@@ -44,16 +45,21 @@ export default class PortsChoose extends React.Component {
     }
 
     onSelectedChange = value => {
-        console.log(eval(value));
+        let temp_list = [];
+        for (let i = 0; i < value.length; i++) {
+            let one_key = Object.keys(JSON.parse(value[i]))[0]
+            temp_list = [...temp_list, `{"${one_key}":{}}`]
+        }
+        this.props.onChange(value, temp_list)
     }
 
     addItem = () => {
         const { items, input_cport, input_type, input_hip, input_hport } = this.state;
         this.setState({
-            items: [...items, `{"${input_cport}/${input_type}":["${input_hip}","${input_hport}"]}`],
+            items: [...items, `{"${input_cport}/${input_type}":[{"HostIp":"${input_hip}","HostPort":"${input_hport}"}]}`],
             input_cport: '',
             input_type: 'tcp',
-            input_hip: "",
+            input_hip: "0.0.0.0",
             input_hport: "",
         });
     };
@@ -66,7 +72,7 @@ export default class PortsChoose extends React.Component {
                 mode="multiple"
                 style={{ width: '320px' }}
                 placeholder={this.props.args}
-                onChange={value => this.props.onChange(value)}
+                onChange={this.onSelectedChange}
                 dropdownRender={menu => (
                     <div>
                         {menu}

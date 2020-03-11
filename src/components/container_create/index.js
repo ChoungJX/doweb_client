@@ -33,7 +33,8 @@ class ContainerCreate_page extends React.Component {
 
             container_name_input: "",
             image_name_input: "",
-            ports: [],
+            ports: {},
+            ports2: {},
 
             command_input: "",
             entrypotin_input: "",
@@ -63,13 +64,18 @@ class ContainerCreate_page extends React.Component {
         })
     }
 
-    handlePorts(value) {
-        let temp_list = [];
-        for (let i = 0; i < value.length; i++) {
-            temp_list = [...temp_list, JSON.parse(value[i])]
+    handlePorts(value1, value2) {
+        let temp_dict = {};
+        let temp_dict2 = {}
+        for (let i = 0; i < value1.length; i++) {
+            temp_dict = { ...temp_dict, ...JSON.parse(value1[i]) }
+        }
+        for (let i = 0; i < value2.length; i++) {
+            temp_dict2 = { ...temp_dict2, ...JSON.parse(value2[i]) }
         }
         this.setState({
-            ports: temp_list,
+            ports: temp_dict,
+            ports2: temp_dict2,
         })
     }
 
@@ -167,6 +173,7 @@ class ContainerCreate_page extends React.Component {
             container_name_input,
             image_name_input,
             ports,
+            ports2,
             command_input,
             entrypotin_input,
             user_input,
@@ -183,6 +190,13 @@ class ContainerCreate_page extends React.Component {
             message.error('必要信息没有填写完整！');
             return;
         }
+
+        let network_config = '';
+        if (network_name_input !== "") {
+            network_config = `{"${network_name_input}":{"IPAMConfig":{"IPv4Address":"${network_ip}"}}}`;
+            network_config = JSON.parse(network_config);
+        }
+
         message.loading({ content: '容器创建中', key: 'updatable', duration: 0 });
         await axios.post('/api',
             {
@@ -191,12 +205,13 @@ class ContainerCreate_page extends React.Component {
                 image: image_name_input,
                 name: container_name_input,
                 connect_port: ports,
+                export_port: ports2,
                 cmd: command_input,
                 entrypoint: entrypotin_input,
                 user: user_input,
                 Tty: ifTty,
                 interactive: ifInteractive,
-
+                network_model: network_config,
             }).then(data => {
                 setTimeout(() => {
                     message.success({ content: '客户端已接收数据！', key: 'updatable', duration: 2 });
@@ -209,7 +224,20 @@ class ContainerCreate_page extends React.Component {
                             `网络:${data.data.data.data.Id}创建成功！`,
                         icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                     });
-                    window.history.back();
+                    message.loading({ content: '容器启动中', key: 'updatable', duration: 0 });
+                    axios.post('/api',
+                        {
+                            api: 'container_start',
+                            server_ip: this.props.server_ip,
+                            container_id: data.data.data.data.Id
+
+                        }).then(data => {
+                            console.log(data.data.data)
+                            setTimeout(() => {
+                                message.success({ content: '容器启动成功！', key: 'updatable', duration: 2 });
+                            }, 1000);
+                            window.history.back();
+                        });
                     return;
                 }
                 notification.open({
@@ -249,7 +277,7 @@ class ContainerCreate_page extends React.Component {
                         label="规则设置"
                         name="ports"
                     >
-                        <PortsChoose onChange={value => this.handlePorts(value)} />
+                        <PortsChoose onChange={(value1, value2) => this.handlePorts(value1, value2)} />
                     </Form.Item>
                 </Form>
                 <Divider orientation="left">高级设置(无特殊需求可以忽略)</Divider>

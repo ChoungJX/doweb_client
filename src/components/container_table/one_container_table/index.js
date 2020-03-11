@@ -57,9 +57,7 @@ class ContainerOneServerTable extends React.Component {
             {
                 title: '节点ip',
                 key: 'ip',
-                render: (text, record) => (
-                    record.NetworkSettings.Networks.bridge.IPAddress
-                )
+                render: (text, record) => this.show_ip(text, record)
             },
             {
                 title: '状态',
@@ -114,6 +112,13 @@ class ContainerOneServerTable extends React.Component {
                     loading: false,
                 })
             });
+    }
+
+    show_ip(text, record){
+        let get_net_work_name = Object.keys(record.NetworkSettings.Networks)[0]
+        return(
+            record.NetworkSettings.Networks[get_net_work_name].IPAddress
+        )
     }
 
     render() {
