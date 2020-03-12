@@ -93,6 +93,13 @@ class ContainerOneServerTable extends React.Component {
         this.fetch();
         this.setState({
             selectedRowKeys: [],
+            loading:false
+        })
+    }
+
+    handleLoading() {
+        this.setState({
+            loading: true
         })
     }
 
@@ -114,9 +121,9 @@ class ContainerOneServerTable extends React.Component {
             });
     }
 
-    show_ip(text, record){
+    show_ip(text, record) {
         let get_net_work_name = Object.keys(record.NetworkSettings.Networks)[0]
-        return(
+        return (
             record.NetworkSettings.Networks[get_net_work_name].IPAddress
         )
     }
@@ -130,7 +137,7 @@ class ContainerOneServerTable extends React.Component {
         const hasSelected = selectedRowKeys.length > 0;
         return (
             <div>
-                <Card title="容器一览" extra={<OneContainerActionButton disabled={!hasSelected} loading={loading} server_ip={this.props.server_ip} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} />} >
+                <Card title="容器一览" extra={<OneContainerActionButton disabled={!hasSelected} loading={loading} server_ip={this.props.server_ip} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} onLoading={() => this.handleLoading()} />} >
                     <Table loading={loading} rowSelection={rowSelection} rowKey={record => record.Id} columns={this.columns} dataSource={data} size="middle" />
                 </Card>
             </div>
