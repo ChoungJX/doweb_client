@@ -5,7 +5,7 @@ import './index.css';
 import { Layout, Breadcrumb } from 'antd';
 
 import { AllHeader } from '../../components/header'
-import { IndexSider } from '../../components/index_menu'
+import IndexMenu from '../../components/index_menu'
 import { ServerTable } from '../../components/server_table'
 import { ContainerTable } from '../../components/container_table'
 import { ContainerOne } from '../../components/container_info'
@@ -30,28 +30,28 @@ export default function Index() {
             <AllHeader number={'1'} />
             <Layout>
                 <Switch>
-                    <Route exact path={`${url}`}>
-                        <IndexSider />
+                    <Route path={`${url}/:server_ip`}>
+                        <IndexMenu />
                     </Route>
-                    <Route path={`${url}/serverinfo`}>
-                        <IndexSider openKey='sub1' selectOptins='1' />
+                    <Route path={`${url}/:server_ip/serverinfo`}>
+                        <IndexMenu openKey='sub1' selectOptins='1' />
                     </Route>
-                    <Route path={`${url}/server_secret`}>
-                        <IndexSider openKey='sub1' selectOptins='2' />
+                    <Route path={`${url}/:server_ip/server_secret`}>
+                        <IndexMenu openKey='sub1' selectOptins='2' />
                     </Route>
-                    <Route path={`${url}/containerinfo`}>
-                        <IndexSider openKey='sub2' selectOptins='5' />
+                    <Route path={`${url}/:server_ip/containerinfo`}>
+                        <IndexMenu openKey='sub2' selectOptins='5' />
                     </Route>
-                    <Route path={`${url}/image`}>
-                        <IndexSider openKey='sub4' selectOptins='9' />
+                    <Route path={`${url}/:server_ip/image`}>
+                        <IndexMenu openKey='sub4' selectOptins='9' />
                     </Route>
-                    <Route path={`${url}/network`}>
-                        <IndexSider openKey='sub5' selectOptins='10' />
+                    <Route path={`${url}/:server_ip/network`}>
+                        <IndexMenu openKey='sub5' selectOptins='10' />
                     </Route>
                 </Switch>
                 <Layout style={{ padding: '0 24px 24px' }}>
                     <Switch>
-                        <Route exact path={`${url}`}>
+                        <Route exact path={`${url}/:server_ip`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
                             </Breadcrumb>
@@ -66,39 +66,9 @@ export default function Index() {
                                 <div>aaaa</div>
                             </Content>
                         </Route>
-                        <Route path={`${url}/serverinfo`}>
-                            <Breadcrumb style={{ margin: '16px 0' }}>
-                                <Breadcrumb.Item>主页</Breadcrumb.Item>
-                                <Breadcrumb.Item>集群信息</Breadcrumb.Item>
-                            </Breadcrumb>
-                            <Content
-                                className="site-layout-background"
-                                style={{
-                                    padding: 24,
-                                    margin: 0,
-                                    minHeight: 280,
-                                }}
-                            >
-                                <ServerTable />
-                            </Content>
-                        </Route>
-                        <Route exact path={`${url}/containerinfo`}>
-                            <Breadcrumb style={{ margin: '16px 0' }}>
-                                <Breadcrumb.Item>主页</Breadcrumb.Item>
-                                <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
-                            </Breadcrumb>
-                            <Content
-                                className="site-layout-background"
-                                style={{
-                                    padding: 24,
-                                    margin: 0,
-                                    minHeight: 280,
-                                }}
-                            >
-                                <ContainerTable />
-                            </Content>
-                        </Route>
-                        <Route exact path={`${url}/containerinfo/:server_ip`}>
+                        
+                        
+                        <Route exact path={`${url}/:server_ip/containerinfo`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
                                 <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
@@ -115,7 +85,7 @@ export default function Index() {
                                 <ContainerOneServer />
                             </Content>
                         </Route>
-                        <Route path={`${url}/containerinfo/:server_ip/create`}>
+                        <Route path={`${url}/:server_ip/containerinfo/create`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
                                 <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
@@ -132,7 +102,7 @@ export default function Index() {
                                 <ContainerCreate />
                             </Content>
                         </Route>
-                        <Route path={`${url}/containerinfo/:server_ip/info/:id`}>
+                        <Route path={`${url}/:server_ip/containerinfo/info/:id`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
                                 <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
@@ -150,23 +120,7 @@ export default function Index() {
                                 <ContainerOne />
                             </Content>
                         </Route>
-                        <Route exact path={`${url}/image`}>
-                            <Breadcrumb style={{ margin: '16px 0' }}>
-                                <Breadcrumb.Item>主页</Breadcrumb.Item>
-                                <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
-                            </Breadcrumb>
-                            <Content
-                                className="site-layout-background"
-                                style={{
-                                    padding: 24,
-                                    margin: 0,
-                                    minHeight: 280,
-                                }}
-                            >
-                                <ImageTable />
-                            </Content>
-                        </Route>
-                        <Route exact path={`${url}/image/:server_ip`}>
+                        <Route exact path={`${url}/:server_ip/image`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
                                 <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
@@ -183,23 +137,7 @@ export default function Index() {
                                 <ImageOneServer />
                             </Content>
                         </Route>
-                        <Route exact path={`${url}/network`}>
-                            <Breadcrumb style={{ margin: '16px 0' }}>
-                                <Breadcrumb.Item>主页</Breadcrumb.Item>
-                                <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
-                            </Breadcrumb>
-                            <Content
-                                className="site-layout-background"
-                                style={{
-                                    padding: 24,
-                                    margin: 0,
-                                    minHeight: 280,
-                                }}
-                            >
-                                <NetworkTable />
-                            </Content>
-                        </Route>
-                        <Route exact path={`${url}/network/:server_ip`}>
+                        <Route exact path={`${url}/:server_ip/network`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
                                 <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
@@ -216,7 +154,7 @@ export default function Index() {
                                 <NetworkOneServer />
                             </Content>
                         </Route>
-                        <Route exact path={`${url}/network/:server_ip/create`}>
+                        <Route exact path={`${url}/:server_ip/network/create`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
                                 <Breadcrumb.Item>选择服务器</Breadcrumb.Item>

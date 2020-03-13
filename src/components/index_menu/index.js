@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-    Link
+    Link,
+    useParams
 } from "react-router-dom";
 import 'antd/dist/antd.css';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
@@ -16,7 +17,7 @@ export class IndexSider extends React.Component {
 
     constructor(props) {
         super(props);
-        this.rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4','sub5'];
+        this.rootSubmenuKeys = ['sub1', 'sub2', 'sub3', 'sub4', 'sub5'];
         this.state = {
             openKeys: [this.props.openKey],
             openOptions: [this.props.selectOptins],
@@ -46,7 +47,7 @@ export class IndexSider extends React.Component {
                     defaultSelectedKeys={this.state.openOptions}
                     onOpenChange={this.onOpenChange}
                     style={{ width: 200 }}
-                    defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4','sub5']}
+                    defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4', 'sub5']}
                 >
                     <SubMenu
                         key="sub1"
@@ -58,10 +59,10 @@ export class IndexSider extends React.Component {
                         }
                     >
                         <Menu.Item key="1">
-                            <Link to='/control/serverinfo'>集群总览</Link>
+                            <Link to={`/control/${this.props.server_ip}/serverinfo`}>集群总览</Link>
                         </Menu.Item>
                         <Menu.Item key="2">
-                            <Link to='/control/server_secret'>集群密钥管理</Link>
+                            <Link to={`/control/${this.props.server_ip}/server_secret`}>集群密钥管理</Link>
                         </Menu.Item>
                         <Menu.Item key="3">Option 3</Menu.Item>
                         <Menu.Item key="4">Option 4</Menu.Item>
@@ -76,7 +77,7 @@ export class IndexSider extends React.Component {
                         }
                     >
                         <Menu.Item key="5">
-                            <Link to='/control/containerinfo'>容器总览</Link>
+                            <Link to={`/control/${this.props.server_ip}/containerinfo`}>容器总览</Link>
                         </Menu.Item>
                         <Menu.Item key="6">Option 6</Menu.Item>
                     </SubMenu>
@@ -90,7 +91,7 @@ export class IndexSider extends React.Component {
                         }
                     >
                         <Menu.Item key="9">
-                            <Link to='/control/image'>镜像列表</Link>
+                            <Link to={`/control/${this.props.server_ip}/image`}>镜像列表</Link>
                         </Menu.Item>
                     </SubMenu>
                     <SubMenu
@@ -103,11 +104,17 @@ export class IndexSider extends React.Component {
                         }
                     >
                         <Menu.Item key="10">
-                            <Link to='/control/network'>网卡一览</Link>
+                            <Link to={`/control/${this.props.server_ip}/network`}>网卡一览</Link>
                         </Menu.Item>
                     </SubMenu>
                 </Menu>
             </Sider>
         );
     }
+}
+
+export default function IndexMenu(props) {
+    let { server_ip } = useParams();
+
+    return (<IndexSider server_ip={server_ip} openKey={props.openKey} selectOptins={props.selectOptins} />)
 }
