@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, useHistory, useLocation, Redirect } fro
 
 import Index from '../pages/index'
 import Login from '../pages/login'
+import HomePage from '../pages/home'
 import { Spin } from 'antd';
 import axios from 'axios';
 
@@ -59,6 +60,9 @@ export default class AuthExample extends React.Component {
             <Router>
                 <PrivateRoute path='/control' isAuthenticated={isAuthenticated} isSend={isSend} >
                     <Index />
+                </PrivateRoute>
+                <PrivateRoute exact path='/' isAuthenticated={isAuthenticated} isSend={isSend} >
+                    <HomePage />
                 </PrivateRoute>
                 <Route path='/login' >
                     <Login Login={() => this.authenticate()} />
