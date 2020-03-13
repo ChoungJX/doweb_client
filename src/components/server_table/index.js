@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link, useRouteMatch } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import './index.css';
-import { Table, Card, Tag } from 'antd';
+import { Table, Card, Tag, Button, Tooltip } from 'antd';
+import { FullscreenOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 import ServerAddButton from './add_button'
@@ -32,7 +34,7 @@ export class ServerTable extends React.Component {
                 render: (text, record) => {
                     if (record.server_status === 0) {
                         return (<Tag color="green">在线</Tag>)
-                    }else{
+                    } else {
                         return (<Tag color="red">离线</Tag>)
                     }
                 }
@@ -41,9 +43,18 @@ export class ServerTable extends React.Component {
                 title: '操作',
                 key: 'action',
                 render: (text, record) => (
-                    <span>
-                        <ServerDeleteButton server_id={record.id} onFresh={() => this.handleRefresh()} />
-                    </span>
+                    <div>
+                        <span style={{ marginRight: 8 }}>
+                            <Tooltip placement="top" title="进入该服务器">
+                                <Link to={`${this.props.url}control/${record.server_ip}`} >
+                                    <Button type="primary" shape="circle" icon={<FullscreenOutlined />} />
+                                </Link>
+                            </Tooltip>
+                        </span>
+                        <span style={{ marginRight: 8 }}>
+                            <ServerDeleteButton server_id={record.id} onFresh={() => this.handleRefresh()} />
+                        </span>
+                    </div>
                 ),
             },
         ];
@@ -96,7 +107,13 @@ export class ServerTable extends React.Component {
 }
 
 
+export default function ServerTableHook() {
+    let { url } = useRouteMatch();
 
+    return (
+        <ServerTable url={url} />
+    );
+}
 
 
 // import { Table, Button, Popconfirm, notification, Modal, Input } from 'antd';

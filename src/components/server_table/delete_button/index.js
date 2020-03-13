@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Button, Popconfirm, notification } from 'antd';
+import { Button, Popconfirm, notification, Tooltip } from 'antd';
 import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
@@ -38,9 +38,11 @@ export default class ServerDeleteButton extends React.Component {
 
     render() {
         return (
-            <Popconfirm placement="right" title="您确定要删除该节点吗" onConfirm={() => this.delete_server()} okText="是" cancelText="否">
-                <Button type="primary" shape="circle" icon={<DeleteOutlined />} danger />
-            </Popconfirm>
+            <Tooltip placement="top" title="删除该服务器">
+                <Popconfirm placement="right" title="您确定要删除该节点吗" onConfirm={() => this.delete_server()} okText="是" cancelText="否">
+                    <Button type="primary" shape="circle" icon={<DeleteOutlined />} danger />
+                </Popconfirm>
+            </Tooltip>
         );
     }
 }

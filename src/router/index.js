@@ -110,9 +110,10 @@ function PrivateRoute({ children, ...rest }) {
                             />
                         )
                 ) : (
-                        <div align="center">
+                        <div align="center" style={{"margin-top":"20%"}}>
                             <Spin size="large" />
                         </div>
+
                     )
             }
         />
