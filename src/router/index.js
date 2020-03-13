@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Route, useHistory, useLocation, Redirect } fro
 
 import Index from '../pages/index'
 import Login from '../pages/login'
+import WelcomePage from '../pages/welcome'
 import HomePage from '../pages/home'
 import { Spin } from 'antd';
+import 'antd/dist/antd.css';
 import axios from 'axios';
 
 import './index.css';
@@ -66,6 +68,9 @@ export default class AuthExample extends React.Component {
                 </PrivateRoute>
                 <Route path='/login' >
                     <Login Login={() => this.authenticate()} />
+                </Route>
+                <Route path='/welcome' >
+                    <WelcomePage />
                 </Route>
             </Router>
         );

@@ -14,5 +14,12 @@ module.exports = function (app) {
             changeOrigin: true,
         })
     );
+    app.use(
+        '/welcome_api',
+        createProxyMiddleware({
+            target: 'http://10.12.127.113:4000',
+            changeOrigin: true,
+        })
+    );
 };
 
