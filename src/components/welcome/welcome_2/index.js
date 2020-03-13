@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'antd/dist/antd.css';
-import { Form, Input, Button, Result } from 'antd';
-import { QuestionCircleOutlined, SmileOutlined } from '@ant-design/icons';
-
+import { Form, Input, Button, Result, message } from 'antd';
+import { SmileOutlined } from '@ant-design/icons';
+import axios from 'axios';
 
 class WelcomeSignup extends React.Component {
     constructor(props) {
@@ -10,8 +10,18 @@ class WelcomeSignup extends React.Component {
     }
 
     send_regist(value) {
-        console.log(value)
-        this.props.onNext();
+        axios.post('/welcome_api',
+            {
+                api: 'create_user',
+                ...value
+            }).then(data => {
+                console.log(data.data)
+                if (data.data.status === 0) {
+                    this.props.onNext();
+                } else {
+                    message.info('服务器开小差了，请稍后再试');
+                }
+            });
     }
 
     render() {
@@ -68,11 +78,10 @@ class WelcomeSignup extends React.Component {
                     >
                         <Input.Password />
                     </Form.Item>
-
                     <Form.Item {...tailLayout}>
                         <Button type="primary" htmlType="submit">
-                            Submit
-                </Button>
+                            下一步
+                        </Button>
                     </Form.Item>
                 </Form>}
             />

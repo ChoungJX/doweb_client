@@ -1,8 +1,8 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Steps, Button, message, Col, Row, Result, Input, Radio, Card } from 'antd';
+import { Button, message, Result, Input, Radio, Card } from 'antd';
 import { DatabaseTwoTone, ApiTwoTone, EditTwoTone, ContactsTwoTone, EyeInvisibleTwoTone } from '@ant-design/icons';
-
+import axios from 'axios';
 
 export default function welcome_3(props) {
     return (
@@ -53,10 +53,25 @@ class WelcomeBindServer extends React.Component {
         })
     }
 
-    send_args(){
+    send_args() {
         const { server_ip_input, server_name_input, server_type_input, server_user_input, server_psw_input } = this.state
-        console.log(this.state)
-        this.props.onNext();
+        axios.post('/welcome_api',
+            {
+                api: 'create_server',
+                server_ip: server_ip_input,
+                server_name: server_name_input,
+                server_type: server_type_input,
+                server_user: server_user_input,
+                server_psw: server_psw_input
+
+            }).then(data => {
+                console.log(data.data)
+                if (data.data.status === 0) {
+                    this.props.onNext();
+                } else {
+                    message.info(data.data.message);
+                }
+            });
     }
 
     render() {
@@ -87,7 +102,7 @@ class WelcomeBindServer extends React.Component {
                                     服务器密码:<Input onChange={(e) => this.handleServer_psw_input(e)} value={server_psw_input} style={{ width: 300, marginLeft: 5 }} prefix={<EyeInvisibleTwoTone />} placeholder="******" />
                                 </Input.Group>
                             </Card>
-                            <Button onClick={()=>this.send_args() } type="primary">下一步</Button>
+                            <Button onClick={() => this.send_args()} type="primary">下一步</Button>
                         </center>
                     </div>
                 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Button, Modal, Input, Radio, notification } from 'antd';
-import { DatabaseOutlined, ApiTwoTone, EditTwoTone, SmileOutlined } from '@ant-design/icons';
+import { DatabaseOutlined, ApiTwoTone, EditTwoTone, SmileOutlined, ContactsTwoTone, EyeInvisibleTwoTone } from '@ant-design/icons';
 import axios from 'axios';
 
 
@@ -15,11 +15,13 @@ export default class ServerAddButton extends React.Component {
             input_server_ip: "",
             input_server_name: "",
             input_server_type: "http",
+            server_user_input: "root",
+            server_psw_input: "",
         }
     }
 
     async submit_input() {
-        const { input_server_type, input_server_name, input_server_ip } = this.state
+        const { input_server_type, input_server_name, input_server_ip, server_user_input, server_psw_input } = this.state
         this.setState({
             loading: true
         })
@@ -29,13 +31,17 @@ export default class ServerAddButton extends React.Component {
                 api: 'server_add',
                 server_ip: input_server_ip,
                 server_name: input_server_name,
-                server_type: input_server_type
+                server_type: input_server_type,
+                server_user: server_user_input,
+                server_psw: server_psw_input
             }).then(data => {
                 this.setState({
                     loading: false,
                     input_server_ip: "",
                     input_server_name: "",
                     input_server_type: "http",
+                    server_user_input: "root",
+                    server_psw_input: "",
                     visible: false
                 })
                 notification.open({
@@ -87,10 +93,22 @@ export default class ServerAddButton extends React.Component {
         })
     }
 
+    handleServer_user_input(e) {
+        this.setState({
+            server_user_input: e.target.value
+        })
+    }
+
+    handleServer_psw_input(e) {
+        this.setState({
+            server_psw_input: e.target.value
+        })
+    }
+
     // ====================================================
 
     render() {
-        const { loading, visible, input_server_type, input_server_name, input_server_ip } = this.state
+        const { loading, visible, input_server_type, input_server_name, input_server_ip, server_user_input, server_psw_input } = this.state
         return (
             <div>
                 <Button
@@ -125,6 +143,12 @@ export default class ServerAddButton extends React.Component {
                         <Radio.Button value="http">HTTP</Radio.Button>
                         <Radio.Button value="https">HTTPS</Radio.Button>
                     </Radio.Group>
+                    <br /><br />
+                    <Input.Group>
+                        服务器用户名:<Input onChange={(e) => this.handleServer_user_input(e)} value={server_user_input} style={{ width: 280, marginLeft: 10 }} prefix={<ContactsTwoTone />} placeholder="root" />
+                        <br /><br />
+                        服务器密码:<Input onChange={(e) => this.handleServer_psw_input(e)} value={server_psw_input} style={{ width: 300, marginLeft: 5 }} prefix={<EyeInvisibleTwoTone />} placeholder="******" />
+                    </Input.Group>
                 </Modal>
             </div>
         );

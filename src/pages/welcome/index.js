@@ -1,7 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Steps, Button, message, Col, Row, Result } from 'antd';
-import { SmileOutlined } from '@ant-design/icons';
+import { Steps, Col, Row, Spin } from 'antd';
+import axios from 'axios';
 
 import welcome_1 from '../../components/welcome/welcome_1'
 import welcome_2 from '../../components/welcome/welcome_2'
@@ -14,6 +14,7 @@ export default class WelcomePage extends React.Component {
         super(props);
         this.state = {
             current: 0,
+            welcome: false
         };
         this.steps = [
             {
@@ -45,42 +46,57 @@ export default class WelcomePage extends React.Component {
         this.setState({ current });
     }
 
+    componentDidMount() {
+        this.fetch();
+    }
+
+    fetch() {
+        axios.post('/api',
+            {
+                api: 'ifUsed',
+            }).then(data => {
+                console.log(data.data)
+                if (data.data.status === 0) {
+                    this.setState({
+                        welcome: true,
+                    })
+                } else {
+                    this.setState({
+                        welcome: false,
+                    })
+                    window.location.replace('/')
+                }
+            });
+    }
+
     render() {
-        const { current } = this.state;
+        const { current, welcome } = this.state;
         const { Step } = Steps;
-        return (
-            <div>
-                <br /><br /><br /><br /><br />
-                <Row gutter={[8, 8]}>
-                    <Col span={3} />
-                    <Col span={18} >
-                        <Steps current={current}>
-                            {this.steps.map(item => (
-                                <Step key={item.title} title={item.title} />
-                            ))}
-                        </Steps>
-                        <div className="steps-content">{this.steps[current].content({ onNext: () => this.next(), })}</div>
-                        <div className="steps-action">
-                            {current < this.steps.length - 1 && (
-                                <Button type="primary" onClick={() => this.next()}>
-                                    Next
-                                </Button>
-                            )}
-                            {current === this.steps.length - 1 && (
-                                <Button type="primary" onClick={() => message.success('Processing complete!')}>
-                                    Done
-                                </Button>
-                            )}
-                            {current > 0 && (
-                                <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
-                                    Previous
-                                </Button>
-                            )}
-                        </div>
-                    </Col>
-                    <Col span={3} />
-                </Row>
-            </div>
-        );
+        if (welcome) {
+            return (
+                <div>
+                    <br /><br /><br /><br /><br />
+                    <Row gutter={[8, 8]}>
+                        <Col span={3} />
+                        <Col span={18} >
+                            <Steps current={current}>
+                                {this.steps.map(item => (
+                                    <Step key={item.title} title={item.title} />
+                                ))}
+                            </Steps>
+                            <div className="steps-content">{this.steps[current].content({ onNext: () => this.next(), })}</div>
+                        </Col>
+                        <Col span={3} />
+                    </Row>
+                </div>
+            );
+        } else {
+            return (
+                <div align="center" style={{ "margin-top": "20%" }}>
+                    <Spin size="large" />
+                </div>
+            );
+        }
+
     }
 }
