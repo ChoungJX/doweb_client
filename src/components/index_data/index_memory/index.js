@@ -17,7 +17,7 @@ export default function IndexMemoryData(props) {
     let free = props.data.memory.free;
     free = free.toFixed(2);
 
-    let percent = used / total;
+    let percent = used / total * 100;
     percent = percent.toFixed(2)
 
     return (
@@ -25,7 +25,7 @@ export default function IndexMemoryData(props) {
             <Statistic title="内存占用百分比" value={percent} suffix="%" />
             <br />
             <PieChartOutlined />已使用: <b>{used} GB</b>
-            <Divider  style={{ margin: '4px 0' }} />
+            <Divider style={{ margin: '4px 0' }} />
             内存总量: <b>{total} GB</b>
         </Card>
     )

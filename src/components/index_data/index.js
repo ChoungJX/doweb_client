@@ -10,6 +10,8 @@ import IndexMemoryData from './index_memory'
 import IndexSwapData from './index_swap'
 import IndexNetworkData from './index_network'
 import IndexContainerData from './index_container'
+import IndexImageData from './index_image'
+import IndexVolumeData from './index_volume'
 
 
 export default function IndexData() {
@@ -46,7 +48,8 @@ class IndexDataControl extends React.Component {
                     last_receive: 0,
                     last_send: 0
                 }
-            }
+            },
+            data_docker: {}
         }
     }
 
@@ -83,7 +86,10 @@ class IndexDataControl extends React.Component {
                 api: 'system_use',
                 server_ip: this.props.server_ip,
             }).then(d => {
-                console.log(d.data.data.data)
+                console.log(d.data.data.data);
+                this.setState({
+                    data_docker: d.data.data.data
+                })
             });
     }
 
@@ -93,7 +99,7 @@ class IndexDataControl extends React.Component {
 
 
     render() {
-        const { data } = this.state
+        const { data, data_docker } = this.state
         return (
             <div>
                 <Divider orientation="left">系统资源统计</Divider>
@@ -114,13 +120,13 @@ class IndexDataControl extends React.Component {
                 <Divider orientation="left">Docker资源统计</Divider>
                 <Row justify="space-around" gutter={[16, 16]}>
                     <Col span={8} >
-                        <IndexContainerData />
+                        <IndexContainerData data={data_docker} />
                     </Col>
                     <Col span={8} >
-
+                        <IndexImageData data={data_docker} />
                     </Col>
                     <Col span={8} >
-
+                        <IndexVolumeData data={data_docker} />
                     </Col>
 
                 </Row>
