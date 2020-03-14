@@ -10,6 +10,7 @@ import ContainerSearchNetwork from "./network_select"
 import MultipleSwitch from './mutiple_switch'
 import PortsChoose from './ports_choose'
 
+const { TabPane } = Tabs;
 
 function ContainerPageHeader() {
     let { server_ip } = useParams();
@@ -198,6 +199,9 @@ class ContainerCreate_page extends React.Component {
         }
 
         message.loading({ content: '容器创建中', key: 'updatable', duration: 0 });
+        this.setState({
+            loading: true
+        })
         await axios.post('/api',
             {
                 api: 'container_add',
@@ -213,6 +217,9 @@ class ContainerCreate_page extends React.Component {
                 interactive: ifInteractive,
                 network_model: network_config,
             }).then(data => {
+                this.setState({
+                    loading: false
+                })
                 setTimeout(() => {
                     message.success({ content: '客户端已接收数据！', key: 'updatable', duration: 2 });
                 }, 1000);
@@ -250,7 +257,7 @@ class ContainerCreate_page extends React.Component {
     }
 
     render() {
-        const { TabPane } = Tabs;
+        const { loading } = this.state;
         return (
             <div>
                 <ContainerPageHeader />
@@ -415,8 +422,8 @@ class ContainerCreate_page extends React.Component {
                     </TabPane>
                 </Tabs>
                 <Divider orientation="left">操作</Divider>
-                <Button onClick={() => this.handle_send()}>
-                    fuck me
+                <Button type="primary" loading={loading} onClick={() => this.handle_send()}>
+                    提交
                 </Button>
             </div>
         )
@@ -428,5 +435,9 @@ export default function ContainerCreate() {
     let { server_ip } = useParams();
     let { url } = useRouteMatch();
 
-    return (<ContainerCreate_page server_ip={server_ip} url={url} />)
+    return (
+        <div>
+            <ContainerCreate_page server_ip={server_ip} url={url} />
+        </div>
+    )
 }
