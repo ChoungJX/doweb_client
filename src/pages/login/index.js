@@ -54,7 +54,7 @@ export default class Login extends React.Component {
         const { loading, welcome } = this.state;
         if (loading) {
             return (
-                <div align="center" style={{ "margin-top": "20%" }}>
+                <div align="center" style={{ "marginTop": "20%" }}>
                     <Spin size="large" />
                 </div>
             )

@@ -16,6 +16,7 @@ import ImageOneServer from '../../components/image_table/one_server_image'
 import { NetworkTable } from '../../components/network_table'
 import NetworkOneServer from '../../components/network_table/one_network'
 import NetworkCreate from '../../components/network_create'
+import IndexData from '../../components/index_data'
 
 
 
@@ -30,8 +31,8 @@ export default function Index() {
             <AllHeader number={'1'} />
             <Layout>
                 <Switch>
-                    <Route path={`${url}/:server_ip`}>
-                        <IndexMenu />
+                    <Route exact path={`${url}/:server_ip`}>
+                        <IndexMenu selectOptins='0' />
                     </Route>
                     <Route path={`${url}/:server_ip/serverinfo`}>
                         <IndexMenu openKey='sub1' selectOptins='1' />
@@ -63,15 +64,14 @@ export default function Index() {
                                     minHeight: 280,
                                 }}
                             >
-                                <div>aaaa</div>
+                                <IndexData />
                             </Content>
                         </Route>
-                        
-                        
+
+
                         <Route exact path={`${url}/:server_ip/containerinfo`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
-                                <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
                                 <Breadcrumb.Item>容器总览</Breadcrumb.Item>
                             </Breadcrumb>
                             <Content
@@ -88,7 +88,6 @@ export default function Index() {
                         <Route path={`${url}/:server_ip/containerinfo/create`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
-                                <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
                                 <Breadcrumb.Item>容器创建</Breadcrumb.Item>
                             </Breadcrumb>
                             <Content
@@ -105,7 +104,6 @@ export default function Index() {
                         <Route path={`${url}/:server_ip/containerinfo/info/:id`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
-                                <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
                                 <Breadcrumb.Item>容器总览</Breadcrumb.Item>
                                 <Breadcrumb.Item>容器详情</Breadcrumb.Item>
                             </Breadcrumb>
@@ -123,7 +121,6 @@ export default function Index() {
                         <Route exact path={`${url}/:server_ip/image`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
-                                <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
                                 <Breadcrumb.Item>镜像一览</Breadcrumb.Item>
                             </Breadcrumb>
                             <Content
@@ -140,7 +137,6 @@ export default function Index() {
                         <Route exact path={`${url}/:server_ip/network`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
-                                <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
                                 <Breadcrumb.Item>网络总览</Breadcrumb.Item>
                             </Breadcrumb>
                             <Content
@@ -157,7 +153,6 @@ export default function Index() {
                         <Route exact path={`${url}/:server_ip/network/create`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>
-                                <Breadcrumb.Item>选择服务器</Breadcrumb.Item>
                                 <Breadcrumb.Item>创建新网络</Breadcrumb.Item>
                             </Breadcrumb>
                             <Content

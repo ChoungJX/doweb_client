@@ -4,7 +4,7 @@ import {
     useParams
 } from "react-router-dom";
 import 'antd/dist/antd.css';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, MailOutlined, SettingOutlined,EyeOutlined } from '@ant-design/icons';
 import { Layout, Menu, } from 'antd';
 
 const { SubMenu } = Menu;
@@ -49,6 +49,10 @@ export class IndexSider extends React.Component {
                     style={{ width: 200 }}
                     defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4', 'sub5']}
                 >
+                    <Menu.Item key="0">
+                        <EyeOutlined />
+                        <Link to={`/control/${this.props.server_ip}`}>全局总览</Link>
+                    </Menu.Item>
                     <SubMenu
                         key="sub1"
                         title={
@@ -64,8 +68,6 @@ export class IndexSider extends React.Component {
                         <Menu.Item key="2">
                             <Link to={`/control/${this.props.server_ip}/server_secret`}>集群密钥管理</Link>
                         </Menu.Item>
-                        <Menu.Item key="3">Option 3</Menu.Item>
-                        <Menu.Item key="4">Option 4</Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="sub2"
@@ -79,7 +81,6 @@ export class IndexSider extends React.Component {
                         <Menu.Item key="5">
                             <Link to={`/control/${this.props.server_ip}/containerinfo`}>容器总览</Link>
                         </Menu.Item>
-                        <Menu.Item key="6">Option 6</Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="sub4"

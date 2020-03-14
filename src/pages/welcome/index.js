@@ -92,7 +92,7 @@ export default class WelcomePage extends React.Component {
             );
         } else {
             return (
-                <div align="center" style={{ "margin-top": "20%" }}>
+                <div align="center" style={{ "marginTop": "20%" }}>
                     <Spin size="large" />
                 </div>
             );
