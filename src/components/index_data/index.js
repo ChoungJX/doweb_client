@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom'
 import { Row, Col, Divider } from 'antd'
 import 'antd/dist/antd.css';
-import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
+//import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 import IndexCpuData from './index_cpu'
