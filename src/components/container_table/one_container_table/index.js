@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, useRouteMatch, useParams } from 'react-router-dom'
 import 'antd/dist/antd.css';
-import { Table, Button, Tag, PageHeader, Card } from 'antd';
-import { EyeOutlined } from '@ant-design/icons';
+import { Table, Tag, PageHeader, Card } from 'antd';
+
 import axios from 'axios';
 import moment from "moment";
 
 import OneContainerActionButton from './one_container_action_button'
+import ContainerInspect from './one_container_inspect'
 
 function ContainerPageHeader() {
     let { server_ip } = useParams();
@@ -23,12 +24,10 @@ function ContainerPageHeader() {
 }
 
 function ContainerInspectButton(props) {
-    let { url } = useRouteMatch();
+    let { server_ip } = useParams();
 
     return (
-        <Link to={`${url}/${props.container_id}`} >
-            <Button type="primary" shape="circle" icon={<EyeOutlined />} />
-        </Link>
+        <ContainerInspect server_ip={server_ip} container_id={props.container_id} />
     )
 }
 
@@ -93,7 +92,7 @@ class ContainerOneServerTable extends React.Component {
         this.fetch();
         this.setState({
             selectedRowKeys: [],
-            loading:false
+            loading: false
         })
     }
 
