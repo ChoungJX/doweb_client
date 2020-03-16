@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'
-import { Row, Col, Divider } from 'antd'
+import { Row, Col, Divider, PageHeader } from 'antd'
 import 'antd/dist/antd.css';
 //import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -18,6 +18,12 @@ export default function IndexData() {
     let { server_ip } = useParams();
     return (
         <div>
+            <PageHeader
+                ghost={false}
+                title="总览"
+                subTitle={`服务器:${server_ip}`}
+            >
+            </PageHeader>
             <IndexDataControl server_ip={server_ip} />
         </div>
     );

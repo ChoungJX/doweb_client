@@ -114,7 +114,6 @@ function ImagePageHeader() {
     return (
         <PageHeader
             ghost={false}
-            onBack={() => window.history.back()}
             title="镜像详情"
             subTitle={`服务器:${server_ip}`}
         >

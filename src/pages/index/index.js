@@ -6,17 +6,15 @@ import { Layout, Breadcrumb } from 'antd';
 
 import { AllHeader } from '../../components/header'
 import IndexMenu from '../../components/index_menu'
-import { ServerTable } from '../../components/server_table'
-import { ContainerTable } from '../../components/container_table'
 import { ContainerOne } from '../../components/container_info'
-import { ImageTable } from '../../components/image_table'
 import ContainerOneServer from '../../components/container_table/one_container_table'
 import ContainerCreate from '../../components/container_create'
 import ImageOneServer from '../../components/image_table/one_server_image'
-import { NetworkTable } from '../../components/network_table'
 import NetworkOneServer from '../../components/network_table/one_network'
 import NetworkCreate from '../../components/network_create'
 import IndexData from '../../components/index_data'
+import ServerInfo from '../../components/server_info'
+import ServerPsw from '../../components/server_psw'
 
 
 
@@ -67,8 +65,38 @@ export default function Index() {
                                 <IndexData />
                             </Content>
                         </Route>
-
-
+                        <Route exact path={`${url}/:server_ip/serverinfo`}>
+                            <Breadcrumb style={{ margin: '16px 0' }}>
+                                <Breadcrumb.Item>主页</Breadcrumb.Item>
+                                <Breadcrumb.Item>服务器信息</Breadcrumb.Item>
+                            </Breadcrumb>
+                            <Content
+                                className="site-layout-background"
+                                style={{
+                                    padding: 24,
+                                    margin: 0,
+                                    minHeight: 280,
+                                }}
+                            >
+                                <ServerInfo />
+                            </Content>
+                        </Route>
+                        <Route exact path={`${url}/:server_ip/server_secret`}>
+                            <Breadcrumb style={{ margin: '16px 0' }}>
+                                <Breadcrumb.Item>主页</Breadcrumb.Item>
+                                <Breadcrumb.Item>服务器密钥</Breadcrumb.Item>
+                            </Breadcrumb>
+                            <Content
+                                className="site-layout-background"
+                                style={{
+                                    padding: 24,
+                                    margin: 0,
+                                    minHeight: 280,
+                                }}
+                            >
+                                <ServerPsw />
+                            </Content>
+                        </Route>
                         <Route exact path={`${url}/:server_ip/containerinfo`}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>主页</Breadcrumb.Item>

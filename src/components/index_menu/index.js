@@ -4,7 +4,7 @@ import {
     useParams
 } from "react-router-dom";
 import 'antd/dist/antd.css';
-import { AppstoreOutlined, CloudServerOutlined, EyeOutlined, SaveOutlined, ApartmentOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, CloudServerOutlined, EyeOutlined, SaveOutlined, ApartmentOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { Layout, Menu, } from 'antd';
 
 const { SubMenu } = Menu;
@@ -49,15 +49,19 @@ export class IndexSider extends React.Component {
                     style={{ width: 200 }}
                     defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4', 'sub5']}
                 >
+                    <Menu.Item key="back">
+                        <ArrowLeftOutlined style={{ fontSize: '21px' }} />
+                        <Link to={`/`}>回到主页</Link>
+                    </Menu.Item>
                     <Menu.Item key="0">
-                        <EyeOutlined style={{ fontSize: '21px' }}/>
+                        <EyeOutlined style={{ fontSize: '21px' }} />
                         <Link to={`/control/${this.props.server_ip}`}>全局总览</Link>
                     </Menu.Item>
                     <SubMenu
                         key="sub1"
                         title={
                             <span>
-                                <CloudServerOutlined style={{ fontSize: '21px' }}/>
+                                <CloudServerOutlined style={{ fontSize: '21px' }} />
                                 <span>集群管理</span>
                             </span>
                         }
@@ -73,7 +77,7 @@ export class IndexSider extends React.Component {
                         key="sub2"
                         title={
                             <span>
-                                <AppstoreOutlined style={{ fontSize: '21px' }}/>
+                                <AppstoreOutlined style={{ fontSize: '21px' }} />
                                 <span>容器管理</span>
                             </span>
                         }
@@ -86,7 +90,7 @@ export class IndexSider extends React.Component {
                         key="sub4"
                         title={
                             <span>
-                                <SaveOutlined style={{ fontSize: '21px' }}/>
+                                <SaveOutlined style={{ fontSize: '21px' }} />
                                 <span>镜像管理</span>
                             </span>
                         }
@@ -99,7 +103,7 @@ export class IndexSider extends React.Component {
                         key="sub5"
                         title={
                             <span>
-                                <ApartmentOutlined style={{ fontSize: '21px' }}/>
+                                <ApartmentOutlined style={{ fontSize: '21px' }} />
                                 <span>网络管理</span>
                             </span>
                         }

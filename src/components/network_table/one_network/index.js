@@ -118,7 +118,6 @@ function NetworkPageHeader() {
     return (
         <PageHeader
             ghost={false}
-            onBack={() => window.history.back()}
             title="网络详情"
             subTitle={`服务器:${server_ip}`}
         >

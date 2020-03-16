@@ -15,7 +15,6 @@ function ContainerPageHeader() {
     return (
         <PageHeader
             ghost={false}
-            onBack={() => window.history.back()}
             title="容器详情"
             subTitle={`服务器:${server_ip}`}
         >
