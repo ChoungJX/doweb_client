@@ -15,6 +15,7 @@ import NetworkCreate from '../../components/network_create'
 import IndexData from '../../components/index_data'
 import ServerInfo from '../../components/server_info'
 import ServerPsw from '../../components/server_psw'
+import VolumeOneServer from '../../components/volume_table'
 
 
 
@@ -46,6 +47,9 @@ export default function Index() {
                     </Route>
                     <Route path={`${url}/:server_ip/network`}>
                         <IndexMenu openKey='sub5' selectOptins='10' />
+                    </Route>
+                    <Route path={`${url}/:server_ip/volume`}>
+                        <IndexMenu openKey='sub6' selectOptins='11' />
                     </Route>
                 </Switch>
                 <Layout style={{ padding: '0 24px 24px' }}>
@@ -192,6 +196,22 @@ export default function Index() {
                                 }}
                             >
                                 <NetworkCreate />
+                            </Content>
+                        </Route>
+                        <Route exact path={`${url}/:server_ip/volume/`}>
+                            <Breadcrumb style={{ margin: '16px 0' }}>
+                                <Breadcrumb.Item>主页</Breadcrumb.Item>
+                                <Breadcrumb.Item>卷管理</Breadcrumb.Item>
+                            </Breadcrumb>
+                            <Content
+                                className="site-layout-background"
+                                style={{
+                                    padding: 24,
+                                    margin: 0,
+                                    minHeight: 280,
+                                }}
+                            >
+                                <VolumeOneServer />
                             </Content>
                         </Route>
                     </Switch>

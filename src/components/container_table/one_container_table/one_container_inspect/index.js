@@ -89,9 +89,9 @@ export default class ContainerInspect extends React.Component {
                             <Descriptions.Item span={2} label="镜像">{data.Config.Image}</Descriptions.Item>
                             <Descriptions.Item label="端口映射信息">
                                 {Object.keys(data.NetworkSettings.Ports).map((item, index) =>
-                                    data.NetworkSettings.Ports[`${item}`].map((item2, index2) =>
+                                    data.NetworkSettings.Ports[`${item}`] ? data.NetworkSettings.Ports[`${item}`].map((item2, index2) =>
                                         `${item2.HostIp}:${item2.HostPort} => ${item}`
-                                    )
+                                    ) : item
                                 )}
                             </Descriptions.Item>
                             <Descriptions.Item label="启动参数">
@@ -102,7 +102,10 @@ export default class ContainerInspect extends React.Component {
                             <Descriptions.Item span={2} label="环境变量">
                                 {
                                     data.Config.Env.map((item, index) =>
-                                        item
+                                        <div>
+                                            {item}
+                                            <br />
+                                        </div>
                                     )
                                 }
                             </Descriptions.Item>

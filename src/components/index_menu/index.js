@@ -4,7 +4,7 @@ import {
     useParams
 } from "react-router-dom";
 import 'antd/dist/antd.css';
-import { AppstoreOutlined, CloudServerOutlined, EyeOutlined, SaveOutlined, ApartmentOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, CloudServerOutlined, EyeOutlined, SaveOutlined, ApartmentOutlined, ArrowLeftOutlined, FolderOpenOutlined } from '@ant-design/icons';
 import { Layout, Menu, } from 'antd';
 
 const { SubMenu } = Menu;
@@ -47,7 +47,7 @@ export class IndexSider extends React.Component {
                     defaultSelectedKeys={this.state.openOptions}
                     onOpenChange={this.onOpenChange}
                     style={{ width: 200 }}
-                    defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4', 'sub5']}
+                    defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6']}
                 >
                     <Menu.Item key="back">
                         <ArrowLeftOutlined style={{ fontSize: '21px' }} />
@@ -110,6 +110,19 @@ export class IndexSider extends React.Component {
                     >
                         <Menu.Item key="10">
                             <Link to={`/control/${this.props.server_ip}/network`}>网卡一览</Link>
+                        </Menu.Item>
+                    </SubMenu>
+                    <SubMenu
+                        key="sub6"
+                        title={
+                            <span>
+                                <FolderOpenOutlined style={{ fontSize: '21px' }} />
+                                <span>卷管理</span>
+                            </span>
+                        }
+                    >
+                        <Menu.Item key="11">
+                            <Link to={`/control/${this.props.server_ip}/volume`}>卷一览</Link>
                         </Menu.Item>
                     </SubMenu>
                 </Menu>
