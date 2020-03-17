@@ -53,7 +53,7 @@ class ContainerOneServerTable extends React.Component {
                 )
             },
             {
-                title: '节点ip',
+                title: '容器ip',
                 key: 'ip',
                 render: (text, record) => this.show_ip(text, record)
             },

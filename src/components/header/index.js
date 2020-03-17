@@ -28,13 +28,10 @@ export class AllHeader extends React.Component {
                     style={{ lineHeight: '64px' }}
                 >
                     <Menu.Item key="1">
-                        <Link to="/">功能</Link>
+                        <Link to="/">功能操作</Link>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <Link to="/user">用户</Link>
-                    </Menu.Item>
-                    <Menu.Item key="3">
-                        <Link to="/login">登录</Link>
+                        <Link to="/user">用户管理</Link>
                     </Menu.Item>
                 </Menu>
             </Header>

@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Drawer, Button, Descriptions, Badge, Tooltip } from 'antd';
+import { Drawer, Button, Descriptions, Badge, Tooltip, Skeleton, message } from 'antd';
 import { EyeOutlined, PlayCircleOutlined, ReloadOutlined, PoweroffOutlined, FundProjectionScreenOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
@@ -13,6 +13,7 @@ export default class ContainerInspect extends React.Component {
         super(props);
         this.state = {
             visible: false,
+            loading: false,
             data: {}
         }
     }
@@ -31,6 +32,63 @@ export default class ContainerInspect extends React.Component {
             });
     }
 
+    handleStart() {
+        this.setState({
+            loading: true,
+        })
+        axios.post('/api',
+            {
+                api: 'container_start',
+                server_ip: this.props.server_ip,
+                container_id: this.props.container_id
+            }).then(data => {
+                console.log(data.data.data)
+                this.setState({
+                    loading: false,
+                })
+                message.success("已向服务器发起请求")
+                this.fetch();
+            });
+    }
+
+    handleRestart() {
+        this.setState({
+            loading: true,
+        })
+        axios.post('/api',
+            {
+                api: 'container_restart',
+                server_ip: this.props.server_ip,
+                container_id: this.props.container_id
+            }).then(data => {
+                console.log(data.data.data)
+                this.setState({
+                    loading: false,
+                })
+                message.success("已向服务器发起请求")
+                this.fetch();
+            });
+    }
+
+    handleStop() {
+        this.setState({
+            loading: true,
+        })
+        axios.post('/api',
+            {
+                api: 'container_stop',
+                server_ip: this.props.server_ip,
+                container_id: this.props.container_id
+            }).then(data => {
+                console.log(data.data.data)
+                this.setState({
+                    loading: false,
+                })
+                message.success("已向服务器发起请求")
+                this.fetch();
+            });
+    }
+
     showDrawer = () => {
         this.setState({
             visible: true,
@@ -45,7 +103,7 @@ export default class ContainerInspect extends React.Component {
     };
 
     render() {
-        const { data } = this.state;
+        const { data, loading } = this.state;
         if (data.NetworkSettings) {
             const network_drive = Object.keys(data.NetworkSettings.Networks)[0]
             return (
@@ -71,16 +129,21 @@ export default class ContainerInspect extends React.Component {
                             <Descriptions.Item label="创建时间"> {data.Created.split(".")[0]} </Descriptions.Item>
                             <Descriptions.Item span={2} label="操作">
                                 <Tooltip placement="top" title="启动容器">
-                                    <Button type="primary" shape="circle" icon={<PlayCircleOutlined />} size="large" />
+                                    <Button loading={loading} type="primary" shape="circle" icon={<PlayCircleOutlined />} size="large" onClick={() => this.handleStart()} />
                                 </Tooltip>
                                 <Tooltip placement="top" title="重启容器">
-                                    <Button style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<ReloadOutlined />} size="large" />
+                                    <Button loading={loading} style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<ReloadOutlined />} size="large" onClick={() => this.handleRestart()} />
                                 </Tooltip>
                                 <Tooltip placement="top" title="结束容器">
-                                    <Button style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<PoweroffOutlined />} size="large" danger />
+                                    <Button loading={loading} style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<PoweroffOutlined />} size="large" danger onClick={() => this.handleStop()} />
                                 </Tooltip>
                                 <Tooltip placement="top" title="启动终端">
-                                    <Button style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" />
+                                    {data.State.Status == "running" ?
+                                        <Button style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" />
+                                        :
+                                        <Button style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" disabled />
+                                    }
+
                                 </Tooltip>
                             </Descriptions.Item>
                         </Descriptions>
@@ -104,7 +167,7 @@ export default class ContainerInspect extends React.Component {
                                     data.Config.Env.map((item, index) =>
                                         <div>
                                             {item}
-                                            <br />
+                                            <br /><br />
                                         </div>
                                     )
                                 }
@@ -115,9 +178,23 @@ export default class ContainerInspect extends React.Component {
             );
         } else {
             return (
-                <Tooltip placement="top" title="查看该容器">
-                    <Button type="primary" shape="circle" icon={<EyeOutlined />} onClick={this.showDrawer} />
-                </Tooltip>
+                <div>
+                    <Tooltip placement="top" title="查看该容器">
+                        <Button type="primary" shape="circle" icon={<EyeOutlined />} onClick={this.showDrawer} />
+                    </Tooltip>
+                    <Drawer
+                        title="容器信息"
+                        placement="right"
+                        closable={false}
+                        onClose={this.onClose}
+                        visible={this.state.visible}
+                        width={720}
+                    >
+                        <Skeleton active />
+                        <br /><br />
+                        <Skeleton active />
+                    </Drawer>
+                </div>
             )
         }
 

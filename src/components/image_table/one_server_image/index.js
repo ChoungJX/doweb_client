@@ -8,6 +8,7 @@ import moment from "moment";
 
 import ImageDeleteButton from './delete_button'
 import ImageAddButton from './add_button'
+import ImageInspect from './image_inspect'
 
 
 export default function ImageOneServer(props) {
@@ -35,10 +36,10 @@ class ImageOneServerTable extends React.Component {
             {
                 title: 'ID',
                 key: 'id',
+                width: '30%',
+                ellipsis: true,
                 render: (text, record) => (
-                    <Link to={`${props.url}/${record.Id}`}>
-                        {record.Id}
-                    </Link>
+                    <ImageInspect image_id={record.Id} server_ip={this.props.server_ip} />
                 )
             },
             {

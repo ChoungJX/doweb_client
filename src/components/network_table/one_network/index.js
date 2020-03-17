@@ -6,6 +6,7 @@ import { ApartmentOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 import NetworkDeleteButton from './delete_button'
+import NetworkInspect from './network_inspect'
 
 export default function NetworkOneServer(props) {
     let { server_ip } = useParams();
@@ -33,9 +34,7 @@ class NetworlOneServerTable extends React.Component {
                 title: '名字',
                 key: 'name',
                 render: (text, record) => (
-                    <Link to={`${props.url}/${record.Id}`}>
-                        {record.Name}
-                    </Link>
+                    <NetworkInspect network_name={record.Name} network_id={record.Id} server_ip={this.props.server_ip}/>
                 )
             },
             {

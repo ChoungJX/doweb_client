@@ -62,15 +62,15 @@ export class IndexSider extends React.Component {
                         title={
                             <span>
                                 <CloudServerOutlined style={{ fontSize: '21px' }} />
-                                <span>集群管理</span>
+                                <span>服务器管理</span>
                             </span>
                         }
                     >
                         <Menu.Item key="1">
-                            <Link to={`/control/${this.props.server_ip}/serverinfo`}>集群总览</Link>
+                            <Link to={`/control/${this.props.server_ip}/serverinfo`}>服务器总览</Link>
                         </Menu.Item>
                         <Menu.Item key="2">
-                            <Link to={`/control/${this.props.server_ip}/server_secret`}>集群密钥管理</Link>
+                            <Link to={`/control/${this.props.server_ip}/server_secret`}>服务器密钥管理</Link>
                         </Menu.Item>
                     </SubMenu>
                     <SubMenu
