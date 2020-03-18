@@ -42,20 +42,39 @@ export class ServerTable extends React.Component {
             {
                 title: '操作',
                 key: 'action',
-                render: (text, record) => (
-                    <div>
-                        <span style={{ marginRight: 8 }}>
-                            <Tooltip placement="top" title="进入该服务器">
-                                <Link to={`${this.props.url}control/${record.server_ip}`} >
-                                    <Button type="primary" shape="circle" icon={<FullscreenOutlined />} />
-                                </Link>
-                            </Tooltip>
-                        </span>
-                        <span style={{ marginRight: 8 }}>
-                            <ServerDeleteButton server_id={record.id} onFresh={() => this.handleRefresh()} />
-                        </span>
-                    </div>
-                ),
+                render: (text, record) => {
+                    if (record.server_status === 0) {
+                        return (
+                            <div>
+                                <span style={{ marginRight: 8 }}>
+                                    <Tooltip placement="top" title="进入该服务器">
+                                        <Link to={`${this.props.url}control/${record.server_ip}`} >
+                                            <Button type="primary" shape="circle" icon={<FullscreenOutlined />} />
+                                        </Link>
+                                    </Tooltip>
+                                </span>
+                                <span style={{ marginRight: 8 }}>
+                                    <ServerDeleteButton server_id={record.id} onFresh={() => this.handleRefresh()} />
+                                </span>
+                            </div>
+                        );
+                    } else {
+                        return (
+                            <div>
+                                <span style={{ marginRight: 8 }}>
+                                    <Tooltip placement="top" title="进入该服务器">
+                                        <Link to={`${this.props.url}control/${record.server_ip}`} >
+                                            <Button type="primary" shape="circle" icon={<FullscreenOutlined />} disabled />
+                                        </Link>
+                                    </Tooltip>
+                                </span>
+                                <span style={{ marginRight: 8 }}>
+                                    <ServerDeleteButton server_id={record.id} onFresh={() => this.handleRefresh()} disabled={true} />
+                                </span>
+                            </div>
+                        );
+                    }
+                },
             },
         ];
     }

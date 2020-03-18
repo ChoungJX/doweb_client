@@ -39,8 +39,8 @@ export default class ServerDeleteButton extends React.Component {
     render() {
         return (
             <Tooltip placement="top" title="删除该服务器">
-                <Popconfirm placement="right" title="您确定要删除该节点吗" onConfirm={() => this.delete_server()} okText="是" cancelText="否">
-                    <Button type="primary" shape="circle" icon={<DeleteOutlined />} danger />
+                <Popconfirm disabled={this.props.disabled} placement="right" title="您确定要删除该节点吗" onConfirm={() => this.delete_server()} okText="是" cancelText="否">
+                    <Button type="primary" shape="circle" icon={<DeleteOutlined />} danger disabled={this.props.disabled} />
                 </Popconfirm>
             </Tooltip>
         );

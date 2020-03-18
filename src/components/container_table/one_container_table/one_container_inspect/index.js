@@ -139,9 +139,9 @@ export default class ContainerInspect extends React.Component {
                                 </Tooltip>
                                 <Tooltip placement="top" title="启动终端">
                                     {data.State.Status == "running" ?
-                                        <Button style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" />
+                                        <Button loading={loading} style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" />
                                         :
-                                        <Button style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" disabled />
+                                        <Button loading={loading} style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" disabled />
                                     }
 
                                 </Tooltip>
