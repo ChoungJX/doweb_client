@@ -85,7 +85,7 @@ class WelcomeBindServer extends React.Component {
                         <center>
                             <Card title="请输入服务器信息" bordered={false} style={{ width: 500 }}>
                                 <Input.Group>
-                                    服务器ip:<Input onChange={(e) => this.handleServer_ip_input(e)} value={server_ip_input} style={{ width: 300, marginLeft: 10 }} prefix={<ApiTwoTone />} placeholder="127.0.0.1" />
+                                    服务器ip或域名:<Input onChange={(e) => this.handleServer_ip_input(e)} value={server_ip_input} style={{ width: 300, marginLeft: 10 }} prefix={<ApiTwoTone />} placeholder="127.0.0.1" />
                                     <br /><br />
                                     服务器名字:<Input onChange={(e) => this.handleServer_name_input(e)} value={server_name_input} style={{ width: 290, marginLeft: 5 }} prefix={<EditTwoTone />} placeholder="lalala" />
                                 </Input.Group>

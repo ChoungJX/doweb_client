@@ -1,7 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Row, Col, Divider } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Divider } from 'antd';
 
 
 export default class ServerTable extends React.Component {

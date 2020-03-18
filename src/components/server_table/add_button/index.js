@@ -134,7 +134,7 @@ export default class ServerAddButton extends React.Component {
                     ]}
                 >
                     <Input.Group>
-                        服务器ip:<Input value={input_server_ip} onChange={this.handleInput_server_ip} prefix={<ApiTwoTone />} placeholder="127.0.0.1" />
+                        服务器ip或域名:<Input value={input_server_ip} onChange={this.handleInput_server_ip} prefix={<ApiTwoTone />} placeholder="127.0.0.1" />
                         服务器名字:<Input value={input_server_name} onChange={this.handleInput_server_name} prefix={<EditTwoTone />} placeholder="lalala" />
                     </Input.Group>
                     <br />
