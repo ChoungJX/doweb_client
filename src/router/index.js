@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, useHistory, useLocation, Redirect } from 'react-router-dom'
+import { HashRouter as Router, Route, useHistory, useLocation, Redirect } from 'react-router-dom'
 
 import Index from '../pages/index'
 import Login from '../pages/login'
