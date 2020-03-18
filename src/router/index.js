@@ -5,6 +5,8 @@ import Index from '../pages/index'
 import Login from '../pages/login'
 import WelcomePage from '../pages/welcome'
 import HomePage from '../pages/home'
+import UserPage from '../pages/user'
+
 import { Spin } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
@@ -63,6 +65,9 @@ export default class AuthExample extends React.Component {
                 <PrivateRoute path='/control' isAuthenticated={isAuthenticated} isSend={isSend} >
                     <Index />
                 </PrivateRoute>
+                <PrivateRoute path='/user' isAuthenticated={isAuthenticated} isSend={isSend} >
+                    <UserPage />
+                </PrivateRoute>
                 <PrivateRoute exact path='/' isAuthenticated={isAuthenticated} isSend={isSend} >
                     <HomePage />
                 </PrivateRoute>
@@ -115,7 +120,7 @@ function PrivateRoute({ children, ...rest }) {
                             />
                         )
                 ) : (
-                        <div align="center" style={{"marginTop":"20%"}}>
+                        <div align="center" style={{ "marginTop": "20%" }}>
                             <Spin size="large" />
                         </div>
 
