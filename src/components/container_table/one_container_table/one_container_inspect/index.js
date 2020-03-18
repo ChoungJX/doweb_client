@@ -151,11 +151,14 @@ export default class ContainerInspect extends React.Component {
                         <Descriptions title="详细参数" bordered column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}>
                             <Descriptions.Item span={2} label="镜像">{data.Config.Image}</Descriptions.Item>
                             <Descriptions.Item label="端口映射信息">
-                                {Object.keys(data.NetworkSettings.Ports).map((item, index) =>
+                                {data.NetworkSettings.Ports ? Object.keys(data.NetworkSettings.Ports).map((item, index) =>
                                     data.NetworkSettings.Ports[`${item}`] ? data.NetworkSettings.Ports[`${item}`].map((item2, index2) =>
-                                        `${item2.HostIp}:${item2.HostPort} => ${item}`
+                                        <div>
+                                            {`${item2.HostIp}:${item2.HostPort} => ${item}`}
+                                            <br /><br />
+                                        </div>
                                     ) : item
-                                )}
+                                ) : ""}
                             </Descriptions.Item>
                             <Descriptions.Item label="启动参数">
                                 {data.Config.Cmd ? data.Config.Cmd.map((item, index) =>

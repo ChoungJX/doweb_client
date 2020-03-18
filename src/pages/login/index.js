@@ -1,15 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import {
     Row,
     Col,
     Calendar,
     Spin,
+    Modal,
 } from 'antd'
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { LoginForm } from '../../components/login_form'
 import axios from 'axios';
 
-
+const { confirm } = Modal;
 
 function onPanelChange(value, mode) {
     console.log(value.format('YYYY-MM-DD'), mode);
@@ -22,12 +25,14 @@ export default class Login extends React.Component {
         this.state = {
             loading: true,
             welcome: false,
+            login: false,
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.fetch();
     }
+
 
     fetch() {
         axios.post('/api',
@@ -36,18 +41,38 @@ export default class Login extends React.Component {
             }).then(data => {
                 console.log(data.data)
                 if (data.data.status === 0) {
-                    window.location.replace('/#/welcome')
                     this.setState({
                         loading: false,
                         welcome: true,
                     })
                 } else {
-                    this.setState({
-                        loading: false,
-                        welcome: false,
-                    })
+                    if (data.data.login) {
+                        window.location.replace('/')
+                    } else {
+                        this.setState({
+                            loading: false,
+                            welcome: false,
+                        })
+                    }
                 }
             });
+    }
+
+    showConfirm() {
+        this.setState({
+            loading: false,
+            welcome: false,
+        })
+        confirm({
+            title: '您尚未注册任何用户或绑定任何服务器',
+            icon: <ExclamationCircleOutlined />,
+            content: '是否需要进入引导界面进行注册绑定？',
+            onOk() {
+                window.location.replace('/#/welcome')
+            },
+            onCancel() {
+            },
+        });
     }
 
     render() {
@@ -60,7 +85,8 @@ export default class Login extends React.Component {
             )
         } else {
             if (welcome) {
-                window.location.replace('/#/welcome')
+                this.showConfirm();
+                return (<div></div>);
             } else {
                 return (
                     <div>
