@@ -36,7 +36,7 @@ export default class Login extends React.Component {
             }).then(data => {
                 console.log(data.data)
                 if (data.data.status === 0) {
-                    window.location.replace('/welcome')
+                    window.location.replace('/#/welcome')
                     this.setState({
                         loading: false,
                         welcome: true,
@@ -60,7 +60,7 @@ export default class Login extends React.Component {
             )
         } else {
             if (welcome) {
-                window.location.replace('/welcome')
+                window.location.replace('/#/welcome')
             } else {
                 return (
                     <div>
