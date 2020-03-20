@@ -68,7 +68,7 @@ export default class Login extends React.Component {
             icon: <ExclamationCircleOutlined />,
             content: '是否需要进入引导界面进行注册绑定？',
             onOk() {
-                window.location.replace('/#/welcome')
+                window.location.replace('/welcome')
             },
             onCancel() {
             },

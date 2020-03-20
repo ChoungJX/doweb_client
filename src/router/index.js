@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter as Router, Route, useHistory, useLocation, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, useHistory, useLocation, Redirect } from 'react-router-dom'
 
 import Index from '../pages/index'
 import Login from '../pages/login'
@@ -56,6 +56,7 @@ export default class AuthExample extends React.Component {
             isAuthenticated: true,
             isSend: true
         })
+        window.location.replace('/')
     }
 
     render() {

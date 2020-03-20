@@ -107,6 +107,9 @@ class NetworkCreate_page extends React.Component {
 
         if (network_name_input === "" || network_subnet_input === "") {
             message.error('必要信息没有填写完整！');
+            this.setState({
+                loading: false
+            })
             return;
         }
         message.loading({ content: '网络创建中', key: 'updatable', duration: 0 });

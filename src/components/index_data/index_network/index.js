@@ -20,6 +20,7 @@ export default function IndexNetworkData(props) {
     let download_unit = 'b/s'
     let upload_unit = 'b/s'
 
+    download /= 8;
     if (download > 1000) {
         download /= 1024;
         download_unit = 'kb/s';
@@ -32,6 +33,7 @@ export default function IndexNetworkData(props) {
             }
         }
     }
+    upload /= 8;
     if (upload > 1000) {
         upload /= 1024;
         upload_unit = 'kb/s';

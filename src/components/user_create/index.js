@@ -15,7 +15,7 @@ export default class UserCreate extends React.Component {
             }).then(data => {
                 console.log(data.data)
                 if (data.data.status === 0) {
-                    window.location.replace('/#/user')
+                    window.location.replace('/user')
                 } else {
                     message.info('用户名重复，请重新设置！');
                 }
