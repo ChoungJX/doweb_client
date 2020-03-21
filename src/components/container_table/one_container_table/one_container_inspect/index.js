@@ -22,7 +22,7 @@ export default class ContainerInspect extends React.Component {
         axios.post('/api',
             {
                 api: 'container_inspect',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
                 container_id: this.props.container_id
             }).then(data => {
                 console.log(data.data.data.data)
@@ -39,7 +39,7 @@ export default class ContainerInspect extends React.Component {
         axios.post('/api',
             {
                 api: 'container_start',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
                 container_id: this.props.container_id
             }).then(data => {
                 console.log(data.data.data)
@@ -48,6 +48,7 @@ export default class ContainerInspect extends React.Component {
                 })
                 message.success("已向服务器发起请求")
                 this.fetch();
+                this.props.onFresh();
             });
     }
 
@@ -58,7 +59,7 @@ export default class ContainerInspect extends React.Component {
         axios.post('/api',
             {
                 api: 'container_restart',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
                 container_id: this.props.container_id
             }).then(data => {
                 console.log(data.data.data)
@@ -67,6 +68,7 @@ export default class ContainerInspect extends React.Component {
                 })
                 message.success("已向服务器发起请求")
                 this.fetch();
+                this.props.onFresh();
             });
     }
 
@@ -77,7 +79,7 @@ export default class ContainerInspect extends React.Component {
         axios.post('/api',
             {
                 api: 'container_stop',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
                 container_id: this.props.container_id
             }).then(data => {
                 console.log(data.data.data)
@@ -86,6 +88,26 @@ export default class ContainerInspect extends React.Component {
                 })
                 message.success("已向服务器发起请求")
                 this.fetch();
+                this.props.onFresh();
+            });
+    }
+
+    handelGotoTerminal() {
+        this.setState({
+            loading: true,
+        })
+        axios.post('/api',
+            {
+                api: 'server_ssh_info',
+                server_id: this.props.server_id,
+                base64: true,
+            }).then(data => {
+                console.log(data.data.data)
+                let ip = data.data.data.ip;
+                let user = data.data.data.user;
+                let psw = data.data.data.psw;
+
+                window.location.replace(`/ssh?hostname=${ip}&username=${user}&password=${psw}&command=docker exec -it ${this.props.container_id} /bin/bash`);
             });
     }
 
@@ -139,7 +161,7 @@ export default class ContainerInspect extends React.Component {
                                 </Tooltip>
                                 <Tooltip placement="top" title="启动终端">
                                     {data.State.Status == "running" ?
-                                        <Button loading={loading} style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" />
+                                        <Button loading={loading} style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" onClick={() => this.handelGotoTerminal()} />
                                         :
                                         <Button loading={loading} style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" disabled />
                                     }

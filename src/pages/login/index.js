@@ -7,16 +7,14 @@ import {
     Calendar,
     Spin,
     Modal,
+    Result,
 } from 'antd'
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined, SmileOutlined } from '@ant-design/icons';
 import { LoginForm } from '../../components/login_form'
 import axios from 'axios';
 
 const { confirm } = Modal;
 
-function onPanelChange(value, mode) {
-    console.log(value.format('YYYY-MM-DD'), mode);
-}
 
 
 export default class Login extends React.Component {
@@ -89,14 +87,25 @@ export default class Login extends React.Component {
                 return (<div></div>);
             } else {
                 return (
-                    <div>
+                    <div style={{
+                        background: `linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7) ),url(/static/img/1.jpg)`,
+                        backgroundSize: "100% 100%",
+                        height: "100%",
+                        width: "100%"
+                    }}>
                         <Row>
-                            <Col span={24}><br></br></Col>
+                            <Col span={24}>
+                                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                                <br /><br /><br /><br />
+                            </Col>
                         </Row>
                         <Row align={'middle'}>
                             <Col span={1} />
                             <Col span={12}>
-                                <Calendar onPanelChange={onPanelChange} />
+                                <Result
+                                    icon={<SmileOutlined />}
+                                    title={<div style={{color:"white"}}>欢迎来到Docker容器可视化管理平台</div>}
+                                />
                             </Col>
                             <Col span={9}>
                                 <LoginForm Login={() => this.props.Login()} />

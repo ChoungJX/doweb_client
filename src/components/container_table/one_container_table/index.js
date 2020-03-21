@@ -10,23 +10,23 @@ import OneContainerActionButton from './one_container_action_button'
 import ContainerInspect from './one_container_inspect'
 
 function ContainerPageHeader() {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
 
     return (
         <PageHeader
             ghost={false}
             title="容器详情"
-            subTitle={`服务器:${server_ip}`}
+            subTitle={`服务器:${server_id}`}
         >
         </PageHeader>
     );
 }
 
 function ContainerInspectButton(props) {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
 
     return (
-        <ContainerInspect server_ip={server_ip} container_id={props.container_id} />
+        <ContainerInspect server_id={server_id} container_id={props.container_id} onFresh={() => props.onFresh()} />
     )
 }
 
@@ -60,9 +60,13 @@ class ContainerOneServerTable extends React.Component {
             {
                 title: '状态',
                 key: 'stauts',
-                render: (text, record) => (
-                    <Tag color="cyan">{record.State}</Tag>
-                )
+                render: (text, record) => {
+                    if (record.State === "running") {
+                        return (<Tag color="cyan">{record.State}</Tag>);
+                    } else {
+                        return (<Tag color="red">{record.State}</Tag>)
+                    }
+                }
             },
             {
                 title: '创建时间',
@@ -76,7 +80,7 @@ class ContainerOneServerTable extends React.Component {
                 key: 'action',
                 render: (text, record) => (
                     <span>
-                        <ContainerInspectButton container_id={record.Id} />
+                        <ContainerInspectButton container_id={record.Id} onFresh={() => this.handleRefresh()} />
                     </span>
                 ),
             },
@@ -109,7 +113,7 @@ class ContainerOneServerTable extends React.Component {
         axios.post('/api',
             {
                 api: 'container_info',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
             }).then(data => {
                 console.log(data.data.data.data)
                 this.setState({
@@ -135,7 +139,7 @@ class ContainerOneServerTable extends React.Component {
         const hasSelected = selectedRowKeys.length > 0;
         return (
             <div>
-                <Card title="容器一览" extra={<OneContainerActionButton disabled={!hasSelected} loading={loading} server_ip={this.props.server_ip} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} onLoading={() => this.handleLoading()} />} >
+                <Card title="容器一览" extra={<OneContainerActionButton disabled={!hasSelected} loading={loading} server_id={this.props.server_id} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} onLoading={() => this.handleLoading()} />} >
                     <Table loading={loading} rowSelection={rowSelection} rowKey={record => record.Id} columns={this.columns} dataSource={data} size="middle" />
                 </Card>
             </div>
@@ -146,12 +150,12 @@ class ContainerOneServerTable extends React.Component {
 
 
 export default function ContainerOneServer() {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
     let { url } = useRouteMatch();
     return (
         <div>
             <ContainerPageHeader />
-            <ContainerOneServerTable server_ip={server_ip} url={url} />
+            <ContainerOneServerTable server_id={server_id} url={url} />
         </div>
     )
 }

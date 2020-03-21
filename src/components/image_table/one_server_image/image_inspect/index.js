@@ -18,7 +18,7 @@ export default class ImageInspect extends React.Component {
         axios.post('/api',
             {
                 api: 'image_inspect',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
                 image_id: this.props.image_id
             }).then(data => {
                 console.log(data.data.data.data)

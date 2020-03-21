@@ -9,7 +9,7 @@ import axios from 'axios';
 function IntoButton(props) {
     let { url } = useRouteMatch();
     return (
-        <Link to={`${url}/${props.server_ip}`} >
+        <Link to={`${url}/${props.server_id}`} >
             <Button type="primary" shape="circle" icon={<ControlTwoTone />} />
         </Link>
     );
@@ -39,7 +39,7 @@ export class CommonTable extends React.Component {
                 key: 'action',
                 render: (text, record) => (
                     <span>
-                        <IntoButton server_ip={record.server_ip} />
+                        <IntoButton server_id={record.id} />
                     </span>
                 ),
             },

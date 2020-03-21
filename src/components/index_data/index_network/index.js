@@ -12,11 +12,13 @@ import '../index.css';
 export default function IndexNetworkData(props) {
     let receive = props.data.network.receive;
     let send = props.data.network.send;
+    let time = props.data.network.time;
     let last_receive = props.data.network.last_receive;
     let last_send = props.data.network.last_send;
+    let last_time = props.data.network.last_time;
 
-    let download = receive - last_receive;
-    let upload = send - last_send
+    let download = (receive - last_receive) / (time - last_time);
+    let upload = (send - last_send) / (time - last_time)
     let download_unit = 'b/s'
     let upload_unit = 'b/s'
 

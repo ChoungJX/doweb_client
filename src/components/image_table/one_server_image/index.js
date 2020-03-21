@@ -12,13 +12,13 @@ import ImageInspect from './image_inspect'
 
 
 export default function ImageOneServer(props) {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
     let { url } = useRouteMatch();
 
     return (
         <div>
             <ImagePageHeader />
-            <ImageOneServerTable server_ip={server_ip} url={url} />
+            <ImageOneServerTable server_id={server_id} url={url} />
         </div>
     );
 }
@@ -39,7 +39,7 @@ class ImageOneServerTable extends React.Component {
                 width: '30%',
                 ellipsis: true,
                 render: (text, record) => (
-                    <ImageInspect image_id={record.Id} server_ip={this.props.server_ip} />
+                    <ImageInspect image_id={record.Id} server_id={this.props.server_id} />
                 )
             },
             {
@@ -78,7 +78,7 @@ class ImageOneServerTable extends React.Component {
         axios.post('/api',
             {
                 api: 'image_info',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
             }).then(data => {
                 console.log(data.data.data.data)
                 this.setState({
@@ -97,9 +97,9 @@ class ImageOneServerTable extends React.Component {
         const hasSelected = selectedRowKeys.length > 0;
         return (
             <div>
-                <Card title="镜像一览" extra={<ImageAddButton server_ip={this.props.server_ip} onFresh={() => this.handleRefresh()} />} >
+                <Card title="镜像一览" extra={<ImageAddButton server_id={this.props.server_id} onFresh={() => this.handleRefresh()} />} >
                     <div style={{ marginBottom: 16 }}>
-                        <ImageDeleteButton disabled={!hasSelected} loading={loading} server_ip={this.props.server_ip} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} />
+                        <ImageDeleteButton disabled={!hasSelected} loading={loading} server_id={this.props.server_id} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} />
                     </div>
                     <Table loading={loading} rowSelection={rowSelection} rowKey={record => record.Id} columns={this.columns} dataSource={data} size="middle" />
                 </Card>
@@ -110,13 +110,13 @@ class ImageOneServerTable extends React.Component {
 
 
 function ImagePageHeader() {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
 
     return (
         <PageHeader
             ghost={false}
             title="镜像详情"
-            subTitle={`服务器:${server_ip}`}
+            subTitle={`服务器:${server_id}`}
         >
         </PageHeader>
     );

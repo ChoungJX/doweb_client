@@ -26,7 +26,7 @@ export default class ImageAddButton extends React.Component {
         await axios.post('/api',
             {
                 api: 'image_pull',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
                 image_name: input_image_name,
             }).then(data => {
                 setTimeout(() => {

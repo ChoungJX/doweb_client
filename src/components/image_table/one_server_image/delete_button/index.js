@@ -21,7 +21,7 @@ export default class ImageDeleteButton extends React.Component {
             await axios.post('/api',
                 {
                     api: 'image_delele',
-                    server_ip: this.props.server_ip,
+                    server_id: this.props.server_id,
                     image_id: this.props.selected[i],
                 }).then(data => {
                     console.log(data.data.data.data);

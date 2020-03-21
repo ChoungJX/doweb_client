@@ -15,16 +15,16 @@ import IndexVolumeData from './index_volume'
 
 
 export default function IndexData() {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
     return (
         <div>
             <PageHeader
                 ghost={false}
                 title="总览"
-                subTitle={`服务器:${server_ip}`}
+                subTitle={`服务器:${server_id}`}
             >
             </PageHeader>
-            <IndexDataControl server_ip={server_ip} />
+            <IndexDataControl server_id={server_id} />
         </div>
     );
 }
@@ -51,8 +51,10 @@ class IndexDataControl extends React.Component {
                 network: {
                     receive: 0,
                     send: 0,
+                    time: 0,
                     last_receive: 0,
-                    last_send: 0
+                    last_send: 0,
+                    last_time: 0,
                 }
             },
             data_docker: {}
@@ -72,7 +74,7 @@ class IndexDataControl extends React.Component {
         axios.post('/api',
             {
                 api: 'check_server_status',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
             }).then(d => {
                 const { data } = this.state;
                 let data2 = {
@@ -80,6 +82,7 @@ class IndexDataControl extends React.Component {
                 }
                 data2.network.last_receive = data.network.receive
                 data2.network.last_send = data.network.send
+                data2.network.last_time = data.network.time
                 this.setState({
                     data: data2
                 })
@@ -90,7 +93,7 @@ class IndexDataControl extends React.Component {
         axios.post('/api',
             {
                 api: 'system_use',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
             }).then(d => {
                 console.log(d.data.data.data);
                 this.setState({

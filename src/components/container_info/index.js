@@ -57,9 +57,9 @@ export class ContainerInfo extends React.Component {
 }
 
 export function ContainerOne() {
-    let { server_ip, id } = useParams();
+    let { server_id, id } = useParams();
 
     return (
-        <ContainerInfo server_ip={server_ip} id={id} />
+        <ContainerInfo server_id={server_id} id={id} />
     )
 }

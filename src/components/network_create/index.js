@@ -9,14 +9,14 @@ import NetworkTypeOption from './network_type_option'
 
 
 function NetworkPageHeader() {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
 
     return (
         <PageHeader
             ghost={false}
             onBack={() => window.history.back()}
             title="创建新网络"
-            subTitle={`服务器:${server_ip}`}
+            subTitle={`服务器:${server_id}`}
         >
         </PageHeader>
     );
@@ -31,11 +31,12 @@ class NetworkCreate_page extends React.Component {
 
             network_name_input: "",
             network_type_input: "bridge",
-            network_type_option_input: [],
+            network_type_option_input: {},
             network_subnet_input: "",
             network_iprange_input: "",
             network_gateway_input: "",
             network_label_input: [],
+            network_macvlan_drive_input: "",
         }
     }
 
@@ -53,9 +54,9 @@ class NetworkCreate_page extends React.Component {
     }
 
     handleNetwork_type_option_input(value) {
-        let temp_list = [];
+        let temp_list = {};
         for (let i = 0; i < value.length; i++) {
-            temp_list = [...temp_list, JSON.parse(value[i])]
+            temp_list = { ...temp_list, ...JSON.parse(value[i]) }
         }
         this.setState({
             network_type_option_input: temp_list,
@@ -77,6 +78,12 @@ class NetworkCreate_page extends React.Component {
     handleNetwork_gateway_input(e) {
         this.setState({
             network_gateway_input: e.target.value,
+        })
+    }
+
+    handleNetwork_macvlan_drive_input(e) {
+        this.setState({
+            network_macvlan_drive_input: e.target.value,
         })
     }
 
@@ -103,25 +110,31 @@ class NetworkCreate_page extends React.Component {
             network_iprange_input,
             network_gateway_input,
             network_label_input,
+            network_macvlan_drive_input,
         } = this.state
 
-        if (network_name_input === "" || network_subnet_input === "") {
+        if (network_name_input === "") {
             message.error('必要信息没有填写完整！');
             this.setState({
                 loading: false
             })
             return;
         }
+        let network_type_option_input_new = network_type_option_input;
+        if (network_type_input === "macvlan") {
+            network_type_option_input_new = { ...network_type_option_input, ...JSON.parse(`{"parent":"${network_macvlan_drive_input}"}`) }
+        }
         message.loading({ content: '网络创建中', key: 'updatable', duration: 0 });
         await axios.post('/api',
             {
                 api: 'network_create',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
                 network_name: network_name_input,
                 network_drive: network_type_input,
                 subnet: network_subnet_input,
                 ip_range: network_iprange_input,
                 gateway: network_gateway_input,
+                option: network_type_option_input_new,
             }).then(data => {
                 setTimeout(() => {
                     message.success({ content: '客户端已接收数据！', key: 'updatable', duration: 2 });
@@ -151,7 +164,7 @@ class NetworkCreate_page extends React.Component {
 
     render() {
         const { Option } = Select;
-        const { loading } = this.state;
+        const { loading, network_type_input } = this.state;
         return (
             <div>
                 <NetworkPageHeader />
@@ -170,8 +183,8 @@ class NetworkCreate_page extends React.Component {
                         name="network_type"
                     >
                         <Select defaultValue="bridge" style={{ width: '450px' }} onChange={value => this.handleNetwork_type_input(value)}>
-                            <Option value="bridge">桥接</Option>
-                            <Option value="macvlan">混合</Option>
+                            <Option value="bridge">NAT</Option>
+                            <Option value="macvlan">桥接</Option>
                         </Select>
                     </Form.Item>
                     <Form.Item
@@ -182,29 +195,61 @@ class NetworkCreate_page extends React.Component {
                     </Form.Item>
                 </Form>
                 <Divider orientation="left">网络详情配置</Divider>
-                <Form>
-                    <Form.Item
-                        label="子网段"
-                        name="subnet"
-                    >
-                        <Input placeholder="如:172.18.0.0/16" style={{ width: '450px' }} onChange={e => this.handleNetwork_subnet_input(e)} />
+                {network_type_input === "macvlan" ?
+                    <Form>
+                        <Form.Item
+                            label="桥接网卡"
+                            name="macvlan_drive"
+                        >
+                            <Input placeholder="如:eth0" style={{ width: '450px' }} onChange={e => this.handleNetwork_macvlan_drive_input(e)} />
+                        </Form.Item>
+                        <Form.Item
+                            label="子网段"
+                            name="subnet"
+                        >
+                            <Input placeholder="如:172.18.0.0/16" style={{ width: '450px' }} onChange={e => this.handleNetwork_subnet_input(e)} />
 
-                    </Form.Item>
-                    <Form.Item
-                        label="IP段"
-                        name="iprange"
-                    >
-                        <Input placeholder="如:172.18.0.0/25" style={{ width: '450px' }} onChange={e => this.handleNetwork_iprange_input(e)} />
+                        </Form.Item>
+                        <Form.Item
+                            label="IP段"
+                            name="iprange"
+                        >
+                            <Input placeholder="如:172.18.0.0/25" style={{ width: '450px' }} onChange={e => this.handleNetwork_iprange_input(e)} />
 
-                    </Form.Item>
-                    <Form.Item
-                        label="网关"
-                        name="gateway"
-                    >
-                        <Input placeholder="如:172.18.0.1" style={{ width: '450px' }} onChange={e => this.handleNetwork_gateway_input(e)} />
+                        </Form.Item>
+                        <Form.Item
+                            label="网关"
+                            name="gateway"
+                        >
+                            <Input placeholder="如:172.18.0.1" style={{ width: '450px' }} onChange={e => this.handleNetwork_gateway_input(e)} />
 
-                    </Form.Item>
-                </Form>
+                        </Form.Item>
+                    </Form>
+                    :
+                    <Form>
+                        <Form.Item
+                            label="子网段"
+                            name="subnet"
+                        >
+                            <Input placeholder="如:172.18.0.0/16" style={{ width: '450px' }} onChange={e => this.handleNetwork_subnet_input(e)} />
+
+                        </Form.Item>
+                        <Form.Item
+                            label="IP段"
+                            name="iprange"
+                        >
+                            <Input placeholder="如:172.18.0.0/25" style={{ width: '450px' }} onChange={e => this.handleNetwork_iprange_input(e)} />
+
+                        </Form.Item>
+                        <Form.Item
+                            label="网关"
+                            name="gateway"
+                        >
+                            <Input placeholder="如:172.18.0.1" style={{ width: '450px' }} onChange={e => this.handleNetwork_gateway_input(e)} />
+
+                        </Form.Item>
+                    </Form>}
+
                 <Divider orientation="left">高级配置</Divider>
                 <Form>
                     <Form.Item
@@ -225,8 +270,8 @@ class NetworkCreate_page extends React.Component {
 
 
 export default function NetworkCreate() {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
     let { url } = useRouteMatch();
 
-    return (<NetworkCreate_page server_ip={server_ip} url={url} />)
+    return (<NetworkCreate_page server_id={server_id} url={url} />)
 }

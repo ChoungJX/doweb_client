@@ -19,7 +19,7 @@ export default class VolumeDeleteButton extends React.Component {
         await axios.post('/api',
             {
                 api: 'volume_delete_unused',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
             }).then(data => {
                 console.log(data.data.data.data);
                 if (!data.data.data.data.message) {

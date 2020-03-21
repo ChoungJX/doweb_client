@@ -21,5 +21,19 @@ module.exports = function (app) {
             changeOrigin: true,
         })
     );
+    app.use(
+        '/ssh',
+        createProxyMiddleware({
+            target: 'http://10.12.127.113:8888',
+            changeOrigin: true,
+        })
+    );
+    app.use(
+        '/ssh/ws',
+        createProxyMiddleware({
+            target: 'http://10.12.127.113:8888',
+            changeOrigin: true,
+        })
+    );
 };
 

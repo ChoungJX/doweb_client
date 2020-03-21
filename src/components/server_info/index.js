@@ -1,23 +1,24 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'
 import 'antd/dist/antd.css';
-import { Descriptions, Skeleton, PageHeader,Divider } from 'antd';
+import { Descriptions, Skeleton, PageHeader, Divider, Typography, message } from 'antd';
 import axios from 'axios';
 
+const { Paragraph } = Typography;
 
 export default function ServerInfo(props) {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
 
     return (
         <div>
             <PageHeader
                 ghost={false}
                 title="服务器信息"
-                subTitle={`服务器:${server_ip}`}
+                subTitle={`服务器:${server_id}`}
             >
             </PageHeader>
             <Divider />
-            <ServerInfoShow server_ip={server_ip} />
+            <ServerInfoShow server_id={server_id} />
         </div>
     );
 }
@@ -29,6 +30,7 @@ class ServerInfoShow extends React.Component {
         this.state = {
             data1: {},
             data2: {},
+            name: ""
         }
     }
 
@@ -36,7 +38,7 @@ class ServerInfoShow extends React.Component {
         axios.post('/api',
             {
                 api: 'system_infomation',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
             }).then(data => {
                 console.log(data.data.data.data)
                 this.setState({
@@ -46,11 +48,20 @@ class ServerInfoShow extends React.Component {
         axios.post('/api',
             {
                 api: 'system_version',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
             }).then(data => {
                 console.log(data.data.data.data)
                 this.setState({
                     data2: data.data.data.data
+                })
+            });
+        axios.post('/api',
+            {
+                api: 'server_one_info',
+                server_id: this.props.server_id,
+            }).then(data => {
+                this.setState({
+                    name: data.data.name
                 })
             });
     }
@@ -59,13 +70,44 @@ class ServerInfoShow extends React.Component {
         this.fetch();
     }
 
+    onChange = str => {
+        const { name } = this.state;
+        if (name === str) {
+            return;
+        }
+        console.log('Content change:', str);
+        axios.post('/api',
+            {
+                api: 'server_change_name',
+                server_id: this.props.server_id,
+                server_name: str,
+            }).then(data => {
+                this.setState({
+                    name: str
+                })
+                message.success("名字修改成功！")
+            }).catch(err => {
+                message.error("服务器开小差了，请稍后再试")
+            });
+    };
+
     render() {
-        const { data1, data2 } = this.state;
+        const { data1, data2, name } = this.state;
         if (data1.OSType) {
             let mem = data1.MemTotal / 1024 / 1024 / 1024;
             mem = mem.toFixed(2);
             return (
                 <div>
+                    <Descriptions
+                        title="用户设定"
+                        bordered
+                        column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
+                    >
+                        <Descriptions.Item label="节点名字" span={1}>
+                            <Paragraph editable={{ onChange: this.onChange }}>{name}</Paragraph>
+                        </Descriptions.Item>
+                    </Descriptions>
+                    <br /><br />
                     <Descriptions
                         title="系统信息"
                         bordered

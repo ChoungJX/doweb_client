@@ -13,14 +13,14 @@ import PortsChoose from './ports_choose'
 const { TabPane } = Tabs;
 
 function ContainerPageHeader() {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
 
     return (
         <PageHeader
             ghost={false}
             onBack={() => window.history.back()}
             title="创建容器"
-            subTitle={`服务器:${server_ip}`}
+            subTitle={`服务器:${server_id}`}
         >
         </PageHeader>
     );
@@ -205,7 +205,7 @@ class ContainerCreate_page extends React.Component {
         await axios.post('/api',
             {
                 api: 'container_add',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
                 image: image_name_input,
                 name: container_name_input,
                 connect_port: ports,
@@ -235,7 +235,7 @@ class ContainerCreate_page extends React.Component {
                     axios.post('/api',
                         {
                             api: 'container_start',
-                            server_ip: this.props.server_ip,
+                            server_id: this.props.server_id,
                             container_id: data.data.data.data.Id
 
                         }).then(data => {
@@ -275,7 +275,7 @@ class ContainerCreate_page extends React.Component {
                         label="镜像"
                         name="image_name"
                     >
-                        <ContainerSearchImage server_ip={this.props.server_ip} onChange={value => this.handleImage_name_input(value)} />
+                        <ContainerSearchImage server_id={this.props.server_id} onChange={value => this.handleImage_name_input(value)} />
                     </Form.Item>
                 </Form>
                 <Divider orientation="left">端口映射</Divider>
@@ -339,7 +339,7 @@ class ContainerCreate_page extends React.Component {
                                     label="网卡选择"
                                     name="network_drive"
                                 >
-                                    <ContainerSearchNetwork server_ip={this.props.server_ip} onChange={value => this.handleNetwork_name_input(value)} />
+                                    <ContainerSearchNetwork server_id={this.props.server_id} onChange={value => this.handleNetwork_name_input(value)} />
                                 </Form.Item>
                                 <Form.Item
                                     label="主机名(Hostname)"
@@ -432,12 +432,12 @@ class ContainerCreate_page extends React.Component {
 
 
 export default function ContainerCreate() {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
     let { url } = useRouteMatch();
 
     return (
         <div>
-            <ContainerCreate_page server_ip={server_ip} url={url} />
+            <ContainerCreate_page server_id={server_id} url={url} />
         </div>
     )
 }

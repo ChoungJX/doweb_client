@@ -69,7 +69,6 @@ class UserInfoTable extends React.Component {
         axios.post('/api',
             {
                 api: 'user_info',
-                server_ip: this.props.server_ip,
             }).then(data => {
                 console.log(data.data.data)
                 this.setState({
@@ -101,7 +100,7 @@ class UserInfoTable extends React.Component {
             <div>
                 <Card title="用户一览" >
                     <div style={{ marginBottom: 16 }}>
-                        {<UserDeleteButton disabled={!hasSelected} server_ip={this.props.server_ip} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} />}
+                        {<UserDeleteButton disabled={!hasSelected} server_id={this.props.server_id} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} />}
                     </div>
                     <Table loading={loading} rowSelection={rowSelection} rowKey={record => record.id} columns={this.columns} dataSource={data} size="middle" />
                 </Card>

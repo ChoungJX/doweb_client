@@ -29,7 +29,7 @@ export default class OneContainerActionButton extends React.Component {
             await axios.post('/api',
                 {
                     api: 'container_delete_stoped',
-                    server_ip: this.props.server_ip,
+                    server_id: this.props.server_id,
                 }).then(data => {
                     console.log(data.data);
                     notification.open({
@@ -55,7 +55,7 @@ export default class OneContainerActionButton extends React.Component {
                 await axios.post('/api',
                     {
                         api: 'container_restart',
-                        server_ip: this.props.server_ip,
+                        server_id: this.props.server_id,
                         container_id: this.props.selected[i],
                     }).then(data => {
                         console.log(data.data);
@@ -72,7 +72,7 @@ export default class OneContainerActionButton extends React.Component {
                 await axios.post('/api',
                     {
                         api: 'container_stop',
-                        server_ip: this.props.server_ip,
+                        server_id: this.props.server_id,
                         container_id: this.props.selected[i],
                     }).then(data => {
                         console.log(data.data);
@@ -89,7 +89,7 @@ export default class OneContainerActionButton extends React.Component {
                 await axios.post('/api',
                     {
                         api: 'container_delete',
-                        server_ip: this.props.server_ip,
+                        server_id: this.props.server_id,
                         container_id: this.props.selected[i],
                     }).then(data => {
                         console.log(data.data);

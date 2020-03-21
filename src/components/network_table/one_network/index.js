@@ -9,13 +9,13 @@ import NetworkDeleteButton from './delete_button'
 import NetworkInspect from './network_inspect'
 
 export default function NetworkOneServer(props) {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
     let { url } = useRouteMatch();
 
     return (
         <div>
             <NetworkPageHeader />
-            <NetworlOneServerTable server_ip={server_ip} url={url} />
+            <NetworlOneServerTable server_id={server_id} url={url} />
         </div>
     );
 }
@@ -34,7 +34,7 @@ class NetworlOneServerTable extends React.Component {
                 title: '名字',
                 key: 'name',
                 render: (text, record) => (
-                    <NetworkInspect network_name={record.Name} network_id={record.Id} server_ip={this.props.server_ip}/>
+                    <NetworkInspect network_name={record.Name} network_id={record.Id} server_id={this.props.server_id}/>
                 )
             },
             {
@@ -73,7 +73,7 @@ class NetworlOneServerTable extends React.Component {
         axios.post('/api',
             {
                 api: 'network_info',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
             }).then(data => {
                 console.log(data.data.data.data)
                 this.setState({
@@ -102,7 +102,7 @@ class NetworlOneServerTable extends React.Component {
                     }
                 >
                     <div style={{ marginBottom: 16 }}>
-                        {<NetworkDeleteButton disabled={!hasSelected} server_ip={this.props.server_ip} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} /> }
+                        {<NetworkDeleteButton disabled={!hasSelected} server_id={this.props.server_id} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} /> }
                     </div>
                     <Table loading={loading} rowSelection={rowSelection} rowKey={record => record.Id} columns={this.columns} dataSource={data} size="middle" />
                 </Card>
@@ -112,13 +112,13 @@ class NetworlOneServerTable extends React.Component {
 }
 
 function NetworkPageHeader() {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
 
     return (
         <PageHeader
             ghost={false}
             title="网络详情"
-            subTitle={`服务器:${server_ip}`}
+            subTitle={`服务器:${server_id}`}
         >
         </PageHeader>
     );

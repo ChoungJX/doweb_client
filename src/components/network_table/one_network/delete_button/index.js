@@ -20,7 +20,7 @@ export default class NetworkDeleteButton extends React.Component {
             await axios.post('/api',
                 {
                     api: 'network_delete',
-                    server_ip: this.props.server_ip,
+                    server_id: this.props.server_id,
                     network_id: this.props.selected[i],
                 }).then(data => {
                     console.log(data.data.data.data);

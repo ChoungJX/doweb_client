@@ -62,7 +62,7 @@ export class LoginForm extends React.Component {
                     onFinishFailed={() => this.onFinishFailed()}
                 >
                     <Form.Item
-                        label="用户名"
+                        label={<div style={{color:"white"}}>用户名</div>}
                         name="username"
                         rules={[{ required: true, message: '请输入用户名!' }]}
                     >
@@ -70,7 +70,7 @@ export class LoginForm extends React.Component {
                     </Form.Item>
 
                     <Form.Item
-                        label="密码"
+                        label={<div style={{color:"white"}}>密码</div>}
                         name="password"
                         rules={[{ required: true, message: '请输入密码!' }]}
                     >
@@ -78,7 +78,7 @@ export class LoginForm extends React.Component {
                     </Form.Item>
 
                     <Form.Item {...this.tailLayout} name="remember" valuePropName="checked">
-                        <Checkbox>记住我</Checkbox>
+                        <Checkbox><div style={{color:"white"}}>记住我</div></Checkbox>
                     </Form.Item>
 
                     <Form.Item {...this.tailLayout}>

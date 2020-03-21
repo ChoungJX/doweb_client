@@ -18,7 +18,7 @@ export default class NetworkInspect extends React.Component {
         axios.post('/api',
             {
                 api: 'network_inspect',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
                 network_id: this.props.network_id
             }).then(data => {
                 console.log(data.data.data.data)

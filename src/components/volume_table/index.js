@@ -10,25 +10,25 @@ import VolumeDeleteButton from './delete_button'
 
 
 function VolumePageHeader() {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
 
     return (
         <PageHeader
             ghost={false}
             title="卷详情"
-            subTitle={`服务器:${server_ip}`}
+            subTitle={`服务器:${server_id}`}
         >
         </PageHeader>
     );
 }
 
 export default function VolumeOneServer() {
-    let { server_ip } = useParams();
+    let { server_id } = useParams();
     let { url } = useRouteMatch();
     return (
         <div>
             <VolumePageHeader />
-            <VolumeOneServerTable server_ip={server_ip} url={url} />
+            <VolumeOneServerTable server_id={server_id} url={url} />
         </div>
     )
 }
@@ -63,7 +63,7 @@ class VolumeOneServerTable extends React.Component {
         axios.post('/api',
             {
                 api: 'volume_info',
-                server_ip: this.props.server_ip,
+                server_id: this.props.server_id,
             }).then(data => {
                 console.log(data.data.data.data)
                 this.setState({
@@ -82,7 +82,7 @@ class VolumeOneServerTable extends React.Component {
         const { data, loading } = this.state;
         return (
             <div>
-                <Card title="卷一览" extra={<VolumeDeleteButton server_ip={this.props.server_ip} onFresh={() => this.fresh_table()} />} >
+                <Card title="卷一览" extra={<VolumeDeleteButton server_id={this.props.server_id} onFresh={() => this.fresh_table()} />} >
                     <Table loading={loading} rowKey={record => record.Name} columns={this.columns} dataSource={data} size="middle" />
                 </Card>
             </div>

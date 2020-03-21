@@ -12,7 +12,7 @@ export default class ContainerSearchImage extends React.Component {
         this.state = {
             disabled: false,
             items: [],
-            server_ip: this.props.server_ip,
+            server_id: this.props.server_id,
         }
     }
 
@@ -25,11 +25,11 @@ export default class ContainerSearchImage extends React.Component {
             items: [],
             disabled: true,
         });
-        const { server_ip } = this.state
+        const { server_id } = this.state
         axios.post('/api',
             {
                 api: 'image_info',
-                server_ip: server_ip,
+                server_id: server_id,
             }).then(data => {
                 console.log(data.data.data.data);
                 this.setState({
