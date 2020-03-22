@@ -1,10 +1,10 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import { Form, Input, Button, Result, message, Spin } from 'antd';
 import { SmileOutlined } from '@ant-design/icons';
+import { Button, Col, Form, Input, message, Result, Row, Spin } from 'antd';
+import 'antd/dist/antd.css';
 import axios from 'axios';
+import React from 'react';
+import { LoginForm } from '../../login_form';
 
-import { LoginForm } from '../../login_form'
 
 class WelcomeSignup extends React.Component {
     constructor(props) {
@@ -87,7 +87,14 @@ class WelcomeSignup extends React.Component {
                     <Result
                         icon={<SmileOutlined />}
                         title="该服务器已经创建了管理员账户，请登录进行操作"
-                        extra={<LoginForm Login={() => this.props.onNext()} />}
+                        extra={
+                            <Row>
+                                <Col span={8} />
+                                <Col span={4}>
+                                    <LoginForm {...layout} Login={() => this.props.onNext()} />
+                                </Col>
+                            </Row>
+                        }
                     />
                 )
             } else {

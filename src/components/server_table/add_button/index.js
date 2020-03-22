@@ -1,8 +1,8 @@
-import React from 'react';
+import { ApiTwoTone, ContactsTwoTone, DatabaseOutlined, DatabaseTwoTone, EditTwoTone, EyeInvisibleTwoTone, SmileOutlined } from '@ant-design/icons';
+import { Button, Input, Modal, notification, Radio } from 'antd';
 import 'antd/dist/antd.css';
-import { Button, Modal, Input, Radio, notification } from 'antd';
-import { DatabaseOutlined, ApiTwoTone, EditTwoTone, SmileOutlined, ContactsTwoTone, EyeInvisibleTwoTone } from '@ant-design/icons';
 import axios from 'axios';
+import React from 'react';
 
 
 export default class ServerAddButton extends React.Component {
@@ -17,11 +17,12 @@ export default class ServerAddButton extends React.Component {
             input_server_type: "http",
             server_user_input: "root",
             server_psw_input: "",
+            input_server_ssh_ip: "",
         }
     }
 
     async submit_input() {
-        const { input_server_type, input_server_name, input_server_ip, server_user_input, server_psw_input } = this.state
+        const { input_server_type, input_server_name, input_server_ip, server_user_input, server_psw_input, input_server_ssh_ip } = this.state
         this.setState({
             loading: true
         })
@@ -32,6 +33,7 @@ export default class ServerAddButton extends React.Component {
                 server_ip: input_server_ip,
                 server_name: input_server_name,
                 server_type: input_server_type,
+                server_ssh_ip: input_server_ssh_ip,
                 server_user: server_user_input,
                 server_psw: server_psw_input
             }).then(data => {
@@ -42,6 +44,7 @@ export default class ServerAddButton extends React.Component {
                     input_server_type: "http",
                     server_user_input: "root",
                     server_psw_input: "",
+                    input_server_ssh_ip: "",
                     visible: false
                 })
                 notification.open({
@@ -93,6 +96,12 @@ export default class ServerAddButton extends React.Component {
         })
     }
 
+    handleInput_server_sship = (e) => {
+        this.setState({
+            input_server_ssh_ip: e.target.value
+        })
+    }
+
     handleServer_user_input(e) {
         this.setState({
             server_user_input: e.target.value
@@ -108,7 +117,7 @@ export default class ServerAddButton extends React.Component {
     // ====================================================
 
     render() {
-        const { loading, visible, input_server_type, input_server_name, input_server_ip, server_user_input, server_psw_input } = this.state
+        const { loading, visible, input_server_type, input_server_name, input_server_ip, server_user_input, server_psw_input, input_server_ssh_ip } = this.state
         return (
             <div>
                 <Button
@@ -145,6 +154,8 @@ export default class ServerAddButton extends React.Component {
                     </Radio.Group>
                     <br /><br />
                     <Input.Group>
+                        ssh服务IP:<Input onChange={(e) => this.handleInput_server_sship(e)} value={input_server_ssh_ip} style={{ width: 280, marginLeft: 10 }} prefix={<DatabaseTwoTone />} placeholder="127.0.0.1:22" />
+                        <br /><br />
                         服务器用户名:<Input onChange={(e) => this.handleServer_user_input(e)} value={server_user_input} style={{ width: 280, marginLeft: 10 }} prefix={<ContactsTwoTone />} placeholder="root" />
                         <br /><br />
                         服务器密码:<Input onChange={(e) => this.handleServer_psw_input(e)} value={server_psw_input} style={{ width: 300, marginLeft: 5 }} prefix={<EyeInvisibleTwoTone />} placeholder="******" />

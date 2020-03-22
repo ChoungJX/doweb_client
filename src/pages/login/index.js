@@ -93,21 +93,21 @@ export default class Login extends React.Component {
                         height: "100%",
                         width: "100%"
                     }}>
-                        <Row>
-                            <Col span={24}>
-                                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                                <br /><br /><br /><br />
-                            </Col>
-                        </Row>
+                        <div style={{
+                                    height:"30%"
+                                }}>
+                            aaa
+                        </div>
                         <Row align={'middle'}>
                             <Col span={1} />
-                            <Col span={12}>
+                            <Col span={9}>
                                 <Result
                                     icon={<SmileOutlined />}
-                                    title={<div style={{color:"white"}}>欢迎来到Docker容器可视化管理平台</div>}
+                                    title={<div style={{ color: "white" }}>欢迎来到Docker容器可视化管理平台</div>}
                                 />
                             </Col>
-                            <Col span={9}>
+                            <Col span={6} />
+                            <Col span={8}>
                                 <LoginForm Login={() => this.props.Login()} />
                             </Col>
                             <Col span={2} />

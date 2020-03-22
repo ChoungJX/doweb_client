@@ -30,7 +30,8 @@ class ServerInfoShow extends React.Component {
         this.state = {
             data1: {},
             data2: {},
-            name: ""
+            name: "",
+            ssh: ""
         }
     }
 
@@ -64,6 +65,16 @@ class ServerInfoShow extends React.Component {
                     name: data.data.name
                 })
             });
+        axios.post('/api',
+            {
+                api: 'server_ssh_info',
+                server_id: this.props.server_id,
+                base64: true,
+            }).then(data => {
+                this.setState({
+                    ssh: data.data.data.ip
+                })
+            });
     }
 
     componentDidMount() {
@@ -91,8 +102,28 @@ class ServerInfoShow extends React.Component {
             });
     };
 
+    onChangeSsh = str => {
+        const { ssh } = this.state;
+        if (ssh === str) {
+            return;
+        }
+        axios.post('/api',
+            {
+                api: 'server_change_ssh',
+                server_id: this.props.server_id,
+                server_ssh: str,
+            }).then(data => {
+                this.setState({
+                    ssh: str
+                })
+                message.success("ssh服务器ip修改成功！")
+            }).catch(err => {
+                message.error("服务器开小差了，请稍后再试")
+            });
+    };
+
     render() {
-        const { data1, data2, name } = this.state;
+        const { data1, data2, name, ssh } = this.state;
         if (data1.OSType) {
             let mem = data1.MemTotal / 1024 / 1024 / 1024;
             mem = mem.toFixed(2);
@@ -103,8 +134,11 @@ class ServerInfoShow extends React.Component {
                         bordered
                         column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
                     >
-                        <Descriptions.Item label="节点名字" span={1}>
+                        <Descriptions.Item label="节点名字">
                             <Paragraph editable={{ onChange: this.onChange }}>{name}</Paragraph>
+                        </Descriptions.Item>
+                        <Descriptions.Item label="节点ssh服务ip">
+                            <Paragraph editable={{ onChange: this.onChangeSsh }}>{ssh}</Paragraph>
                         </Descriptions.Item>
                     </Descriptions>
                     <br /><br />

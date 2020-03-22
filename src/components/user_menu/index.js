@@ -49,6 +49,9 @@ class UserMenuFunc extends React.Component {
                         <Menu.Item key="2">
                             <Link to={`${this.props.url}/creat`}>创建新用户</Link>
                         </Menu.Item>
+                        <Menu.Item key="3">
+                            <Link to={`${this.props.url}/change`}>修改用户信息</Link>
+                        </Menu.Item>
                     </SubMenu>
                 </Menu>
             </Sider>

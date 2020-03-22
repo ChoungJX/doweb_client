@@ -1,10 +1,10 @@
-import React from 'react';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Checkbox, Form, Input, message, Card } from 'antd';
 import 'antd/dist/antd.css';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import React from 'react';
 
 
-import { Form, Input, Button, Checkbox, message, } from 'antd';
 
 
 
@@ -54,39 +54,41 @@ export class LoginForm extends React.Component {
     render() {
         return (
             <div>
-                <Form
-                    {...this.layout}
-                    name="basic"
-                    initialValues={{ remember: true }}
-                    onFinish={values => this.onFinish(values)}
-                    onFinishFailed={() => this.onFinishFailed()}
-                >
-                    <Form.Item
-                        label={<div style={{color:"white"}}>用户名</div>}
-                        name="username"
-                        rules={[{ required: true, message: '请输入用户名!' }]}
+                <Card title="登录" style={{ width: 400, boxShadow:"2px 4px 6px #123" }}>
+                    <Form
+                        {...this.props.layout}
+                        name="basic"
+                        initialValues={{ remember: true }}
+                        onFinish={values => this.onFinish(values)}
+                        onFinishFailed={() => this.onFinishFailed()}
                     >
-                        <Input prefix={<UserOutlined className="site-form-item-icon" />} />
-                    </Form.Item>
+                        <Form.Item
+                            label="用户名"
+                            name="username"
+                            rules={[{ required: true, message: '请输入用户名!' }]}
+                        >
+                            <Input prefix={<UserOutlined className="site-form-item-icon" />} />
+                        </Form.Item>
 
-                    <Form.Item
-                        label={<div style={{color:"white"}}>密码</div>}
-                        name="password"
-                        rules={[{ required: true, message: '请输入密码!' }]}
-                    >
-                        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} />
-                    </Form.Item>
+                        <Form.Item
+                            label="密码"
+                            name="password"
+                            rules={[{ required: true, message: '请输入密码!' }]}
+                        >
+                            <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} />
+                        </Form.Item>
 
-                    <Form.Item {...this.tailLayout} name="remember" valuePropName="checked">
-                        <Checkbox><div style={{color:"white"}}>记住我</div></Checkbox>
-                    </Form.Item>
+                        <Form.Item {...this.tailLayout} name="remember" valuePropName="checked">
+                            <Checkbox>记住我</Checkbox>
+                        </Form.Item>
 
-                    <Form.Item {...this.tailLayout}>
-                        <Button loading={this.state.loading} type="primary" htmlType="submit">
-                            登录
+                        <Form.Item {...this.tailLayout}>
+                            <Button loading={this.state.loading} type="primary" htmlType="submit">
+                                登录
             </Button>
-                    </Form.Item>
-                </Form>
+                        </Form.Item>
+                    </Form>
+                </Card>
             </div>
         );
     }

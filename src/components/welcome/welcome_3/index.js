@@ -20,6 +20,7 @@ class WelcomeBindServer extends React.Component {
             server_type_input: "http",
             server_user_input: "root",
             server_psw_input: "",
+            input_server_ssh_ip: "",
 
             loading: false,
         }
@@ -55,11 +56,17 @@ class WelcomeBindServer extends React.Component {
         })
     }
 
+    handleInput_server_sship = (e) => {
+        this.setState({
+            input_server_ssh_ip: e.target.value
+        })
+    }
+
     send_args() {
         this.setState({
             loading: true,
         })
-        const { server_ip_input, server_name_input, server_type_input, server_user_input, server_psw_input } = this.state
+        const { server_ip_input, server_name_input, server_type_input, server_user_input, server_psw_input, input_server_ssh_ip } = this.state
         axios.post('/api',
             {
                 api: 'create_server',
@@ -67,7 +74,8 @@ class WelcomeBindServer extends React.Component {
                 server_name: server_name_input,
                 server_type: server_type_input,
                 server_user: server_user_input,
-                server_psw: server_psw_input
+                server_psw: server_psw_input,
+                server_ssh_ip: input_server_ssh_ip,
 
             }).then(data => {
                 console.log(data.data)
@@ -89,7 +97,7 @@ class WelcomeBindServer extends React.Component {
     }
 
     render() {
-        const { server_ip_input, server_name_input, server_type_input, server_user_input, server_psw_input, loading } = this.state
+        const { server_ip_input, server_name_input, server_type_input, server_user_input, server_psw_input, loading, input_server_ssh_ip } = this.state
         return (
             <Result
                 icon={<DatabaseTwoTone />}
@@ -111,6 +119,8 @@ class WelcomeBindServer extends React.Component {
                                 </Radio.Group>
                                 <br /><br />
                                 <Input.Group>
+                                    ssh服务IP:<Input onChange={(e) => this.handleInput_server_sship(e)} value={input_server_ssh_ip} style={{ width: 280, marginLeft: 10 }} prefix={<DatabaseTwoTone />} placeholder="127.0.0.1:22" />
+                                    <br /><br />
                                     服务器用户名:<Input onChange={(e) => this.handleServer_user_input(e)} value={server_user_input} style={{ width: 280, marginLeft: 10 }} prefix={<ContactsTwoTone />} placeholder="root" />
                                     <br /><br />
                                     服务器密码:<Input onChange={(e) => this.handleServer_psw_input(e)} value={server_psw_input} style={{ width: 300, marginLeft: 5 }} prefix={<EyeInvisibleTwoTone />} placeholder="******" />

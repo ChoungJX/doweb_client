@@ -5,9 +5,17 @@ import axios from 'axios';
 import { PageHeader, Form, Input, Button, Checkbox, message } from 'antd';
 
 export default class UserCreate extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false
+        }
+    }
 
     send_regist(value) {
-        console.log(value)
+        this.setState({
+            loading: true
+        })
         axios.post('/api',
             {
                 api: 'create_user',
@@ -19,6 +27,9 @@ export default class UserCreate extends React.Component {
                 } else {
                     message.info('用户名重复，请重新设置！');
                 }
+                this.setState({
+                    loading: false
+                })
             });
     }
 
@@ -30,6 +41,7 @@ export default class UserCreate extends React.Component {
         const tailLayout = {
             wrapperCol: { offset: 8, span: 16 },
         };
+        const { loading } = this.state;
         return (
             <div>
                 <PageHeader
@@ -82,7 +94,7 @@ export default class UserCreate extends React.Component {
                         <Checkbox>是否设置为管理员</Checkbox>
                     </Form.Item>
                     <Form.Item {...tailLayout}>
-                        <Button type="primary" htmlType="submit">
+                        <Button loading={loading} type="primary" htmlType="submit">
                             创建
                         </Button>
                     </Form.Item>
