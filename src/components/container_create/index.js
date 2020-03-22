@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useRouteMatch, useParams } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import { PageHeader, Input, Form, Divider, Select, Button, message, notification, Tabs, Switch, Slider, InputNumber } from 'antd';
-import { AppleOutlined, AndroidOutlined, SmileOutlined } from '@ant-design/icons';
+import { BarChartOutlined, BarcodeOutlined, DropboxOutlined, ApartmentOutlined, SlidersOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 import ContainerSearchImage from "./image_select"
@@ -292,7 +292,7 @@ class ContainerCreate_page extends React.Component {
                     <TabPane
                         tab={
                             <span>
-                                <AppleOutlined />
+                                <SlidersOutlined />
                                 参数设置
                             </span>
                         }
@@ -327,7 +327,7 @@ class ContainerCreate_page extends React.Component {
                     <TabPane
                         tab={
                             <span>
-                                <AndroidOutlined />
+                                <ApartmentOutlined />
                                 网络设置
                             </span>
                         }
@@ -359,7 +359,7 @@ class ContainerCreate_page extends React.Component {
                     <TabPane
                         tab={
                             <span>
-                                <AndroidOutlined />
+                                <DropboxOutlined />
                                 环境变量
                             </span>
                         }
@@ -372,7 +372,7 @@ class ContainerCreate_page extends React.Component {
                     <TabPane
                         tab={
                             <span>
-                                <AndroidOutlined />
+                                <BarcodeOutlined />
                                 标签设置
                             </span>
                         }
@@ -385,7 +385,7 @@ class ContainerCreate_page extends React.Component {
                     <TabPane
                         tab={
                             <span>
-                                <AndroidOutlined />
+                                <BarChartOutlined />
                                 资源分配
                             </span>
                         }
