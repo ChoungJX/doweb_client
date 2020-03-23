@@ -80,10 +80,11 @@ export class AllHeader extends React.Component {
                         <div align="right">
                             <Dropdown overlay={this.menu}>
                                 <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                                    <Avatar icon={<UserOutlined />} />
                                     {username} <DownOutlined />
                                 </a>
                             </Dropdown>
+                            <span>                       </span>
+                            <Avatar icon={<UserOutlined />} />
                         </div>
                     </Col>
                 </Row>
