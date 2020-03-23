@@ -17,7 +17,7 @@ export class AllHeader extends React.Component {
         this.menu = (
             <Menu>
                 <Menu.Item>
-                    <div onClick={() => this.logout()}>
+                    <div align="center" onClick={() => this.logout()}>
                         登出
                     </div>
                 </Menu.Item>
@@ -38,8 +38,8 @@ export class AllHeader extends React.Component {
                 api: 'logout',
 
             }).then(data => {
-                message.info("登出成功！");
                 window.location.reload();
+                message.info("登出成功！");
             });
     }
 
@@ -60,8 +60,8 @@ export class AllHeader extends React.Component {
         return (
             <Header className="header">
                 <div className="logo" />
-                <Row>
-                    <Col span={21}>
+                <Row justify="space-between">
+                    <Col>
                         <Menu
                             theme="dark"
                             mode="horizontal"
@@ -77,13 +77,14 @@ export class AllHeader extends React.Component {
                         </Menu>
                     </Col>
                     <Col>
-                        <Dropdown overlay={this.menu}>
-                            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                                {username} <DownOutlined />
-                            </a>
-                        </Dropdown>
-                        <span>|</span>
-                        <Avatar icon={<UserOutlined />} />
+                        <div align="right">
+                            <Dropdown overlay={this.menu}>
+                                <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                                    <Avatar icon={<UserOutlined />} />
+                                    {username} <DownOutlined />
+                                </a>
+                            </Dropdown>
+                        </div>
                     </Col>
                 </Row>
             </Header>

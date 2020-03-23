@@ -90,7 +90,7 @@ export default class Login extends React.Component {
                     <div style={{
                         background: `linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7) ),url(/static/img/1.jpg)`,
                         backgroundSize: "100% 100%",
-                        height: "100%",
+                        height: "1080px",
                         width: "100%"
                     }}>
                         <div style={{
@@ -98,19 +98,19 @@ export default class Login extends React.Component {
                                 }}>
                             aaa
                         </div>
-                        <Row align={'middle'}>
+                        <Row align={'middle'} justify="space-between" >
                             <Col span={1} />
-                            <Col span={9}>
+                            <Col>
                                 <Result
                                     icon={<SmileOutlined />}
                                     title={<div style={{ color: "white" }}>欢迎来到Docker容器可视化管理平台</div>}
                                 />
                             </Col>
-                            <Col span={6} />
-                            <Col span={8}>
+                            <Col span={4} />
+                            <Col >
                                 <LoginForm Login={() => this.props.Login()} />
                             </Col>
-                            <Col span={2} />
+                            <Col span={1} />
                         </Row>
                     </div>
                 )

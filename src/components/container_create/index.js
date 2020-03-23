@@ -288,7 +288,7 @@ class ContainerCreate_page extends React.Component {
                     </Form.Item>
                 </Form>
                 <Divider orientation="left">高级设置(无特殊需求可以忽略)</Divider>
-                <Tabs defaultActiveKey="1" type="card" >
+                <Tabs defaultActiveKey="1"  >
                     <TabPane
                         tab={
                             <span>
