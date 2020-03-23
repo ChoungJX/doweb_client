@@ -94,13 +94,13 @@ export default class Login extends React.Component {
                         width: "100%"
                     }}>
                         <div style={{
-                                    height:"30%"
+                                    height:"300px"
                                 }}>
                             aaa
                         </div>
                         <Row align={'middle'} justify="space-between" >
                             <Col span={1} />
-                            <Col>
+                            <Col >
                                 <Result
                                     icon={<SmileOutlined />}
                                     title={<div style={{ color: "white" }}>欢迎来到Docker容器可视化管理平台</div>}
