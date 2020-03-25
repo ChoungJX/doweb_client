@@ -1,7 +1,7 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import { Select, Divider, Input, Form, Radio } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import { Divider, Input, Radio, Select, Button } from 'antd';
+import React from 'react';
+
 
 
 export default class PortsChoose extends React.Component {
@@ -105,12 +105,12 @@ export default class PortsChoose extends React.Component {
                             <Input value={input_hport} placeholder="443" style={{ flex: 'auto' }} onChange={this.onHportChange} />
                         </div>
                         <div align="right">
-                            <a
+                            <Button type="link"
                                 style={{ flex: 'none', padding: '8px', display: 'block', cursor: 'pointer' }}
                                 onClick={this.addItem}
                             >
                                 <PlusOutlined /> 添加选项
-                            </a>
+                            </Button>
                         </div>
                     </div>
                 )}

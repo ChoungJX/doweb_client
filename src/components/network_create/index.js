@@ -1,11 +1,11 @@
-import React from 'react';
-import { Link, useRouteMatch, useParams } from 'react-router-dom'
-import 'antd/dist/antd.css';
-import { PageHeader, Input, Form, Divider, Select, Button, message, notification } from 'antd';
-import { UploadOutlined, SmileOutlined } from '@ant-design/icons';
+import { SmileOutlined, UploadOutlined } from '@ant-design/icons';
+import { Button, Divider, Form, Input, message, notification, PageHeader, Select } from 'antd';
 import axios from 'axios';
+import React from 'react';
+import { useParams, useRouteMatch } from 'react-router-dom';
+import NetworkTypeOption from './network_type_option';
 
-import NetworkTypeOption from './network_type_option'
+
 
 
 function NetworkPageHeader() {
@@ -22,7 +22,7 @@ function NetworkPageHeader() {
     );
 }
 
-class NetworkCreate_page extends React.Component {
+class NetworkCreatePage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -113,6 +113,7 @@ class NetworkCreate_page extends React.Component {
             network_macvlan_drive_input,
         } = this.state
 
+        let aaa = network_label_input; //现在暂时没用
         if (network_name_input === "") {
             message.error('必要信息没有填写完整！');
             this.setState({
@@ -273,5 +274,5 @@ export default function NetworkCreate() {
     let { server_id } = useParams();
     let { url } = useRouteMatch();
 
-    return (<NetworkCreate_page server_id={server_id} url={url} />)
+    return (<NetworkCreatePage server_id={server_id} url={url} />)
 }

@@ -1,11 +1,11 @@
-import React from 'react';
-import { useRouteMatch, useParams } from 'react-router-dom'
-import 'antd/dist/antd.css';
-import { Table, Tag, PageHeader, Card } from 'antd';
-
+import { Card, PageHeader, Table } from 'antd';
 import axios from 'axios';
+import React from 'react';
+import { useParams, useRouteMatch } from 'react-router-dom';
+import VolumeDeleteButton from './delete_button';
 
-import VolumeDeleteButton from './delete_button'
+
+
 
 
 

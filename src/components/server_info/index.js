@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'
-import 'antd/dist/antd.css';
+
 import { Descriptions, Skeleton, PageHeader, Divider, Typography, message } from 'antd';
 import axios from 'axios';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom'
-import 'antd/dist/antd.css';
+
 import './index.css';
 import { Table, Card, Tag, Button, Tooltip } from 'antd';
 import { FullscreenOutlined } from '@ant-design/icons';

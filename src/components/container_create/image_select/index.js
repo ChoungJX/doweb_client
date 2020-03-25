@@ -1,8 +1,7 @@
-import React from 'react';
-import 'antd/dist/antd.css';
 import { Select, Spin } from 'antd';
-import { ControlTwoTone } from '@ant-design/icons';
 import axios from 'axios';
+import React from 'react';
+
 
 
 
@@ -46,7 +45,7 @@ export default class ContainerSearchImage extends React.Component {
     }
 
     render() {
-        const { items, disabled, value, } = this.state;
+        const { items, disabled } = this.state;
         const { Option } = Select;
         return (
             <Select

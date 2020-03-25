@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'
-import 'antd/dist/antd.css';
+
 import { Typography, Descriptions, Alert, PageHeader, Divider, message } from 'antd';
 import axios from 'axios';
 const { Paragraph } = Typography;

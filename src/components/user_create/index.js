@@ -1,5 +1,5 @@
 import React from 'react';
-import 'antd/dist/antd.css';
+
 import axios from 'axios';
 
 import { PageHeader, Form, Input, Button, Checkbox, message } from 'antd';

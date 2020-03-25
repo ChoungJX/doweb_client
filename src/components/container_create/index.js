@@ -1,14 +1,14 @@
-import React from 'react';
-import { Link, useRouteMatch, useParams } from 'react-router-dom'
-import 'antd/dist/antd.css';
-import { PageHeader, Input, Form, Divider, Select, Button, message, notification, Tabs, Switch, Slider, InputNumber } from 'antd';
-import { BarChartOutlined, BarcodeOutlined, DropboxOutlined, ApartmentOutlined, SlidersOutlined, SmileOutlined } from '@ant-design/icons';
+import { ApartmentOutlined, BarChartOutlined, BarcodeOutlined, DropboxOutlined, SlidersOutlined, SmileOutlined } from '@ant-design/icons';
+import { Button, Divider, Form, Input, InputNumber, message, notification, PageHeader, Switch, Tabs } from 'antd';
 import axios from 'axios';
+import React from 'react';
+import { useParams, useRouteMatch } from 'react-router-dom';
+import ContainerSearchImage from "./image_select";
+import MultipleSwitch from './mutiple_switch';
+import ContainerSearchNetwork from "./network_select";
+import PortsChoose from './ports_choose';
 
-import ContainerSearchImage from "./image_select"
-import ContainerSearchNetwork from "./network_select"
-import MultipleSwitch from './mutiple_switch'
-import PortsChoose from './ports_choose'
+
 
 const { TabPane } = Tabs;
 
@@ -26,7 +26,7 @@ function ContainerPageHeader() {
     );
 }
 
-class ContainerCreate_page extends React.Component {
+class ContainerCreatePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -186,6 +186,10 @@ class ContainerCreate_page extends React.Component {
             env,
             label
         } = this.state;
+
+        let aaa = hostname;
+        aaa = env;
+        aaa = label;//暂时没用
 
         if (image_name_input === "") {
             message.error('必要信息没有填写完整！');
@@ -437,7 +441,7 @@ export default function ContainerCreate() {
 
     return (
         <div>
-            <ContainerCreate_page server_id={server_id} url={url} />
+            <ContainerCreatePage server_id={server_id} url={url} />
         </div>
     )
 }

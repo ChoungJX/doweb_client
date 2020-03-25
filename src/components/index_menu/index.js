@@ -3,7 +3,7 @@ import {
     Link,
     useParams
 } from "react-router-dom";
-import 'antd/dist/antd.css';
+
 import { AppstoreOutlined, CloudServerOutlined, EyeOutlined, SaveOutlined, ApartmentOutlined, ArrowLeftOutlined, FolderOpenOutlined } from '@ant-design/icons';
 import { Layout, Menu, } from 'antd';
 
@@ -43,7 +43,6 @@ export class IndexSider extends React.Component {
             <Sider width={200} className="site-layout-background">
                 <Menu
                     mode="inline"
-                    defaultOpenKeys={this.state.openKeys}
                     defaultSelectedKeys={this.state.openOptions}
                     onOpenChange={this.onOpenChange}
                     style={{ width: 200 }}

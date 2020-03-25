@@ -1,5 +1,5 @@
 import React from 'react';
-import 'antd/dist/antd.css';
+
 import { Button, notification, Popconfirm } from 'antd';
 import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios';

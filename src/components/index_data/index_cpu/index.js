@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Statistic, Divider } from 'antd';
 import { QrcodeOutlined } from '@ant-design/icons';
-import 'antd/dist/antd.css';
+
 import '../index.css';
 
 

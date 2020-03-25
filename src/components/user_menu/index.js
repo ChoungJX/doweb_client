@@ -1,11 +1,11 @@
-import React from 'react';
-import { Switch, Route, useRouteMatch, Link } from 'react-router-dom'
-import 'antd/dist/antd.css';
+import { ArrowLeftOutlined, UserOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
-import { UserOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+const { Sider } = Layout;
 
 
 export default function UserMenu(props) {

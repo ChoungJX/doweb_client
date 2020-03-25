@@ -1,5 +1,5 @@
 import React from 'react';
-import 'antd/dist/antd.css';
+
 import { Select, PageHeader, Row, Col, Input, Form, Button, message, Checkbox, Divider } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';

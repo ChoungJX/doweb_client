@@ -1,6 +1,6 @@
 import React from 'react';
-import 'antd/dist/antd.css';
-import { Drawer, Descriptions, Tooltip, Skeleton } from 'antd';
+
+import { Drawer, Descriptions, Tooltip, Skeleton, Button } from 'antd';
 import axios from 'axios';
 
 
@@ -47,7 +47,7 @@ export default class NetworkInspect extends React.Component {
             return (
                 <div>
                     <Tooltip placement="top" title="查看该网络">
-                        <a onClick={this.showDrawer}>{this.props.network_name}</a>
+                        <Button type="link" onClick={this.showDrawer}>{this.props.network_name}</Button>
                     </Tooltip>
                     <Drawer
                         title="网络信息"
@@ -81,7 +81,7 @@ export default class NetworkInspect extends React.Component {
             return (
                 <div>
                     <Tooltip placement="top" title="查看该网络">
-                        <a onClick={this.showDrawer}>{this.props.network_name}</a>
+                        <Button type="link" onClick={this.showDrawer}>{this.props.network_name}</Button>
                     </Tooltip>
                     <Drawer
                         title="网络信息"

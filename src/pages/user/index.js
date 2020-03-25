@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom'
-import 'antd/dist/antd.css';
+
 
 import { Layout, Breadcrumb } from 'antd';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouteMatch, useParams } from 'react-router-dom'
-import 'antd/dist/antd.css';
+
 import { Table, Tag, PageHeader, Card } from 'antd';
 
 import axios from 'axios';

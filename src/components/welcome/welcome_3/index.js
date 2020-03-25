@@ -1,6 +1,6 @@
 import { ApiTwoTone, ContactsTwoTone, DatabaseTwoTone, EditTwoTone, EyeInvisibleTwoTone } from '@ant-design/icons';
 import { Button, Card, Input, message, Radio, Result } from 'antd';
-import 'antd/dist/antd.css';
+
 import axios from 'axios';
 import React from 'react';
 

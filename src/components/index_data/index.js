@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'
 import { Row, Col, Divider, PageHeader } from 'antd'
-import 'antd/dist/antd.css';
+
 //import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
 import axios from 'axios';
 

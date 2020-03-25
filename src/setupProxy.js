@@ -10,28 +10,28 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'http://10.12.127.113:4000',
+            target: 'http://127.0.0.1:4000',
             changeOrigin: true,
         })
     );
     app.use(
         '/welcome_api',
         createProxyMiddleware({
-            target: 'http://10.12.127.113:4000',
+            target: 'http://127.0.0.1:4000',
             changeOrigin: true,
         })
     );
     app.use(
         '/ssh',
         createProxyMiddleware({
-            target: 'http://10.12.127.113:8888',
+            target: 'http://127.0.0.1:8888',
             changeOrigin: true,
         })
     );
     app.use(
         '/ssh/ws',
         createProxyMiddleware({
-            target: 'http://10.12.127.113:8888',
+            target: 'http://127.0.0.1:8888',
             changeOrigin: true,
         })
     );

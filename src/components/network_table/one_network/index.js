@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useRouteMatch, useParams } from 'react-router-dom'
-import 'antd/dist/antd.css';
+
 import { PageHeader, Button, Tag, Table, Card } from 'antd';
 import { ApartmentOutlined } from '@ant-design/icons';
 import axios from 'axios';

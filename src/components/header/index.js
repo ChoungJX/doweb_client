@@ -2,9 +2,9 @@ import React from 'react';
 import {
     Link,
 } from "react-router-dom";
-import 'antd/dist/antd.css';
+
 import './index.css';
-import { Layout, Menu, Row, Col, Dropdown, Avatar, message } from 'antd';
+import { Layout, Menu, Row, Col, Dropdown, Avatar, message, Button } from 'antd';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
@@ -14,17 +14,9 @@ const { Header, } = Layout;
 export class AllHeader extends React.Component {
     constructor(props) {
         super(props);
-        this.menu = (
-            <Menu>
-                <Menu.Item>
-                    <div align="center" onClick={() => this.logout()}>
-                        登出
-                    </div>
-                </Menu.Item>
-            </Menu>
-        )
         this.state = {
-            username: ""
+            username: "",
+            ifadmin: "0"
         }
     }
 
@@ -51,12 +43,13 @@ export class AllHeader extends React.Component {
             }).then(data => {
                 this.setState({
                     username: data.data.username,
+                    ifadmin: data.data.ifadmin
                 })
             });
     }
 
     render() {
-        const { username } = this.state;
+        const { username, ifadmin } = this.state
         return (
             <Header className="header">
                 <div className="logo" />
@@ -78,12 +71,23 @@ export class AllHeader extends React.Component {
                     </Col>
                     <Col>
                         <div align="right">
-                            <Dropdown overlay={this.menu}>
-                                <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                            <Dropdown overlay={
+                                <Menu>
+                                    <Menu.Item>
+                                        身份: {ifadmin === "100" ? "管理员" : "普通用户"}
+                                    </Menu.Item>
+                                    <Menu.Divider />
+                                    <Menu.Item>
+                                        <div align="center" onClick={() => this.logout()}>
+                                            登出
+                                    </div>
+                                    </Menu.Item>
+                                </Menu>
+                            }>
+                                <Button size="large" type="link">
                                     {username} <DownOutlined />
-                                </a>
+                                </Button>
                             </Dropdown>
-                            <span>                       </span>
                             <Avatar icon={<UserOutlined />} />
                         </div>
                     </Col>

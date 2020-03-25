@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Statistic, Divider } from 'antd';
 import { PieChartOutlined, HddOutlined } from '@ant-design/icons';
-import 'antd/dist/antd.css';
+
 import '../index.css';
 
 
@@ -14,8 +14,6 @@ export default function IndexMemoryData(props) {
     used = used.toFixed(2);
     let total = props.data.memory.total;
     total = total.toFixed(2);
-    let free = props.data.memory.free;
-    free = free.toFixed(2);
 
     let percent = used / total * 100;
     percent = percent.toFixed(2)

@@ -1,14 +1,13 @@
-import React from 'react';
-import { Link, useRouteMatch, useParams } from 'react-router-dom'
-import 'antd/dist/antd.css';
-import { PageHeader, Tag, Table, Card } from 'antd';
-import { ControlTwoTone } from '@ant-design/icons';
+import { Card, PageHeader, Table, Tag } from 'antd';
 import axios from 'axios';
 import moment from "moment";
+import React from 'react';
+import { useParams, useRouteMatch } from 'react-router-dom';
+import ImageAddButton from './add_button';
+import ImageDeleteButton from './delete_button';
+import ImageInspect from './image_inspect';
 
-import ImageDeleteButton from './delete_button'
-import ImageAddButton from './add_button'
-import ImageInspect from './image_inspect'
+
 
 
 export default function ImageOneServer(props) {

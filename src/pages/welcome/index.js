@@ -1,5 +1,5 @@
 import React from 'react';
-import 'antd/dist/antd.css';
+
 import { Steps, Col, Row, Spin } from 'antd';
 import axios from 'axios';
 

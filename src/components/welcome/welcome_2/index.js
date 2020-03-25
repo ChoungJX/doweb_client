@@ -1,6 +1,6 @@
 import { SmileOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Input, message, Result, Row, Spin } from 'antd';
-import 'antd/dist/antd.css';
+
 import axios from 'axios';
 import React from 'react';
 import { LoginForm } from '../../login_form';

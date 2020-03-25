@@ -1,6 +1,6 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, message, Card } from 'antd';
-import 'antd/dist/antd.css';
+
 import axios from 'axios';
 import React from 'react';
 

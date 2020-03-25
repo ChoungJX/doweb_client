@@ -1,5 +1,5 @@
 import React from 'react';
-import 'antd/dist/antd.css';
+
 import { Drawer, Button, Descriptions, Badge, Tooltip, Skeleton, message } from 'antd';
 import { EyeOutlined, PlayCircleOutlined, ReloadOutlined, PoweroffOutlined, FundProjectionScreenOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -146,7 +146,7 @@ export default class ContainerInspect extends React.Component {
                             <Descriptions.Item label="名字"> {data.Name ? data.Name : ""} </Descriptions.Item>
                             <Descriptions.Item label="网络信息">{`${data.NetworkSettings.Networks[`${network_drive}`].IPAddress}(${network_drive})`}</Descriptions.Item>
                             <Descriptions.Item label="状态">
-                                {data.State ? data.State.Status == "running" ? <Badge status="processing" text={data.State.Status} /> : <Badge status="error" text={data.State.Status} /> : ""}
+                                {data.State ? data.State.Status === "running" ? <Badge status="processing" text={data.State.Status} /> : <Badge status="error" text={data.State.Status} /> : ""}
                             </Descriptions.Item>
                             <Descriptions.Item label="创建时间"> {data.Created.split(".")[0]} </Descriptions.Item>
                             <Descriptions.Item span={2} label="操作">
@@ -160,7 +160,7 @@ export default class ContainerInspect extends React.Component {
                                     <Button loading={loading} style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<PoweroffOutlined />} size="large" danger onClick={() => this.handleStop()} />
                                 </Tooltip>
                                 <Tooltip placement="top" title="启动终端">
-                                    {data.State.Status == "running" ?
+                                    {data.State.Status === "running" ?
                                         <Button loading={loading} style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" onClick={() => this.handelGotoTerminal()} />
                                         :
                                         <Button loading={loading} style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" disabled />

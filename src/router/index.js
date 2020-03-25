@@ -1,17 +1,17 @@
-import React from "react";
-import { BrowserRouter as Router, Route, useHistory, useLocation, Redirect } from 'react-router-dom'
-
-import Index from '../pages/index'
-import Login from '../pages/login'
-import WelcomePage from '../pages/welcome'
-import HomePage from '../pages/home'
-import UserPage from '../pages/user'
-
 import { Spin } from 'antd';
-import 'antd/dist/antd.css';
 import axios from 'axios';
-
+import React from "react";
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import HomePage from '../pages/home';
+import Index from '../pages/index';
+import Login from '../pages/login';
+import UserPage from '../pages/user';
+import WelcomePage from '../pages/welcome';
 import './index.css';
+
+
+
+
 
 
 
@@ -83,25 +83,6 @@ export default class AuthExample extends React.Component {
     }
 }
 
-
-function LoginPage(props) {
-    let history = useHistory();
-    let location = useLocation();
-
-    let { from } = location.state || { from: { pathname: "/" } };
-    let login = () => {
-        props.Login(() => {
-            history.replace(from);
-        });
-    };
-
-    return (
-        <div>
-            <p>You must log in to view the page at {from.pathname}</p>
-            <button onClick={login}>Log in</button>
-        </div>
-    );
-}
 
 function PrivateRoute({ children, ...rest }) {
     console.log(rest.isSend)

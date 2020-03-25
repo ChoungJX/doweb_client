@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom'
-import 'antd/dist/antd.css';
+
 import { Table, Button, Card } from 'antd';
 import { ControlTwoTone } from '@ant-design/icons';
 import axios from 'axios';

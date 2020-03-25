@@ -1,5 +1,5 @@
 import React from 'react';
-import 'antd/dist/antd.css';
+
 import { Select, Spin } from 'antd';
 import axios from 'axios';
 
@@ -45,7 +45,7 @@ export default class ContainerSearchNetwork extends React.Component {
     }
 
     render() {
-        const { items, disabled, value, } = this.state;
+        const { items, disabled } = this.state;
         const { Option } = Select;
         return (
             <Select

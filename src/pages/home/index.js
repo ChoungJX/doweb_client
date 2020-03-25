@@ -1,10 +1,10 @@
+import { Alert, Breadcrumb, Col, Divider, Layout, Row } from 'antd';
 import React from 'react';
-import 'antd/dist/antd.css';
-import { Layout, Breadcrumb, Divider, Col, Row, Card,Alert } from 'antd';
+import { AllHeader } from '../../components/header';
+import ServerTableHook from '../../components/server_table';
 import './index.css';
-import { AllHeader } from '../../components/header'
 
-import ServerTableHook from '../../components/server_table'
+
 
 export default class HomePage extends React.Component {
     constructor(props) {
@@ -16,8 +16,6 @@ export default class HomePage extends React.Component {
 
     render() {
         const { Header, Content, Footer } = Layout;
-        const { Meta } = Card;
-        const { loading } = this.state;
         return (
             <Layout className="layout">
                 <Header>

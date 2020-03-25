@@ -1,5 +1,5 @@
 import React from 'react';
-import 'antd/dist/antd.css';
+
 import axios from 'axios';
 
 import { Card, Table, Tag } from 'antd';

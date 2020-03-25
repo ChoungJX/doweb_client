@@ -1,8 +1,8 @@
-import React from 'react';
-import { useParams } from 'react-router-dom'
-import 'antd/dist/antd.css';
+import { PageHeader, Skeleton } from 'antd';
 import axios from 'axios';
-import { Row, Col, PageHeader, Skeleton } from 'antd';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
 
 
 

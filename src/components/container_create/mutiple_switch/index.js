@@ -1,6 +1,6 @@
 import React from 'react';
-import 'antd/dist/antd.css';
-import { Select, Divider, Input } from 'antd';
+
+import { Select, Divider, Input, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 
@@ -26,12 +26,9 @@ export default class MultipleSwitch extends React.Component {
         });
     };
 
-    onSelectedChange = value => {
-        console.log(eval(value));
-    }
 
     addItem = () => {
-        const { items, items_value, input_value, input_key } = this.state;
+        const { items, input_value, input_key } = this.state;
         this.setState({
             items: [...items, `{"${input_key}":"${input_value}"}`],
             input_key: '',
@@ -58,12 +55,12 @@ export default class MultipleSwitch extends React.Component {
                             <Input addonBefore="value" style={{ flex: 'auto' }} value={input_value} onChange={this.onValueChange} />
                         </div>
                         <div align="right">
-                            <a
+                            <Button type="link"
                                 style={{ flex: 'none', padding: '8px', display: 'block', cursor: 'pointer' }}
                                 onClick={this.addItem}
                             >
                                 <PlusOutlined /> 添加选项
-                            </a>
+                            </Button>
                         </div>
                     </div>
                 )}

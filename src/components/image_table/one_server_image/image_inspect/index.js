@@ -1,7 +1,7 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import { Drawer, Descriptions, Tooltip, Skeleton } from 'antd';
+import { Button, Descriptions, Drawer, Skeleton, Tooltip } from 'antd';
 import axios from 'axios';
+import React from 'react';
+
 
 
 
@@ -47,7 +47,7 @@ export default class ImageInspect extends React.Component {
             return (
                 <div>
                     <Tooltip placement="top" title="查看该镜像">
-                        <a onClick={this.showDrawer}>{this.props.image_id}</a>
+                        <Button type="link" onClick={this.showDrawer}>{this.props.image_id}</Button>
                     </Tooltip>
                     <Drawer
                         title="镜像信息"
@@ -82,7 +82,7 @@ export default class ImageInspect extends React.Component {
             return (
                 <div>
                     <Tooltip placement="top" title="查看该镜像">
-                        <a onClick={this.showDrawer}>{this.props.image_id}</a>
+                        <Button type="link" onClick={this.showDrawer}>{this.props.image_id}</Button>
                     </Tooltip>
                     <Drawer
                         title="镜像信息"

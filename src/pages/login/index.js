@@ -1,17 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
-import 'antd/dist/antd.css';
-import {
-    Row,
-    Col,
-    Calendar,
-    Spin,
-    Modal,
-    Result,
-} from 'antd'
 import { ExclamationCircleOutlined, SmileOutlined } from '@ant-design/icons';
-import { LoginForm } from '../../components/login_form'
+import { Col, Modal, Result, Row, Spin } from 'antd';
 import axios from 'axios';
+import React from 'react';
+import { LoginForm } from '../../components/login_form';
+
 
 const { confirm } = Modal;
 
@@ -90,7 +82,7 @@ export default class Login extends React.Component {
                     <div style={{
                         background: `linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7) ),url(/static/img/1.jpg)`,
                         backgroundSize: "100% 100%",
-                        height: "1080px",
+                        height: "100%",
                         width: "100%"
                     }}>
                         <div style={{

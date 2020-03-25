@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Typography } from 'antd';
 import { AppstoreOutlined } from '@ant-design/icons';
-import 'antd/dist/antd.css';
+
 import '../index.css';
 
 const { Paragraph } = Typography;
