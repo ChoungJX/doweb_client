@@ -27,7 +27,7 @@ class UserChange extends React.Component {
 
 
     fetch_search(value) {
-        console.log(value)
+        //console.log(value)
         if (value === "") {
             return;
         }
@@ -36,7 +36,7 @@ class UserChange extends React.Component {
                 api: 'search_user_by_name',
                 input: value
             }).then(data => {
-                console.log(data.data)
+                //console.log(data.data)
                 this.setState({
                     data: data.data.data
                 })
@@ -61,7 +61,7 @@ class UserChange extends React.Component {
                 ...value1,
                 id: value
             }).then(data => {
-                console.log(data.data)
+                //console.log(data.data)
                 if (data.data.status === 0) {
                     window.location.replace('/user')
                 } else {
@@ -74,7 +74,7 @@ class UserChange extends React.Component {
     }
 
     handleChange(value) {
-        console.log(value);
+        //console.log(value);
         this.setState({
             value: value,
         })

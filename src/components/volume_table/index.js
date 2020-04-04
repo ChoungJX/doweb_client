@@ -65,7 +65,7 @@ class VolumeOneServerTable extends React.Component {
                 api: 'volume_info',
                 server_id: this.props.server_id,
             }).then(data => {
-                console.log(data.data.data.data)
+                //console.log(data.data.data.data)
                 this.setState({
                     data: data.data.data.data.Volumes,
                     loading: false,
@@ -83,7 +83,7 @@ class VolumeOneServerTable extends React.Component {
         return (
             <div>
                 <Card title="卷一览" extra={<VolumeDeleteButton server_id={this.props.server_id} onFresh={() => this.fresh_table()} />} >
-                    <Table loading={loading} rowKey={record => record.Name} columns={this.columns} dataSource={data} size="middle" />
+                    <Table pagination={{ defaultPageSize: 5 }} loading={loading} rowKey={record => record.Name} columns={this.columns} dataSource={data} size="middle" />
                 </Card>
             </div>
         );

@@ -29,7 +29,7 @@ export default class Login extends React.Component {
             {
                 api: 'ifUsed',
             }).then(data => {
-                console.log(data.data)
+                //console.log(data.data)
                 if (data.data.status === 0) {
                     this.setState({
                         loading: false,
@@ -86,9 +86,9 @@ export default class Login extends React.Component {
                         width: "100%"
                     }}>
                         <div style={{
-                                    height:"300px"
+                                    height:"25%"
                                 }}>
-                            aaa
+                            
                         </div>
                         <Row align={'middle'} justify="space-between" >
                             <Col span={1} />

@@ -4,16 +4,16 @@ export default function log(text, type) {
   //if (DEV) { //只有在开发的时候才会打印
     switch (type) {
       case "warn":
-        console.log('%c '+ JSON.stringify(text), "background: yellow; color: white; display: block;");
+        //console.log('%c '+ JSON.stringify(text), "background: yellow; color: white; display: block;");
         break;
       case "success":
-        console.log('%c '+ JSON.stringify(text), "background: green; color: white; display: block; padding: 2px;");
+        //console.log('%c '+ JSON.stringify(text), "background: green; color: white; display: block; padding: 2px;");
         break;
       case "error":
-        console.log('%c '+ JSON.stringify(text), "background: red; color: white; display: block;padding: 2px;");
+        //console.log('%c '+ JSON.stringify(text), "background: red; color: white; display: block;padding: 2px;");
         break;
       case "info":
-        console.log('%c '+ JSON.stringify(text), "background: blue; color: white; display: block;padding: 2px;");
+        //console.log('%c '+ JSON.stringify(text), "background: blue; color: white; display: block;padding: 2px;");
       default:
         break;
     }

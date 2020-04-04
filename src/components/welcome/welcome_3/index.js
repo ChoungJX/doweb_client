@@ -78,7 +78,7 @@ class WelcomeBindServer extends React.Component {
                 server_ssh_ip: input_server_ssh_ip,
 
             }).then(data => {
-                console.log(data.data)
+                //console.log(data.data)
                 if (data.data.status === 0) {
                     this.props.onNext();
                 } else {
@@ -88,7 +88,7 @@ class WelcomeBindServer extends React.Component {
                     })
                 }
             }).catch(err => {
-                console.log(err);
+                //console.log(err);
                 message.error('与控制节点配对失败，请检查输入是否正确，');
                 this.setState({
                     loading: false,

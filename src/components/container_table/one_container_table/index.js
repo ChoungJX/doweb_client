@@ -115,7 +115,7 @@ class ContainerOneServerTable extends React.Component {
                 api: 'container_info',
                 server_id: this.props.server_id,
             }).then(data => {
-                console.log(data.data.data.data)
+                //console.log(data.data.data.data)
                 this.setState({
                     data: data.data.data.data,
                     loading: false,
@@ -140,7 +140,7 @@ class ContainerOneServerTable extends React.Component {
         return (
             <div>
                 <Card title="容器一览" extra={<OneContainerActionButton disabled={!hasSelected} loading={loading} server_id={this.props.server_id} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} onLoading={() => this.handleLoading()} />} >
-                    <Table loading={loading} rowSelection={rowSelection} rowKey={record => record.Id} columns={this.columns} dataSource={data} size="middle" />
+                    <Table pagination={{ defaultPageSize: 5 }} loading={loading} rowSelection={rowSelection} rowKey={record => record.Id} columns={this.columns} dataSource={data} size="middle" />
                 </Card>
             </div>
         );

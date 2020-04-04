@@ -25,7 +25,7 @@ export default class ContainerInspect extends React.Component {
                 server_id: this.props.server_id,
                 container_id: this.props.container_id
             }).then(data => {
-                console.log(data.data.data.data)
+                //console.log(data.data.data.data)
                 this.setState({
                     data: data.data.data.data
                 })
@@ -42,13 +42,18 @@ export default class ContainerInspect extends React.Component {
                 server_id: this.props.server_id,
                 container_id: this.props.container_id
             }).then(data => {
-                console.log(data.data.data)
+                //console.log(data.data.data)
                 this.setState({
                     loading: false,
                 })
                 message.success("已向服务器发起请求")
                 this.fetch();
                 this.props.onFresh();
+            }).catch(err => {
+                message.error("请求操作失败！请稍后再试")
+                this.setState({
+                    loading: false,
+                })
             });
     }
 
@@ -62,13 +67,18 @@ export default class ContainerInspect extends React.Component {
                 server_id: this.props.server_id,
                 container_id: this.props.container_id
             }).then(data => {
-                console.log(data.data.data)
+                //console.log(data.data.data)
                 this.setState({
                     loading: false,
                 })
                 message.success("已向服务器发起请求")
                 this.fetch();
                 this.props.onFresh();
+            }).catch(err => {
+                message.error("请求操作失败！请稍后再试")
+                this.setState({
+                    loading: false,
+                })
             });
     }
 
@@ -82,13 +92,18 @@ export default class ContainerInspect extends React.Component {
                 server_id: this.props.server_id,
                 container_id: this.props.container_id
             }).then(data => {
-                console.log(data.data.data)
+                //console.log(data.data.data)
                 this.setState({
                     loading: false,
                 })
                 message.success("已向服务器发起请求")
                 this.fetch();
                 this.props.onFresh();
+            }).catch(err => {
+                message.error("请求操作失败！请稍后再试")
+                this.setState({
+                    loading: false,
+                })
             });
     }
 
@@ -102,12 +117,20 @@ export default class ContainerInspect extends React.Component {
                 server_id: this.props.server_id,
                 base64: true,
             }).then(data => {
-                console.log(data.data.data)
+                //console.log(data.data.data)
                 let ip = data.data.data.ip;
                 let user = data.data.data.user;
                 let psw = data.data.data.psw;
 
-                window.location.replace(`/ssh?hostname=${ip}&username=${user}&password=${psw}&command=docker exec -it ${this.props.container_id} /bin/bash`);
+                window.open(`/ssh?hostname=${ip}&username=${user}&password=${psw}&command=docker exec -it ${this.props.container_id} /bin/bash`);
+                this.setState({
+                    loading: false,
+                })
+            }).catch(err => {
+                message.error("请求操作失败！请稍后再试")
+                this.setState({
+                    loading: false,
+                })
             });
     }
 
@@ -139,7 +162,7 @@ export default class ContainerInspect extends React.Component {
                         closable={false}
                         onClose={this.onClose}
                         visible={this.state.visible}
-                        width={720}
+                        width={840}
                     >
                         <Descriptions title="基本信息" bordered column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}>
                             <Descriptions.Item span={2} label="ID">{data.Id ? data.Id : ""}</Descriptions.Item>

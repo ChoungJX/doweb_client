@@ -30,7 +30,7 @@ export default class ContainerSearchNetwork extends React.Component {
                 api: 'network_info',
                 server_id: server_id,
             }).then(data => {
-                console.log(data.data.data.data);
+                //console.log(data.data.data.data);
                 this.setState({
                     items: data.data.data.data,
                 })

@@ -70,7 +70,7 @@ class UserInfoTable extends React.Component {
             {
                 api: 'user_info',
             }).then(data => {
-                console.log(data.data.data)
+                //console.log(data.data.data)
                 this.setState({
                     data: data.data.data,
                     loading: false,

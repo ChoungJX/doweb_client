@@ -21,7 +21,7 @@ export default class ImageInspect extends React.Component {
                 server_id: this.props.server_id,
                 image_id: this.props.image_id
             }).then(data => {
-                console.log(data.data.data.data)
+                //console.log(data.data.data.data)
                 this.setState({
                     data: data.data.data.data
                 })
@@ -55,7 +55,7 @@ export default class ImageInspect extends React.Component {
                         closable={false}
                         onClose={this.onClose}
                         visible={this.state.visible}
-                        width={720}
+                        width={840}
                     >
                         <Descriptions title="基本信息" bordered column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}>
                             <Descriptions.Item span={2} label="ID">{data.Id ? data.Id : ""}</Descriptions.Item>

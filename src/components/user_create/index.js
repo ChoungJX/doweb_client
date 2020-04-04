@@ -21,7 +21,7 @@ export default class UserCreate extends React.Component {
                 api: 'create_user',
                 ...value
             }).then(data => {
-                console.log(data.data)
+                //console.log(data.data)
                 if (data.data.status === 0) {
                     window.location.replace('/user')
                 } else {

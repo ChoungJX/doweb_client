@@ -31,7 +31,7 @@ export default class ImageAddButton extends React.Component {
                 setTimeout(() => {
                     message.success({ content: '客户端已接收数据！', key: 'updatable', duration: 2 });
                 }, 1000);
-                console.log(data.data.data.data);
+                //console.log(data.data.data.data);
                 if (!data.data.data.data.message) {
                     notification.open({
                         message: '下载成功！',

@@ -95,7 +95,7 @@ class IndexDataControl extends React.Component {
                 api: 'system_use',
                 server_id: this.props.server_id,
             }).then(d => {
-                console.log(d.data.data.data);
+                //console.log(d.data.data.data);
                 this.setState({
                     data_docker: d.data.data.data
                 })
@@ -103,7 +103,7 @@ class IndexDataControl extends React.Component {
     }
 
     callback(key) {
-        console.log(key);
+        //console.log(key);
     }
 
 

@@ -79,7 +79,7 @@ class ImageOneServerTable extends React.Component {
                 api: 'image_info',
                 server_id: this.props.server_id,
             }).then(data => {
-                console.log(data.data.data.data)
+                //console.log(data.data.data.data)
                 this.setState({
                     data: data.data.data.data,
                     loading: false,
@@ -100,7 +100,7 @@ class ImageOneServerTable extends React.Component {
                     <div style={{ marginBottom: 16 }}>
                         <ImageDeleteButton disabled={!hasSelected} loading={loading} server_id={this.props.server_id} url={this.props.url} selected={selectedRowKeys} onFresh={() => this.handleRefresh()} />
                     </div>
-                    <Table loading={loading} rowSelection={rowSelection} rowKey={record => record.Id} columns={this.columns} dataSource={data} size="middle" />
+                    <Table pagination={{ defaultPageSize: 5 }} loading={loading} rowSelection={rowSelection} rowKey={record => record.Id} columns={this.columns} dataSource={data} size="middle" />
                 </Card>
             </div>
         );

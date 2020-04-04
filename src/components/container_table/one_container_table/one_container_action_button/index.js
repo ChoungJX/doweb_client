@@ -31,7 +31,7 @@ export default class OneContainerActionButton extends React.Component {
                     api: 'container_delete_stoped',
                     server_id: this.props.server_id,
                 }).then(data => {
-                    console.log(data.data);
+                    //console.log(data.data);
                     notification.open({
                         message: '删除成功！',
                         description:
@@ -58,7 +58,7 @@ export default class OneContainerActionButton extends React.Component {
                         server_id: this.props.server_id,
                         container_id: this.props.selected[i],
                     }).then(data => {
-                        console.log(data.data);
+                        //console.log(data.data);
                         notification.open({
                             message: '重启成功！',
                             description:
@@ -75,7 +75,7 @@ export default class OneContainerActionButton extends React.Component {
                         server_id: this.props.server_id,
                         container_id: this.props.selected[i],
                     }).then(data => {
-                        console.log(data.data);
+                        //console.log(data.data);
                         notification.open({
                             message: '停止成功！',
                             description:
@@ -92,7 +92,7 @@ export default class OneContainerActionButton extends React.Component {
                         server_id: this.props.server_id,
                         container_id: this.props.selected[i],
                     }).then(data => {
-                        console.log(data.data);
+                        //console.log(data.data);
                         notification.open({
                             message: '删除成功！',
                             description:

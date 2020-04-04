@@ -67,6 +67,9 @@ export class AllHeader extends React.Component {
                             <Menu.Item key="2">
                                 <Link to="/user">用户管理</Link>
                             </Menu.Item>
+                            <Menu.Item key="3">
+                                <Link to="/about">关于</Link>
+                            </Menu.Item>
                         </Menu>
                     </Col>
                     <Col>

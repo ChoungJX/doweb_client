@@ -55,7 +55,7 @@ export default class WelcomePage extends React.Component {
             {
                 api: 'ifUsed',
             }).then(data => {
-                console.log(data.data)
+                //console.log(data.data)
                 if (data.data.status === 0) {
                     this.setState({
                         welcome: true,

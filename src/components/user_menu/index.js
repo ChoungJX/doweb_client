@@ -11,16 +11,13 @@ const { Sider } = Layout;
 export default function UserMenu(props) {
 
     return (
-        <div>
-            <UserMenuFunc {...props} />
-        </div>
+        <UserMenuFunc {...props} />
     );
 }
 
 
 class UserMenuFunc extends React.Component {
-
-
+    
     render() {
         return (
             <Sider width={200} className="site-layout-background">
@@ -28,7 +25,7 @@ class UserMenuFunc extends React.Component {
                     mode="inline"
                     defaultSelectedKeys={this.props.selectOptins}
                     defaultOpenKeys={['sub1']}
-                    style={{ height: '100%', borderRight: 0 }}
+
                 >
                     <Menu.Item key="back">
                         <ArrowLeftOutlined style={{ fontSize: '21px' }} />

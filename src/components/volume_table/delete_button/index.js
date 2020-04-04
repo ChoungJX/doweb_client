@@ -21,7 +21,7 @@ export default class VolumeDeleteButton extends React.Component {
                 api: 'volume_delete_unused',
                 server_id: this.props.server_id,
             }).then(data => {
-                console.log(data.data.data.data);
+                //console.log(data.data.data.data);
                 if (!data.data.data.data.message) {
                     let free_size = data.data.data.data.SpaceReclaimed / 1024 / 1024
                     if (free_size > 1000) {

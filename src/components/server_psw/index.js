@@ -41,7 +41,7 @@ class ServerPswShow extends React.Component {
             {
                 api: 'psw_check',
             }).then(data => {
-                console.log(data.data.id)
+                //console.log(data.data.id)
                 this.setState({
                     id: data.data.id
                 })

@@ -24,7 +24,7 @@ class WelcomeSignup extends React.Component {
                 api: 'create_user',
                 ...value
             }).then(data => {
-                console.log(data.data)
+                //console.log(data.data)
                 if (data.data.status === 0) {
                     this.props.onNext();
                 } else {
@@ -34,7 +34,7 @@ class WelcomeSignup extends React.Component {
                     })
                 }
             }).catch(err => {
-                console.log(err);
+                //console.log(err);
                 message.error('服务器开小差了，请稍后再试');
                 this.setState({
                     loading: false,
@@ -51,7 +51,7 @@ class WelcomeSignup extends React.Component {
             {
                 aaa: 'aaa',
             }).then(data => {
-                console.log(data.data)
+                //console.log(data.data)
                 if (data.data.status === -2) {
                     this.setState({
                         loading: false,
@@ -64,7 +64,7 @@ class WelcomeSignup extends React.Component {
                     })
                 }
             }).catch(err => {
-                console.log(err);
+                //console.log(err);
                 message.error('服务器开小差了，请稍后再试');
                 this.setState({
                     loading: false,

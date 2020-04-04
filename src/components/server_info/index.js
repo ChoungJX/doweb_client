@@ -41,7 +41,7 @@ class ServerInfoShow extends React.Component {
                 api: 'system_infomation',
                 server_id: this.props.server_id,
             }).then(data => {
-                console.log(data.data.data.data)
+                //console.log(data.data.data.data)
                 this.setState({
                     data1: data.data.data.data
                 })
@@ -51,7 +51,7 @@ class ServerInfoShow extends React.Component {
                 api: 'system_version',
                 server_id: this.props.server_id,
             }).then(data => {
-                console.log(data.data.data.data)
+                //console.log(data.data.data.data)
                 this.setState({
                     data2: data.data.data.data
                 })
@@ -86,7 +86,7 @@ class ServerInfoShow extends React.Component {
         if (name === str) {
             return;
         }
-        console.log('Content change:', str);
+        //console.log('Content change:', str);
         axios.post('/api',
             {
                 api: 'server_change_name',

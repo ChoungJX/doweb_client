@@ -21,7 +21,7 @@ export default class NetworkInspect extends React.Component {
                 server_id: this.props.server_id,
                 network_id: this.props.network_id
             }).then(data => {
-                console.log(data.data.data.data)
+                //console.log(data.data.data.data)
                 this.setState({
                     data: data.data.data.data
                 })

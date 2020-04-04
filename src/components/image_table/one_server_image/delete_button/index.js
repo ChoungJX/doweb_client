@@ -24,7 +24,7 @@ export default class ImageDeleteButton extends React.Component {
                     server_id: this.props.server_id,
                     image_id: this.props.selected[i],
                 }).then(data => {
-                    console.log(data.data.data.data);
+                    //console.log(data.data.data.data);
                     if (!data.data.data.data.message) {
                         notification.open({
                             message: '删除成功！',

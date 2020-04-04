@@ -165,7 +165,7 @@ class ContainerCreatePage extends React.Component {
     }
 
     test() {
-        console.log(this.state);
+        //console.log(this.state);
     }
     // =======================================================
 
@@ -227,7 +227,7 @@ class ContainerCreatePage extends React.Component {
                 setTimeout(() => {
                     message.success({ content: '客户端已接收数据！', key: 'updatable', duration: 2 });
                 }, 1000);
-                console.log(data.data.data.data);
+                //console.log(data.data.data.data);
                 if (!data.data.data.data.message) {
                     notification.open({
                         message: '创建成功！',
@@ -243,7 +243,7 @@ class ContainerCreatePage extends React.Component {
                             container_id: data.data.data.data.Id
 
                         }).then(data => {
-                            console.log(data.data.data)
+                            //console.log(data.data.data)
                             setTimeout(() => {
                                 message.success({ content: '容器启动成功！', key: 'updatable', duration: 2 });
                             }, 1000);

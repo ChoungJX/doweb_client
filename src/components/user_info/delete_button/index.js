@@ -22,7 +22,7 @@ export default class UserDeleteButton extends React.Component {
                     api: 'user_delete',
                     user_id: this.props.selected[i],
                 }).then(data => {
-                    console.log(data.data);
+                    //console.log(data.data);
                     if (data.data.status === 0) {
                         notification.open({
                             message: '删除成功！',

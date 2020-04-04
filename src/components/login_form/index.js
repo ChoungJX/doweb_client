@@ -24,7 +24,7 @@ export class LoginForm extends React.Component {
     }
 
     async onFinish(values) {
-        console.log(values);
+        //console.log(values);
         this.setState({
             loading: true,
         });
@@ -35,7 +35,7 @@ export class LoginForm extends React.Component {
                 username: values.username,
                 password: values.password,
             }).then(data => {
-                console.log(data.data)
+                //console.log(data.data)
                 if (data.data.status === 0) {
                     this.props.Login()
                 } else {
@@ -48,7 +48,7 @@ export class LoginForm extends React.Component {
     }
 
     onFinishFailed() {
-        //console.log('Failed:');
+        ////console.log('Failed:');
     }
 
     render() {
