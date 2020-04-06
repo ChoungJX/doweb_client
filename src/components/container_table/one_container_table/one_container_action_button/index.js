@@ -110,7 +110,7 @@ export default class OneContainerActionButton extends React.Component {
             <div>
                 <Dropdown overlay={this.menu}>
                     <Button disabled={this.props.disabled} loading={this.props.loading}>
-                        快捷操作 <DownOutlined />
+                        容器操作 <DownOutlined />
                     </Button>
                 </Dropdown>
             </div>

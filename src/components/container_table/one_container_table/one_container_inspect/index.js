@@ -213,7 +213,7 @@ export default class ContainerInspect extends React.Component {
                             <Descriptions.Item span={2} label="环境变量">
                                 {
                                     data.Config.Env.map((item, index) =>
-                                        <div>
+                                        <div key={index}>
                                             {item}
                                             <br /><br />
                                         </div>

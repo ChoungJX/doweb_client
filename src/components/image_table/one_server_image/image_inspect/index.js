@@ -59,7 +59,9 @@ export default class ImageInspect extends React.Component {
                     >
                         <Descriptions title="基本信息" bordered column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}>
                             <Descriptions.Item span={2} label="ID">{data.Id ? data.Id : ""}</Descriptions.Item>
-                            <Descriptions.Item label="名字">{data.RepoTags}</Descriptions.Item>
+                            <Descriptions.Item label="名字"><div>{data.RepoTags.map((item,index)=>
+                                <div>{item}<br /><br /></div>
+                            )}</div></Descriptions.Item>
                             <Descriptions.Item label="Docker版本">{data.DockerVersion}</Descriptions.Item>
                             <Descriptions.Item span={2} label="构建时间">{data.Created}</Descriptions.Item>
                             <Descriptions.Item label="构建平台">{data.Architecture}</Descriptions.Item>
@@ -67,7 +69,7 @@ export default class ImageInspect extends React.Component {
                             <Descriptions.Item label="镜像结构">
                                 {
                                     data.RootFS.Layers.map((item, index) =>
-                                        <div>
+                                        <div key={index}>
                                             {`${index}: ${item}`}
                                             <br /><br />
                                         </div>

@@ -1,5 +1,5 @@
 import { ApiTwoTone, ContactsTwoTone, DatabaseOutlined, DatabaseTwoTone, EditTwoTone, EyeInvisibleTwoTone, SmileOutlined } from '@ant-design/icons';
-import { Button, Input, Modal, notification, Radio } from 'antd';
+import { Button, Input, Modal, notification, Radio,message } from 'antd';
 
 import axios from 'axios';
 import React from 'react';
@@ -53,6 +53,11 @@ export default class ServerAddButton extends React.Component {
                         `节点:${input_server_name}创建成功！`,
                     icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                 });
+            }).catch(err=>{
+                this.setState({
+                    loading: false,
+                });
+                message.error("与服务器通讯失败！请检测输入是否正确")
             });
         this.props.onFresh();
     }

@@ -45,7 +45,11 @@ class ImageOneServerTable extends React.Component {
                 title: 'Tag',
                 key: 'tag',
                 render: (text, record) => (
-                    <Tag color="#108ee9">{record.RepoTags}</Tag>
+                    <span>
+                        {record.RepoTags.map((item,index)=>(
+                            <Tag key={index} color="#108ee9">{item}</Tag>
+                        ))}
+                    </span>
                 )
             },
             {

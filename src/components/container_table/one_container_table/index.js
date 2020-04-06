@@ -44,6 +44,17 @@ class ContainerOneServerTable extends React.Component {
                 title: '名字',
                 dataIndex: 'Names',
                 key: 'name',
+                render:(text,record)=>{
+                    return(
+                        <div>
+                            {text.map((item,index)=>
+                                (<div key={index}>
+                                    {item.split("/")[1]}
+                                </div>)
+                            )}
+                        </div>
+                    )
+                }
             },
             {
                 title: '对应镜像',

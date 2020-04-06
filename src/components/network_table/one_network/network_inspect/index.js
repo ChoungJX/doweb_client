@@ -65,7 +65,7 @@ export default class NetworkInspect extends React.Component {
                             <Descriptions.Item span={2} label="详情">
                                 {
                                     data.IPAM.Config.map((item, index) =>
-                                        <div>
+                                        <div key={index}>
                                             {`网关: ${item.Gateway}`}
                                             <br />
                                             {`网段: ${item.Subnet}`}

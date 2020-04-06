@@ -257,6 +257,8 @@ class ContainerCreatePage extends React.Component {
                         `${data.data.data.data.message}`,
                     icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                 });
+            }).catch(err=>{
+                message.error("与服务器通讯失败！请稍后再试")
             });
     }
 
