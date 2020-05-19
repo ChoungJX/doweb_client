@@ -62,7 +62,7 @@ export default class ContainerSearchImage extends React.Component {
                 )}
             >
                 {items.map(d => (
-                    <Option key={d.Id}>{d.RepoTags}</Option>
+                    <Option key={d.Id}>{d.RepoTags.join(" | ")}</Option>
                 ))}
             </Select>
         )

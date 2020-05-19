@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';
 import App from './router';
 
 ReactDOM.render(
-    <App />,
+    <ConfigProvider locale={zhCN}>
+        <App />
+    </ConfigProvider>,
     document.getElementById('root')
 );

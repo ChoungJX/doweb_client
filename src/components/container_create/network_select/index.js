@@ -52,7 +52,7 @@ export default class ContainerSearchNetwork extends React.Component {
                 style={{ width: '450px' }}
                 labelInValue
                 notFoundContent={<Spin size="small" />}
-                placeholder="查看镜像列表"
+                placeholder="查看网络列表"
                 disabled={disabled ? true : false}
                 onChange={value => this.handleValue(value)}
                 dropdownRender={menu => (

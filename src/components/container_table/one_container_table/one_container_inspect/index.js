@@ -166,7 +166,12 @@ export default class ContainerInspect extends React.Component {
                     >
                         <Descriptions title="基本信息" bordered column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}>
                             <Descriptions.Item span={2} label="ID">{data.Id ? data.Id : ""}</Descriptions.Item>
-                            <Descriptions.Item label="名字"> {data.Name ? data.Name : ""} </Descriptions.Item>
+                            <Descriptions.Item label="名字">
+                                {data.Name ?
+                                    data.Name.split("/")[1]
+                                    :
+                                    ""} '
+                            </Descriptions.Item>
                             <Descriptions.Item label="网络信息">{`${data.NetworkSettings.Networks[`${network_drive}`].IPAddress}(${network_drive})`}</Descriptions.Item>
                             <Descriptions.Item label="状态">
                                 {data.State ? data.State.Status === "running" ? <Badge status="processing" text={data.State.Status} /> : <Badge status="error" text={data.State.Status} /> : ""}

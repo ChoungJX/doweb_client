@@ -63,6 +63,10 @@ class ServerPswShow extends React.Component {
         if (user === str) {
             return;
         }
+        if (str.length === 0) {
+            message.error("请输入用户名！");
+            return;
+        }
         axios.post('/api',
             {
                 api: 'server_change_user',
@@ -85,6 +89,10 @@ class ServerPswShow extends React.Component {
     onChangePsw = str => {
         const { psw } = this.state;
         if (psw === str) {
+            return;
+        }
+        if (str.length === 0) {
+            message.error("请输入密码！");
             return;
         }
         axios.post('/api',

@@ -86,6 +86,10 @@ class ServerInfoShow extends React.Component {
         if (name === str) {
             return;
         }
+        if (str.length === 0) {
+            message.error("请输入名字！");
+            return;
+        }
         //console.log('Content change:', str);
         axios.post('/api',
             {
@@ -105,6 +109,10 @@ class ServerInfoShow extends React.Component {
     onChangeSsh = str => {
         const { ssh } = this.state;
         if (ssh === str) {
+            return;
+        }
+        if (str.length === 0) {
+            message.error("请输入IP或域名！");
             return;
         }
         axios.post('/api',
