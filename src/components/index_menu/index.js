@@ -1,11 +1,8 @@
+import { ApartmentOutlined, AppstoreOutlined, CloseCircleOutlined, ArrowLeftOutlined, CloudServerOutlined, EyeOutlined, FolderOpenOutlined, SaveOutlined } from '@ant-design/icons';
+import { Layout, Menu, notification, Button } from 'antd';
+import axios from 'axios';
 import React from 'react';
-import {
-    Link,
-    useParams
-} from "react-router-dom";
-
-import { AppstoreOutlined, CloudServerOutlined, EyeOutlined, SaveOutlined, ApartmentOutlined, ArrowLeftOutlined, FolderOpenOutlined } from '@ant-design/icons';
-import { Layout, Menu, } from 'antd';
+import { Link, useParams } from "react-router-dom";
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -132,6 +129,38 @@ export class IndexSider extends React.Component {
 
 export default function IndexMenu(props) {
     let { server_id } = useParams();
+    const btn = (
+        <Button type="primary" size="small" onClick={() => window.location.replace("/")}>
+            确认
+        </Button>
+    );
+    axios.post('/api',
+        {
+            api: 'server_check',
+            server_id: server_id,
+        }).then(d2 => {
+            if (d2.data.status === 0) {
+
+            } else {
+                notification.open({
+                    message: '与目标服务器连接失败！',
+                    description:
+                        '可能该服务器已经离线或是您输入了一个错误的服务器ID。点击确定返回主页。',
+                    icon: <CloseCircleOutlined style={{ color: '#f5222d' }} />,
+                    btn,
+                    duration: 0,
+                });
+            }
+        }).catch(err => {
+            notification.open({
+                message: '与目标服务器连接失败！',
+                description:
+                    '可能该服务器已经离线或是您输入了一个错误的服务器ID。点击确定返回主页。',
+                icon: <CloseCircleOutlined style={{ color: '#f5222d' }} />,
+                btn,
+                duration: 0,
+            });
+        });
 
     return (<IndexSider server_id={server_id} openKey={props.openKey} selectOptins={props.selectOptins} />)
 }

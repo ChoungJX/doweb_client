@@ -23,9 +23,11 @@ export default class UserCreate extends React.Component {
             }).then(data => {
                 //console.log(data.data)
                 if (data.data.status === 0) {
-                    window.location.replace('/user')
-                } else {
-                    message.info('用户名重复，请重新设置！');
+                    message.success("用户创建成功！");
+                } else if(data.data.status === -1) {
+                    message.warning('用户名重复，请重新设置！');
+                }else if(data.data.status === -2){
+                    message.error("您的权限不足！无法添加用户！");
                 }
                 this.setState({
                     loading: false

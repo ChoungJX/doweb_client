@@ -3,6 +3,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom'
 
 
 import { Layout, Breadcrumb } from 'antd';
+import { GithubOutlined } from '@ant-design/icons';
 
 import './index.css';
 import { AllHeader } from '../../components/header'
@@ -12,16 +13,16 @@ import UserCreate from '../../components/user_create'
 import UserChangeMount from '../../components/user_change'
 
 
-const { Content } = Layout;
+const { Content, Footer } = Layout;
 
 
 export default function UserPage() {
     let { url } = useRouteMatch();
 
     return (
-        <Layout>
+        <Layout style={{ "height": "100%" }}>
             <AllHeader number={'2'} />
-            <Layout>
+            <Layout style={{ marginTop: 64 }}>
                 <Switch>
                     <Route exact path={`${url}`}>
                         <UserMenu selectOptins='1' url={url} />
@@ -83,6 +84,7 @@ export default function UserPage() {
                     </Switch>
                 </Layout>
             </Layout>
+            <Footer style={{ textAlign: 'center' }}><a rel="noopener noreferrer" href="https://github.com/ChoungJX/doweb_server" target="_blank"><GithubOutlined /></a> ChoungJX毕业作品</Footer>
         </Layout>
     );
 }

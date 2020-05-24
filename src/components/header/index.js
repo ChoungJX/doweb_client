@@ -51,7 +51,7 @@ export class AllHeader extends React.Component {
     render() {
         const { username, ifadmin } = this.state
         return (
-            <Header className="header">
+            <Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
                 <div className="logo" />
                 <Row justify="space-between">
                     <Col>

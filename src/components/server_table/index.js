@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom'
-
-import './index.css';
-import { Table, Card, Tag, Button, Tooltip } from 'antd';
 import { FullscreenOutlined } from '@ant-design/icons';
+import { Button, Card, Table, Tag, Tooltip } from 'antd';
 import axios from 'axios';
+import React from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
+import ServerAddButton from './add_button';
+import ServerDeleteButton from './delete_button';
+import './index.css';
 
-import ServerAddButton from './add_button'
-import ServerDeleteButton from './delete_button'
+
 
 export class ServerTable extends React.Component {
     constructor(props) {
@@ -87,7 +87,12 @@ export class ServerTable extends React.Component {
         this.fetch();
     }
 
+
+
     fetch() {
+        this.setState({
+            loading: true
+        });
         axios.post('/api',
             {
                 api: 'server_info',

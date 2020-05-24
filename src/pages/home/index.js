@@ -20,7 +20,7 @@ export default class HomePage extends React.Component {
         return (
             <Layout className="layout">
                 <AllHeader number={'1'} />
-                <Content style={{ padding: '0 50px' }}>
+                <Content style={{ padding: '0 50px', marginTop: 64 }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>主页</Breadcrumb.Item>
                     </Breadcrumb>

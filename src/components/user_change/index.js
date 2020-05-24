@@ -63,9 +63,13 @@ class UserChange extends React.Component {
             }).then(data => {
                 //console.log(data.data)
                 if (data.data.status === 0) {
-                    window.location.replace('/user')
-                } else {
-                    message.info('用户名重复，请重新设置！');
+                    message.success("信息修改成功！")
+                } else if (data.data.status === -1) {
+                    message.warning('用户名重复，请重新设置！');
+                } else if (data.data.status === -2) {
+                    message.error('您的权限不足！');
+                } else if (data.data.status === -3) {
+                    message.error('不能降级自己的权限！');
                 }
                 this.setState({
                     loading: false

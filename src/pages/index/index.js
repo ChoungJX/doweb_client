@@ -3,6 +3,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import './index.css';
 import { Layout, Breadcrumb } from 'antd';
+import { GithubOutlined } from '@ant-design/icons';
 
 import { AllHeader } from '../../components/header'
 import IndexMenu from '../../components/index_menu'
@@ -19,7 +20,7 @@ import VolumeOneServer from '../../components/volume_table'
 
 
 
-const { Content } = Layout;
+const { Content, Footer } = Layout;
 
 
 export default function Index() {
@@ -28,7 +29,7 @@ export default function Index() {
     return (
         <Layout>
             <AllHeader number={'1'} />
-            <Layout>
+            <Layout style={{marginTop: 64}}>
                 <Switch>
                     <Route exact path={`${url}/:server_id`}>
                         <IndexMenu selectOptins='0' />
@@ -217,6 +218,7 @@ export default function Index() {
                     </Switch>
                 </Layout>
             </Layout>
+            <Footer style={{ textAlign: 'center' }}><a rel="noopener noreferrer" href="https://github.com/ChoungJX/doweb_server" target="_blank"><GithubOutlined /></a> ChoungJX毕业作品</Footer>
         </Layout>
     );
 }

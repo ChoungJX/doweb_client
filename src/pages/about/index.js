@@ -37,7 +37,7 @@ export default class AboutPage extends React.Component {
         return (
             <Layout className="layout">
                 <AllHeader number={'3'} />
-                <Content style={{ padding: '0 50px' }}>
+                <Content style={{ padding: '0 50px', marginTop: 64 }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>关于</Breadcrumb.Item>
                     </Breadcrumb>
@@ -52,7 +52,7 @@ export default class AboutPage extends React.Component {
                         />
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}><a rel="noopener noreferrer"  href="https://github.com/ChoungJX/doweb_server" target="_blank"><GithubOutlined /></a> ChoungJX毕业作品</Footer>
+                <Footer style={{ textAlign: 'center' }}><a rel="noopener noreferrer" href="https://github.com/ChoungJX/doweb_server" target="_blank"><GithubOutlined /></a> ChoungJX毕业作品</Footer>
             </Layout>
         )
     }
