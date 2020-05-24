@@ -25,11 +25,11 @@ export default class HomePage extends React.Component {
                         <Breadcrumb.Item>主页</Breadcrumb.Item>
                     </Breadcrumb>
                     <div className="site-layout-content">
-                        <Divider orientation="left">系统公告</Divider>
+                        <Divider orientation="left">欢迎</Divider>
                         <Row justify="center" gutter={[16, 16]}>
                             <Col span={24} >
                                 <Alert
-                                    message="欢迎来到Docker容器可视化平台"
+                                    message="欢迎来到可视化Docker容器管理系统"
                                     description="请选择一个服务器来进行操作。您也可以添加新的服务器或者删除一个服务器"
                                     type="info"
                                     showIcon

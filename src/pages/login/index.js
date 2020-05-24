@@ -1,4 +1,4 @@
-import { ExclamationCircleOutlined, SmileOutlined } from '@ant-design/icons';
+import { ClusterOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { Col, Modal, Result, Row, Spin } from 'antd';
 import axios from 'axios';
 import React from 'react';
@@ -86,16 +86,16 @@ export default class Login extends React.Component {
                         width: "100%"
                     }}>
                         <div style={{
-                                    height:"25%"
-                                }}>
-                            
+                            height: "25%"
+                        }}>
+
                         </div>
                         <Row align={'middle'} justify="space-between" >
                             <Col span={1} />
                             <Col >
                                 <Result
-                                    icon={<SmileOutlined />}
-                                    title={<div style={{ color: "white" }}>欢迎来到Docker容器可视化管理平台</div>}
+                                    icon={<ClusterOutlined />}
+                                    title={<div style={{ color: "white" }}>欢迎来到可视化Docker容器管理系统</div>}
                                 />
                             </Col>
                             <Col span={4} />

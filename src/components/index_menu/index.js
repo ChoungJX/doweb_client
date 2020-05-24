@@ -1,5 +1,5 @@
-import { ApartmentOutlined, AppstoreOutlined, CloseCircleOutlined, ArrowLeftOutlined, CloudServerOutlined, EyeOutlined, FolderOpenOutlined, SaveOutlined } from '@ant-design/icons';
-import { Layout, Menu, notification, Button } from 'antd';
+import { ApartmentOutlined, AppstoreOutlined, ArrowLeftOutlined, CloseCircleOutlined, CloudServerOutlined, DashboardOutlined, FolderOpenOutlined, SaveOutlined } from '@ant-design/icons';
+import { Button, Layout, Menu, notification } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { Link, useParams } from "react-router-dom";
@@ -50,8 +50,8 @@ export class IndexSider extends React.Component {
                         <Link to={`/`}>回到主页</Link>
                     </Menu.Item>
                     <Menu.Item key="0">
-                        <EyeOutlined style={{ fontSize: '21px' }} />
-                        <Link to={`/control/${this.props.server_id}`}>全局总览</Link>
+                        <DashboardOutlined style={{ fontSize: '21px' }} />
+                        <Link to={`/control/${this.props.server_id}`}>Dashboard</Link>
                     </Menu.Item>
                     <SubMenu
                         key="sub1"
@@ -146,7 +146,7 @@ export default function IndexMenu(props) {
                     message: '与目标服务器连接失败！',
                     description:
                         '可能该服务器已经离线或是您输入了一个错误的服务器ID。点击确定返回主页。',
-                    icon: <CloseCircleOutlined style={{ color: '#f5222d' }} />,
+                    icon: <CloseCircleOutlined style={{ color: '#f5222d', fontSize: '30px' }} />,
                     btn,
                     duration: 0,
                 });
@@ -156,7 +156,7 @@ export default function IndexMenu(props) {
                 message: '与目标服务器连接失败！',
                 description:
                     '可能该服务器已经离线或是您输入了一个错误的服务器ID。点击确定返回主页。',
-                icon: <CloseCircleOutlined style={{ color: '#f5222d' }} />,
+                icon: <CloseCircleOutlined style={{ color: '#f5222d', fontSize: '30px' }} />,
                 btn,
                 duration: 0,
             });
