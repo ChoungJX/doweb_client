@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom'
-
-import { Table, Button, Card } from 'antd';
 import { ControlTwoTone } from '@ant-design/icons';
+import { Button, Card, Modal, Table } from 'antd';
 import axios from 'axios';
+import React from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
+
 
 
 function IntoButton(props) {
@@ -59,7 +59,17 @@ export class CommonTable extends React.Component {
             {
                 api: 'server_info',
             }).then(data => {
-                //console.log(data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data: data.data.data,
                     loading: false,

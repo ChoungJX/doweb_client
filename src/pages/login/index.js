@@ -1,4 +1,4 @@
-import { ClusterOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { ControlTwoTone, ExclamationCircleOutlined } from '@ant-design/icons';
 import { Col, Modal, Result, Row, Spin } from 'antd';
 import axios from 'axios';
 import React from 'react';
@@ -80,7 +80,7 @@ export default class Login extends React.Component {
             } else {
                 return (
                     <div style={{
-                        background: `linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7) ),url(/static/img/1.jpg)`,
+                        background: `linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7) ),url(/static/img/IMG_2702.JPG)`,
                         backgroundSize: "100% 100%",
                         height: "100%",
                         width: "100%"
@@ -94,7 +94,7 @@ export default class Login extends React.Component {
                             <Col span={1} />
                             <Col >
                                 <Result
-                                    icon={<ClusterOutlined />}
+                                    icon={<ControlTwoTone style={{fontSize:"72px"}}/>}
                                     title={<div style={{ color: "white" }}>欢迎来到可视化Docker容器管理系统</div>}
                                 />
                             </Col>

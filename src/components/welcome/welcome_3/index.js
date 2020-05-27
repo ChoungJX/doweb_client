@@ -1,8 +1,8 @@
 import { ApiTwoTone, ContactsTwoTone, DatabaseTwoTone, EditTwoTone, EyeInvisibleTwoTone } from '@ant-design/icons';
-import { Button, Card, Input, message, Radio, Result } from 'antd';
-
+import { Button, Card, Input, message, Modal, Radio, Result } from 'antd';
 import axios from 'axios';
 import React from 'react';
+
 
 export default function welcome_3(props) {
     return (
@@ -68,6 +68,10 @@ class WelcomeBindServer extends React.Component {
             message.error("输入长度大于限制！");
             return;
         }
+        if (server_name_input.length<1){
+            message.warning("请为服务器定义一个名字");
+            return;
+        }
 
         this.setState({
             loading: true,
@@ -84,7 +88,17 @@ class WelcomeBindServer extends React.Component {
                 server_ssh_ip: input_server_ssh_ip,
 
             }).then(data => {
-                //console.log(data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 if (data.data.status === 0) {
                     this.props.onNext();
                 } else {

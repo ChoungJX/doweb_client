@@ -1,7 +1,7 @@
+import { Button, Descriptions, Drawer, Modal, Skeleton, Tooltip } from 'antd';
+import axios from 'axios';
 import React from 'react';
 
-import { Drawer, Descriptions, Tooltip, Skeleton, Button } from 'antd';
-import axios from 'axios';
 
 
 
@@ -21,7 +21,17 @@ export default class NetworkInspect extends React.Component {
                 server_id: this.props.server_id,
                 network_id: this.props.network_id
             }).then(data => {
-                //console.log(data.data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data: data.data.data.data
                 })

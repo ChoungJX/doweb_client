@@ -1,8 +1,8 @@
+import { SearchOutlined } from '@ant-design/icons';
+import { Button, Checkbox, Col, Divider, Form, Input, message, Modal, PageHeader, Row, Select } from 'antd';
+import axios from 'axios';
 import React from 'react';
 
-import { Select, PageHeader, Row, Col, Input, Form, Button, message, Checkbox, Divider } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
-import axios from 'axios';
 
 const { Option } = Select;
 
@@ -36,7 +36,17 @@ class UserChange extends React.Component {
                 api: 'search_user_by_name',
                 input: value
             }).then(data => {
-                //console.log(data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data: data.data.data
                 })
@@ -61,7 +71,17 @@ class UserChange extends React.Component {
                 ...value1,
                 id: value
             }).then(data => {
-                //console.log(data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 if (data.data.status === 0) {
                     message.success("信息修改成功！")
                 } else if (data.data.status === -1) {

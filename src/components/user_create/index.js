@@ -1,8 +1,8 @@
+import { Button, Checkbox, Form, Input, message, Modal, PageHeader } from 'antd';
+import axios from 'axios';
 import React from 'react';
 
-import axios from 'axios';
 
-import { PageHeader, Form, Input, Button, Checkbox, message } from 'antd';
 
 export default class UserCreate extends React.Component {
     constructor(props) {
@@ -21,12 +21,22 @@ export default class UserCreate extends React.Component {
                 api: 'create_user',
                 ...value
             }).then(data => {
-                //console.log(data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 if (data.data.status === 0) {
                     message.success("用户创建成功！");
-                } else if(data.data.status === -1) {
+                } else if (data.data.status === -1) {
                     message.warning('用户名重复，请重新设置！');
-                }else if(data.data.status === -2){
+                } else if (data.data.status === -2) {
                     message.error("您的权限不足！无法添加用户！");
                 }
                 this.setState({

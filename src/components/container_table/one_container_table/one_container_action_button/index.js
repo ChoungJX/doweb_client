@@ -1,5 +1,5 @@
 import { DownOutlined, SmileOutlined } from '@ant-design/icons';
-import { Button, Dropdown, Menu, message, notification } from 'antd';
+import { Button, Dropdown, Menu, message, Modal, notification } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -31,7 +31,17 @@ export default class OneContainerActionButton extends React.Component {
                     api: 'container_delete_stoped',
                     server_id: this.props.server_id,
                 }).then(data => {
-                    //console.log(data.data);
+                    if (data.data.status === -666) {
+                        Modal.error({
+                            title: '错误：登录已经失效！',
+                            content: '请重新登录！',
+                            onOk() {
+                                window.location.replace("/")
+                            },
+                        });
+                        return;
+                    }
+
                     notification.open({
                         message: '删除成功！',
                         description:
@@ -58,7 +68,17 @@ export default class OneContainerActionButton extends React.Component {
                         server_id: this.props.server_id,
                         container_id: this.props.selected[i],
                     }).then(data => {
-                        //console.log(data.data);
+                        if (data.data.status === -666) {
+                            Modal.error({
+                                title: '错误：登录已经失效！',
+                                content: '请重新登录！',
+                                onOk() {
+                                    window.location.replace("/")
+                                },
+                            });
+                            return;
+                        }
+
                         notification.open({
                             message: '重启成功！',
                             description:
@@ -75,7 +95,17 @@ export default class OneContainerActionButton extends React.Component {
                         server_id: this.props.server_id,
                         container_id: this.props.selected[i],
                     }).then(data => {
-                        //console.log(data.data);
+                        if (data.data.status === -666) {
+                            Modal.error({
+                                title: '错误：登录已经失效！',
+                                content: '请重新登录！',
+                                onOk() {
+                                    window.location.replace("/")
+                                },
+                            });
+                            return;
+                        }
+
                         notification.open({
                             message: '停止成功！',
                             description:
@@ -92,7 +122,17 @@ export default class OneContainerActionButton extends React.Component {
                         server_id: this.props.server_id,
                         container_id: this.props.selected[i],
                     }).then(data => {
-                        //console.log(data.data);
+                        if (data.data.status === -666) {
+                            Modal.error({
+                                title: '错误：登录已经失效！',
+                                content: '请重新登录！',
+                                onOk() {
+                                    window.location.replace("/")
+                                },
+                            });
+                            return;
+                        }
+
                         notification.open({
                             message: '删除成功！',
                             description:

@@ -1,4 +1,4 @@
-import { PageHeader, Skeleton } from 'antd';
+import { Modal, PageHeader, Skeleton } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
@@ -36,6 +36,17 @@ export class ContainerInfo extends React.Component {
                 api: 'one_container_info',
                 id: this.props.id,
             }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     loading: false,
                     data: data.data,

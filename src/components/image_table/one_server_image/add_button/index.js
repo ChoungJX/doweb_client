@@ -28,6 +28,17 @@ export default class ImageAddButton extends React.Component {
                 server_id: this.props.server_id,
                 image_name: input_image_name,
             }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 setTimeout(() => {
                     message.success({ content: '客户端已接收数据！', key: 'updatable', duration: 2 });
                 }, 1000);

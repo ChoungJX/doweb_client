@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'
-import { Row, Col, Divider, PageHeader } from 'antd'
+import { Row, Col, Divider, PageHeader, Modal } from 'antd'
 
 //import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -57,7 +57,8 @@ class IndexDataControl extends React.Component {
                     last_time: 0,
                 }
             },
-            data_docker: {}
+            data_docker: {},
+            flag: 0
         }
     }
 
@@ -71,11 +72,27 @@ class IndexDataControl extends React.Component {
     }
 
     fetch() {
+        const { flag } = this.state;
+        if (flag === 1) {
+            return;
+        }
         axios.post('/api',
             {
                 api: 'check_server_status',
                 server_id: this.props.server_id,
             }).then(d => {
+                if (d.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    this.setState({ flag: 1 });
+                    return;
+                }
+
                 const { data } = this.state;
                 let data2 = {
                     ...d.data.data.data
@@ -95,7 +112,21 @@ class IndexDataControl extends React.Component {
                 api: 'system_use',
                 server_id: this.props.server_id,
             }).then(d => {
-                //console.log(d.data.data.data);
+                if (d.data.status === -666) {
+                    const { flag } = this.state;
+                    if (flag === 1) {
+                        return;
+                    }
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data_docker: d.data.data.data
                 })

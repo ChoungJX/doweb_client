@@ -1,8 +1,8 @@
+import { EyeOutlined, FundProjectionScreenOutlined, PlayCircleOutlined, PoweroffOutlined, ReloadOutlined } from '@ant-design/icons';
+import { Badge, Button, Descriptions, Drawer, message, Modal, Skeleton, Tooltip } from 'antd';
+import axios from 'axios';
 import React from 'react';
 
-import { Drawer, Button, Descriptions, Badge, Tooltip, Skeleton, message } from 'antd';
-import { EyeOutlined, PlayCircleOutlined, ReloadOutlined, PoweroffOutlined, FundProjectionScreenOutlined } from '@ant-design/icons';
-import axios from 'axios';
 
 
 
@@ -25,7 +25,17 @@ export default class ContainerInspect extends React.Component {
                 server_id: this.props.server_id,
                 container_id: this.props.container_id
             }).then(data => {
-                //console.log(data.data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data: data.data.data.data
                 })
@@ -42,7 +52,17 @@ export default class ContainerInspect extends React.Component {
                 server_id: this.props.server_id,
                 container_id: this.props.container_id
             }).then(data => {
-                //console.log(data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     loading: false,
                 })
@@ -67,7 +87,17 @@ export default class ContainerInspect extends React.Component {
                 server_id: this.props.server_id,
                 container_id: this.props.container_id
             }).then(data => {
-                //console.log(data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     loading: false,
                 })
@@ -92,7 +122,17 @@ export default class ContainerInspect extends React.Component {
                 server_id: this.props.server_id,
                 container_id: this.props.container_id
             }).then(data => {
-                //console.log(data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     loading: false,
                 })
@@ -117,7 +157,17 @@ export default class ContainerInspect extends React.Component {
                 server_id: this.props.server_id,
                 base64: true,
             }).then(data => {
-                //console.log(data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 let ip = data.data.data.ip;
                 let user = data.data.data.user;
                 let psw = data.data.data.psw;

@@ -1,4 +1,4 @@
-import { ClusterOutlined, GithubOutlined } from '@ant-design/icons';
+import { ControlTwoTone, GithubOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, message, Result } from 'antd';
 import axios from 'axios';
 import React from 'react';
@@ -43,7 +43,7 @@ export default class AboutPage extends React.Component {
                     </Breadcrumb>
                     <div className="site-layout-content">
                         <Result
-                            icon={<ClusterOutlined />}
+                            icon={<ControlTwoTone style={{ fontSize: "72px" }} />}
                             title="可视化Docker容器管理系统"
                             subTitle={<div>客户端版本号:<b>{version}</b></div>}
                             extra={<a href="https://github.com/ChoungJX/doweb_server" rel="noopener noreferrer" target="_blank">

@@ -1,5 +1,5 @@
 import { ApartmentOutlined, BarChartOutlined, BarcodeOutlined, DropboxOutlined, SlidersOutlined, SmileOutlined } from '@ant-design/icons';
-import { Button, Divider, Form, Input, InputNumber, message, notification, PageHeader, Switch, Tabs } from 'antd';
+import { Button, Divider, Form, Input, InputNumber, message, Modal, notification, PageHeader, Switch, Tabs } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { useParams, useRouteMatch } from 'react-router-dom';
@@ -221,6 +221,17 @@ class ContainerCreatePage extends React.Component {
                 interactive: ifInteractive,
                 network_model: network_config,
             }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     loading: false
                 })
@@ -243,7 +254,17 @@ class ContainerCreatePage extends React.Component {
                             container_id: data.data.data.data.Id
 
                         }).then(data => {
-                            //console.log(data.data.data)
+                            if (data.data.status === -666) {
+                                Modal.error({
+                                    title: '错误：登录已经失效！',
+                                    content: '请重新登录！',
+                                    onOk() {
+                                        window.location.replace("/")
+                                    },
+                                });
+                                return;
+                            }
+
                             setTimeout(() => {
                                 message.success({ content: '容器启动成功！', key: 'updatable', duration: 2 });
                             }, 1000);
@@ -257,7 +278,7 @@ class ContainerCreatePage extends React.Component {
                         `${data.data.data.data.message}`,
                     icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                 });
-            }).catch(err=>{
+            }).catch(err => {
                 message.error("与服务器通讯失败！请稍后再试")
             });
     }

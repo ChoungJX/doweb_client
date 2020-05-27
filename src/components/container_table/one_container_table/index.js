@@ -1,13 +1,13 @@
-import React from 'react';
-import { useRouteMatch, useParams } from 'react-router-dom'
-
-import { Table, Tag, PageHeader, Card } from 'antd';
-
+import { Card, Modal, PageHeader, Table, Tag } from 'antd';
 import axios from 'axios';
 import moment from "moment";
+import React from 'react';
+import { useParams, useRouteMatch } from 'react-router-dom';
+import OneContainerActionButton from './one_container_action_button';
+import ContainerInspect from './one_container_inspect';
 
-import OneContainerActionButton from './one_container_action_button'
-import ContainerInspect from './one_container_inspect'
+
+
 
 function ContainerPageHeader() {
     let { server_id } = useParams();
@@ -44,10 +44,10 @@ class ContainerOneServerTable extends React.Component {
                 title: '名字',
                 dataIndex: 'Names',
                 key: 'name',
-                render:(text,record)=>{
-                    return(
+                render: (text, record) => {
+                    return (
                         <div>
-                            {text.map((item,index)=>
+                            {text.map((item, index) =>
                                 (<div key={index}>
                                     {item.split("/")[1]}
                                 </div>)
@@ -126,7 +126,17 @@ class ContainerOneServerTable extends React.Component {
                 api: 'container_info',
                 server_id: this.props.server_id,
             }).then(data => {
-                //console.log(data.data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data: data.data.data.data,
                     loading: false,

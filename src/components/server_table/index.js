@@ -1,5 +1,5 @@
 import { FullscreenOutlined } from '@ant-design/icons';
-import { Button, Card, Table, Tag, Tooltip } from 'antd';
+import { Button, Card, Modal, Table, Tag, Tooltip } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
@@ -97,6 +97,17 @@ export class ServerTable extends React.Component {
             {
                 api: 'server_info',
             }).then(d => {
+                if (d.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data: d.data.data,
                     loading: false,
@@ -107,6 +118,17 @@ export class ServerTable extends React.Component {
                             api: 'server_check',
                             server_id: d.data.data[i].id,
                         }).then(d2 => {
+                            if (d2.data.status === -666) {
+                                Modal.error({
+                                    title: '错误：登录已经失效！',
+                                    content: '请重新登录！',
+                                    onOk() {
+                                        window.location.replace("/")
+                                    },
+                                });
+                                return;
+                            }
+
                             const { data } = this.state;
                             data[i]["server_status"] = d2.data.status
                             this.setState({

@@ -1,20 +1,20 @@
+import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
+import { Button, Modal, notification } from 'antd';
+import axios from 'axios';
 import React from 'react';
 
-import { Button, notification } from 'antd';
-import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
-import axios from 'axios';
 
 export default class NetworkDeleteButton extends React.Component {
     constructor(props) {
         super(props);
-        this.state={
-            loading:false,
+        this.state = {
+            loading: false,
         }
     }
 
     async delete_network() {
         this.setState({
-            loading:true
+            loading: true
         })
         for (let i = 0; i < this.props.selected.length; i++) {
             await axios.post('/api',
@@ -23,7 +23,17 @@ export default class NetworkDeleteButton extends React.Component {
                     server_id: this.props.server_id,
                     network_id: this.props.selected[i],
                 }).then(data => {
-                    //console.log(data.data.data.data);
+                    if (data.data.status === -666) {
+                        Modal.error({
+                            title: '错误：登录已经失效！',
+                            content: '请重新登录！',
+                            onOk() {
+                                window.location.replace("/")
+                            },
+                        });
+                        return;
+                    }
+
                     if (!data.data.data.data.message) {
                         notification.open({
                             message: '删除成功！',
@@ -42,13 +52,13 @@ export default class NetworkDeleteButton extends React.Component {
                 });
         }
         this.setState({
-            loading:false
+            loading: false
         })
         this.props.onFresh();
     }
 
     render() {
-        const {loading} = this.state
+        const { loading } = this.state
         return (
             <Button
                 type="primary"

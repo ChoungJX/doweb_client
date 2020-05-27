@@ -1,8 +1,8 @@
 import { ApiTwoTone, ContactsTwoTone, DatabaseOutlined, DatabaseTwoTone, EditTwoTone, EyeInvisibleTwoTone, SmileOutlined } from '@ant-design/icons';
-import { Button, Input, Modal, notification, Radio, message } from 'antd';
-
+import { Button, Input, message, Modal, notification, Radio } from 'antd';
 import axios from 'axios';
 import React from 'react';
+
 
 
 export default class ServerAddButton extends React.Component {
@@ -41,6 +41,17 @@ export default class ServerAddButton extends React.Component {
                 server_user: server_user_input,
                 server_psw: server_psw_input
             }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     loading: false,
                     input_server_ip: "",

@@ -1,4 +1,4 @@
-import { Card, PageHeader, Table, Tag } from 'antd';
+import { Card, Modal, PageHeader, Table, Tag } from 'antd';
 import axios from 'axios';
 import moment from "moment";
 import React from 'react';
@@ -46,7 +46,7 @@ class ImageOneServerTable extends React.Component {
                 key: 'tag',
                 render: (text, record) => (
                     <span>
-                        {record.RepoTags.map((item,index)=>(
+                        {record.RepoTags.map((item, index) => (
                             <Tag key={index} color="#108ee9">{item}</Tag>
                         ))}
                     </span>
@@ -83,7 +83,17 @@ class ImageOneServerTable extends React.Component {
                 api: 'image_info',
                 server_id: this.props.server_id,
             }).then(data => {
-                //console.log(data.data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data: data.data.data.data,
                     loading: false,

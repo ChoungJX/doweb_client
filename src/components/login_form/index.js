@@ -1,8 +1,8 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input, message, Card } from 'antd';
-
+import { Button, Card, Form, Input, message } from 'antd';
 import axios from 'axios';
 import React from 'react';
+
 
 
 
@@ -54,7 +54,7 @@ export class LoginForm extends React.Component {
     render() {
         return (
             <div>
-                <Card title="登录" style={{ width: 400, boxShadow:"2px 4px 6px #123" }}>
+                <Card title="登录系统" style={{ width: 400, boxShadow: "2px 4px 6px #123" }}>
                     <Form
                         {...this.props.layout}
                         name="basic"
@@ -77,11 +77,6 @@ export class LoginForm extends React.Component {
                         >
                             <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} />
                         </Form.Item>
-
-                        <Form.Item {...this.tailLayout} name="remember" valuePropName="checked">
-                            <Checkbox>记住我</Checkbox>
-                        </Form.Item>
-
                         <Form.Item {...this.tailLayout}>
                             <Button loading={this.state.loading} type="primary" htmlType="submit">
                                 登录

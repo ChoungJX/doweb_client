@@ -1,7 +1,7 @@
+import { Modal, Select, Spin } from 'antd';
+import axios from 'axios';
 import React from 'react';
 
-import { Select, Spin } from 'antd';
-import axios from 'axios';
 
 
 
@@ -30,7 +30,17 @@ export default class ContainerSearchNetwork extends React.Component {
                 api: 'network_info',
                 server_id: server_id,
             }).then(data => {
-                //console.log(data.data.data.data);
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     items: data.data.data.data,
                 })

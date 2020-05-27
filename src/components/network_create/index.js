@@ -1,5 +1,5 @@
 import { SmileOutlined, UploadOutlined } from '@ant-design/icons';
-import { Button, Divider, Form, Input, message, notification, PageHeader, Select } from 'antd';
+import { Button, Divider, Form, Input, message, Modal, notification, PageHeader, Select } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { useParams, useRouteMatch } from 'react-router-dom';
@@ -140,7 +140,17 @@ class NetworkCreatePage extends React.Component {
                 setTimeout(() => {
                     message.success({ content: '客户端已接收数据！', key: 'updatable', duration: 2 });
                 }, 1000);
-                //console.log(data.data.data.data);
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 if (!data.data.data.data.message) {
                     notification.open({
                         message: '创建成功！',

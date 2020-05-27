@@ -1,8 +1,8 @@
-import React from 'react';
-import { useParams } from 'react-router-dom'
-
-import { Descriptions, Skeleton, PageHeader, Divider, Typography, message } from 'antd';
+import { Descriptions, Divider, message, Modal, PageHeader, Skeleton, Typography } from 'antd';
 import axios from 'axios';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
 
 const { Paragraph } = Typography;
 
@@ -41,7 +41,17 @@ class ServerInfoShow extends React.Component {
                 api: 'system_infomation',
                 server_id: this.props.server_id,
             }).then(data => {
-                //console.log(data.data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data1: data.data.data.data
                 })
@@ -51,7 +61,17 @@ class ServerInfoShow extends React.Component {
                 api: 'system_version',
                 server_id: this.props.server_id,
             }).then(data => {
-                //console.log(data.data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data2: data.data.data.data
                 })
@@ -61,6 +81,17 @@ class ServerInfoShow extends React.Component {
                 api: 'server_one_info',
                 server_id: this.props.server_id,
             }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     name: data.data.name
                 })
@@ -71,6 +102,17 @@ class ServerInfoShow extends React.Component {
                 server_id: this.props.server_id,
                 base64: true,
             }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     ssh: data.data.data.ip
                 })
@@ -101,6 +143,17 @@ class ServerInfoShow extends React.Component {
                 server_id: this.props.server_id,
                 server_name: str,
             }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     name: str
                 })
@@ -129,6 +182,17 @@ class ServerInfoShow extends React.Component {
                 server_id: this.props.server_id,
                 server_ssh: str,
             }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     ssh: str
                 })

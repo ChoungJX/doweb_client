@@ -1,4 +1,4 @@
-import { Card, PageHeader, Table } from 'antd';
+import { Card, Modal, PageHeader, Table } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { useParams, useRouteMatch } from 'react-router-dom';
@@ -65,7 +65,17 @@ class VolumeOneServerTable extends React.Component {
                 api: 'volume_info',
                 server_id: this.props.server_id,
             }).then(data => {
-                //console.log(data.data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data: data.data.data.data.Volumes,
                     loading: false,

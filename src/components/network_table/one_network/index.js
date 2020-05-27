@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link, useRouteMatch, useParams } from 'react-router-dom'
-
-import { PageHeader, Button, Tag, Table, Card } from 'antd';
 import { ApartmentOutlined } from '@ant-design/icons';
+import { Button, Card, Modal, PageHeader, Table, Tag } from 'antd';
 import axios from 'axios';
+import React from 'react';
+import { Link, useParams, useRouteMatch } from 'react-router-dom';
+import NetworkDeleteButton from './delete_button';
+import NetworkInspect from './network_inspect';
 
-import NetworkDeleteButton from './delete_button'
-import NetworkInspect from './network_inspect'
+
 
 export default function NetworkOneServer(props) {
     let { server_id } = useParams();
@@ -75,7 +75,17 @@ class NetworlOneServerTable extends React.Component {
                 api: 'network_info',
                 server_id: this.props.server_id,
             }).then(data => {
-                //console.log(data.data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data: data.data.data.data,
                     loading: false,

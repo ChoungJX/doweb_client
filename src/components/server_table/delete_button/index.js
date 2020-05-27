@@ -1,8 +1,8 @@
+import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
+import { Button, Modal, notification, Popconfirm, Tooltip } from 'antd';
+import axios from 'axios';
 import React from 'react';
 
-import { Button, Popconfirm, notification, Tooltip } from 'antd';
-import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
-import axios from 'axios';
 
 
 export default class ServerDeleteButton extends React.Component {
@@ -23,6 +23,17 @@ export default class ServerDeleteButton extends React.Component {
                 api: 'server_delete',
                 server_id: this.props.server_id,
             }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     loading: false,
                 })

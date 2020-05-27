@@ -1,8 +1,8 @@
+import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
+import { Button, Modal, notification, Popconfirm } from 'antd';
+import axios from 'axios';
 import React from 'react';
 
-import { Button, notification, Popconfirm } from 'antd';
-import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
-import axios from 'axios';
 
 export default class VolumeDeleteButton extends React.Component {
     constructor(props) {
@@ -21,7 +21,17 @@ export default class VolumeDeleteButton extends React.Component {
                 api: 'volume_delete_unused',
                 server_id: this.props.server_id,
             }).then(data => {
-                //console.log(data.data.data.data);
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 if (!data.data.data.data.message) {
                     let free_size = data.data.data.data.SpaceReclaimed / 1024 / 1024
                     if (free_size > 1000) {

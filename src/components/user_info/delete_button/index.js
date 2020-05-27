@@ -1,8 +1,8 @@
+import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
+import { Button, Modal, notification, Popconfirm } from 'antd';
+import axios from 'axios';
 import React from 'react';
 
-import { Button, notification, Popconfirm } from 'antd';
-import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
-import axios from 'axios';
 
 export default class UserDeleteButton extends React.Component {
     constructor(props) {
@@ -22,7 +22,17 @@ export default class UserDeleteButton extends React.Component {
                     api: 'user_delete',
                     user_id: this.props.selected[i],
                 }).then(data => {
-                    //console.log(data.data);
+                    if (data.data.status === -666) {
+                        Modal.error({
+                            title: '错误：登录已经失效！',
+                            content: '请重新登录！',
+                            onOk() {
+                                window.location.replace("/")
+                            },
+                        });
+                        return;
+                    }
+
                     if (data.data.status === 0) {
                         notification.open({
                             message: '删除成功！',

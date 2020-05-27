@@ -1,10 +1,10 @@
-import React from 'react';
-
+import { Card, Modal, Table, Tag } from 'antd';
 import axios from 'axios';
+import React from 'react';
+import UserDeleteButton from './delete_button';
 
-import { Card, Table, Tag } from 'antd';
 
-import UserDeleteButton from './delete_button'
+
 
 
 export default function UserInfo(props) {
@@ -70,7 +70,17 @@ class UserInfoTable extends React.Component {
             {
                 api: 'user_info',
             }).then(data => {
-                //console.log(data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data: data.data.data,
                     loading: false,

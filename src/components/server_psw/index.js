@@ -1,8 +1,8 @@
-import React from 'react';
-import { useParams } from 'react-router-dom'
-
-import { Typography, Descriptions, Alert, PageHeader, Divider, message } from 'antd';
+import { Alert, Descriptions, Divider, message, Modal, PageHeader, Typography } from 'antd';
 import axios from 'axios';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
 const { Paragraph } = Typography;
 
 export default function ServerPsw(props) {
@@ -41,7 +41,17 @@ class ServerPswShow extends React.Component {
             {
                 api: 'psw_check',
             }).then(data => {
-                //console.log(data.data.id)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     id: data.data.id
                 })
@@ -51,6 +61,17 @@ class ServerPswShow extends React.Component {
                 api: 'server_ssh_info',
                 server_id: this.props.server_id,
             }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     user: data.data.data.user,
                     psw: data.data.data.psw
@@ -77,6 +98,17 @@ class ServerPswShow extends React.Component {
                 server_id: this.props.server_id,
                 server_user: str,
             }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 if (data.data.status === 0) {
                     this.setState({
                         user: str
@@ -109,6 +141,17 @@ class ServerPswShow extends React.Component {
                 server_id: this.props.server_id,
                 server_psw: str,
             }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 if (data.data.status === 0) {
                     this.setState({
                         psw: str

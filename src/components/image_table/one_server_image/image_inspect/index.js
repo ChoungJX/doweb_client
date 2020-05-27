@@ -1,4 +1,4 @@
-import { Button, Descriptions, Drawer, Skeleton, Tooltip } from 'antd';
+import { Button, Descriptions, Drawer, Modal, Skeleton, Tooltip } from 'antd';
 import axios from 'axios';
 import React from 'react';
 
@@ -21,7 +21,17 @@ export default class ImageInspect extends React.Component {
                 server_id: this.props.server_id,
                 image_id: this.props.image_id
             }).then(data => {
-                //console.log(data.data.data.data)
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
                 this.setState({
                     data: data.data.data.data
                 })
@@ -59,7 +69,7 @@ export default class ImageInspect extends React.Component {
                     >
                         <Descriptions title="基本信息" bordered column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}>
                             <Descriptions.Item span={2} label="ID">{data.Id ? data.Id : ""}</Descriptions.Item>
-                            <Descriptions.Item label="名字"><div>{data.RepoTags.map((item,index)=>
+                            <Descriptions.Item label="名字"><div>{data.RepoTags.map((item, index) =>
                                 <div>{item}<br /><br /></div>
                             )}</div></Descriptions.Item>
                             <Descriptions.Item label="Docker版本">{data.DockerVersion}</Descriptions.Item>
