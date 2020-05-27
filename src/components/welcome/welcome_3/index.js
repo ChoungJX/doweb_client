@@ -63,10 +63,16 @@ class WelcomeBindServer extends React.Component {
     }
 
     send_args() {
+        const { server_ip_input, server_name_input, server_type_input, server_user_input, server_psw_input, input_server_ssh_ip } = this.state
+        if (server_name_input.length > 30 || server_user_input.length > 30 || server_psw_input.length > 30 || input_server_ssh_ip.length > 30) {
+            message.error("输入长度大于限制！");
+            return;
+        }
+
         this.setState({
             loading: true,
         })
-        const { server_ip_input, server_name_input, server_type_input, server_user_input, server_psw_input, input_server_ssh_ip } = this.state
+
         axios.post('/api',
             {
                 api: 'create_server',

@@ -1,11 +1,12 @@
-import { ApartmentOutlined, AppstoreOutlined, ArrowLeftOutlined, CloseCircleOutlined, CloudServerOutlined, DashboardOutlined, FolderOpenOutlined, SaveOutlined } from '@ant-design/icons';
-import { Button, Layout, Menu, notification } from 'antd';
+import { ApartmentOutlined, AppstoreOutlined, ArrowLeftOutlined, CloudServerOutlined, DashboardOutlined, FolderOpenOutlined, SaveOutlined } from '@ant-design/icons';
+import { Layout, Menu, Modal } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { Link, useParams } from "react-router-dom";
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
+const { error } = Modal;
 
 
 
@@ -129,11 +130,6 @@ export class IndexSider extends React.Component {
 
 export default function IndexMenu(props) {
     let { server_id } = useParams();
-    const btn = (
-        <Button type="primary" size="small" onClick={() => window.location.replace("/")}>
-            确认
-        </Button>
-    );
     axios.post('/api',
         {
             api: 'server_check',
@@ -142,23 +138,21 @@ export default function IndexMenu(props) {
             if (d2.data.status === 0) {
 
             } else {
-                notification.open({
-                    message: '与目标服务器连接失败！',
-                    description:
-                        '可能该服务器已经离线或是您输入了一个错误的服务器ID。点击确定返回主页。',
-                    icon: <CloseCircleOutlined style={{ color: '#f5222d', fontSize: '30px' }} />,
-                    btn,
-                    duration: 0,
+                error({
+                    title: '警告：与目标服务器连接失败！',
+                    content: '可能该服务器已经离线或是您输入了一个错误的服务器ID。',
+                    onOk() {
+                        window.location.replace("/")
+                    },
                 });
             }
         }).catch(err => {
-            notification.open({
-                message: '与目标服务器连接失败！',
-                description:
-                    '可能该服务器已经离线或是您输入了一个错误的服务器ID。点击确定返回主页。',
-                icon: <CloseCircleOutlined style={{ color: '#f5222d', fontSize: '30px' }} />,
-                btn,
-                duration: 0,
+            error({
+                title: '警告：与目标服务器连接失败！',
+                content: '可能该服务器已经离线或是您输入了一个错误的服务器ID。',
+                onOk() {
+                    window.location.replace("/")
+                },
             });
         });
 

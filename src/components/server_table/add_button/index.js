@@ -1,5 +1,5 @@
 import { ApiTwoTone, ContactsTwoTone, DatabaseOutlined, DatabaseTwoTone, EditTwoTone, EyeInvisibleTwoTone, SmileOutlined } from '@ant-design/icons';
-import { Button, Input, Modal, notification, Radio,message } from 'antd';
+import { Button, Input, Modal, notification, Radio, message } from 'antd';
 
 import axios from 'axios';
 import React from 'react';
@@ -23,6 +23,10 @@ export default class ServerAddButton extends React.Component {
 
     async submit_input() {
         const { input_server_type, input_server_name, input_server_ip, server_user_input, server_psw_input, input_server_ssh_ip } = this.state
+        if (input_server_type.length > 30 || input_server_name.length > 30 || server_user_input.length > 30 || server_psw_input.length > 30 || input_server_ssh_ip.length > 30) {
+            console.log()
+            return;
+        }
         this.setState({
             loading: true
         })
@@ -53,7 +57,7 @@ export default class ServerAddButton extends React.Component {
                         `节点:${input_server_name}创建成功！`,
                     icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                 });
-            }).catch(err=>{
+            }).catch(err => {
                 this.setState({
                     loading: false,
                 });

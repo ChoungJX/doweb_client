@@ -67,6 +67,10 @@ class ServerPswShow extends React.Component {
             message.error("请输入用户名！");
             return;
         }
+        if (str.length > 20) {
+            message.error("输入长度大于限制！");
+            return;
+        }
         axios.post('/api',
             {
                 api: 'server_change_user',
@@ -93,6 +97,10 @@ class ServerPswShow extends React.Component {
         }
         if (str.length === 0) {
             message.error("请输入密码！");
+            return;
+        }
+        if (str.length > 20) {
+            message.error("输入长度大于限制！");
             return;
         }
         axios.post('/api',

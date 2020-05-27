@@ -90,6 +90,10 @@ class ServerInfoShow extends React.Component {
             message.error("请输入名字！");
             return;
         }
+        if (str.length > 20) {
+            message.error("输入长度大于限制！");
+            return;
+        }
         //console.log('Content change:', str);
         axios.post('/api',
             {
@@ -113,6 +117,10 @@ class ServerInfoShow extends React.Component {
         }
         if (str.length === 0) {
             message.error("请输入IP或域名！");
+            return;
+        }
+        if (str.length > 30) {
+            message.error("输入长度大于限制！");
             return;
         }
         axios.post('/api',
