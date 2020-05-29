@@ -1,13 +1,13 @@
-import { Spin } from 'antd';
+import { Modal, Spin } from 'antd';
 import axios from 'axios';
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import AboutPage from '../pages/about';
 import HomePage from '../pages/home';
 import Index from '../pages/index';
 import Login from '../pages/login';
 import UserPage from '../pages/user';
 import WelcomePage from '../pages/welcome';
-import AboutPage from '../pages/about';
 import './index.css';
 
 
@@ -30,6 +30,14 @@ export default class App extends React.Component {
                     isSend: true,
                     isAuthenticated: d.data.isLogin
                 })
+            }).catch(err => {
+                Modal.error({
+                    title: '错误：与服务器连接失败！',
+                    content: '可能服务器处于离线状态，请稍后再试。',
+                    onOk() {
+                        window.location.replace("/")
+                    },
+                });
             });
     }
 

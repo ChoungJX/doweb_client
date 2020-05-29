@@ -21,7 +21,7 @@ export default function UserPage() {
     let { url } = useRouteMatch();
 
     return (
-        <Layout style={{ "height": "100%" }}>
+        <Layout>
             <AllHeader number={'2'} />
             <Layout style={{ marginTop: 64 }}>
                 <Switch>
