@@ -17,7 +17,7 @@ export default function UserMenu(props) {
 
 
 class UserMenuFunc extends React.Component {
-    
+
     render() {
         return (
             <Sider width={200} className="site-layout-background">
@@ -48,6 +48,9 @@ class UserMenuFunc extends React.Component {
                         </Menu.Item>
                         <Menu.Item key="3">
                             <Link to={`${this.props.url}/change`}>修改用户信息</Link>
+                        </Menu.Item>
+                        <Menu.Item key="4">
+                            <Link to={`${this.props.url}/history`}>登录历史</Link>
                         </Menu.Item>
                     </SubMenu>
                 </Menu>

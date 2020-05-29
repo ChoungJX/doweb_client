@@ -24,7 +24,11 @@ export default class ServerAddButton extends React.Component {
     async submit_input() {
         const { input_server_type, input_server_name, input_server_ip, server_user_input, server_psw_input, input_server_ssh_ip } = this.state
         if (input_server_type.length > 30 || input_server_name.length > 30 || server_user_input.length > 30 || server_psw_input.length > 30 || input_server_ssh_ip.length > 30) {
-            console.log()
+            message.error("输入长度大于限制！");
+            return;
+        }
+        if (input_server_name.length < 1) {
+            message.warning("请为服务器定义一个名字");
             return;
         }
         this.setState({

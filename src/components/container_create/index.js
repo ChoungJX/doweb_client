@@ -61,7 +61,7 @@ class ContainerCreatePage extends React.Component {
 
     handleImage_name_input(value) {
         this.setState({
-            image_name_input: value.label[0]
+            image_name_input: value.label
         })
     }
 

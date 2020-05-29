@@ -11,6 +11,7 @@ import UserMenu from '../../components/user_menu'
 import UserInfo from '../../components/user_info'
 import UserCreate from '../../components/user_create'
 import UserChangeMount from '../../components/user_change'
+import UserLoginhistory from '../../components/user_loginhistory'
 
 
 const { Content, Footer } = Layout;
@@ -32,6 +33,9 @@ export default function UserPage() {
                     </Route>
                     <Route exact path={`${url}/change`}>
                         <UserMenu selectOptins='3' url={url} />
+                    </Route>
+                    <Route exact path={`${url}/history`}>
+                        <UserMenu selectOptins='4' url={url} />
                     </Route>
                 </Switch>
                 <Layout style={{ padding: '0 24px 24px' }}>
@@ -79,6 +83,21 @@ export default function UserPage() {
                                 }}
                             >
                                 <UserChangeMount />
+                            </Content>
+                        </Route>
+                        <Route exact path={`${url}/history`}>
+                            <Breadcrumb style={{ margin: '16px 0' }}>
+                                <Breadcrumb.Item>登录历史</Breadcrumb.Item>
+                            </Breadcrumb>
+                            <Content
+                                className="site-layout-background"
+                                style={{
+                                    padding: 24,
+                                    margin: 0,
+                                    minHeight: 280,
+                                }}
+                            >
+                                <UserLoginhistory />
                             </Content>
                         </Route>
                     </Switch>
