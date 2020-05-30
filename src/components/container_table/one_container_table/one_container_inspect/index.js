@@ -220,7 +220,7 @@ export default class ContainerInspect extends React.Component {
                                 {data.Name ?
                                     data.Name.split("/")[1]
                                     :
-                                    ""} '
+                                    ""}
                             </Descriptions.Item>
                             <Descriptions.Item label="网络信息">{`${data.NetworkSettings.Networks[`${network_drive}`].IPAddress}(${network_drive})`}</Descriptions.Item>
                             <Descriptions.Item label="状态">

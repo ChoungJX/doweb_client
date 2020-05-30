@@ -1,17 +1,17 @@
-import React from 'react';
-import { useParams } from 'react-router-dom'
-import { Row, Col, Divider, PageHeader, Modal } from 'antd'
-
+import { Col, Divider, Modal, PageHeader, Row, Spin } from 'antd';
 //import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import IndexContainerData from './index_container';
+import IndexCpuData from './index_cpu';
+import IndexImageData from './index_image';
+import IndexMemoryData from './index_memory';
+import IndexNetworkData from './index_network';
+import IndexSwapData from './index_swap';
+import IndexVolumeData from './index_volume';
 
-import IndexCpuData from './index_cpu'
-import IndexMemoryData from './index_memory'
-import IndexSwapData from './index_swap'
-import IndexNetworkData from './index_network'
-import IndexContainerData from './index_container'
-import IndexImageData from './index_image'
-import IndexVolumeData from './index_volume'
+
 
 
 export default function IndexData() {
@@ -58,7 +58,8 @@ class IndexDataControl extends React.Component {
                 }
             },
             data_docker: {},
-            flag: 0
+            flag: 0,
+            ifLoaded: false
         }
     }
 
@@ -101,7 +102,8 @@ class IndexDataControl extends React.Component {
                 data2.network.last_send = data.network.send
                 data2.network.last_time = data.network.time
                 this.setState({
-                    data: data2
+                    data: data2,
+                    ifLoaded: true
                 })
             });
     }
@@ -139,38 +141,40 @@ class IndexDataControl extends React.Component {
 
 
     render() {
-        const { data, data_docker } = this.state
+        const { data, data_docker, ifLoaded } = this.state
         return (
-            <div>
-                <Divider orientation="left">系统资源统计</Divider>
-                <Row justify="space-around" gutter={[16, 16]}>
-                    <Col span={6} >
-                        <IndexCpuData data={data} />
-                    </Col>
-                    <Col span={6} >
-                        <IndexMemoryData data={data} />
-                    </Col>
-                    <Col span={6} >
-                        <IndexSwapData data={data} />
-                    </Col>
-                    <Col span={6} >
-                        <IndexNetworkData data={data} />
-                    </Col>
-                </Row>
-                <Divider orientation="left">Docker资源统计</Divider>
-                <Row justify="space-around" gutter={[16, 16]}>
-                    <Col span={8} >
-                        <IndexContainerData data={data_docker} />
-                    </Col>
-                    <Col span={8} >
-                        <IndexImageData data={data_docker} />
-                    </Col>
-                    <Col span={8} >
-                        <IndexVolumeData data={data_docker} />
-                    </Col>
+            <Spin size="large" tip="加载中..." spinning={!ifLoaded}>
+                <div>
+                    <Divider orientation="left">系统资源统计</Divider>
+                    <Row justify="space-around" gutter={[16, 16]}>
+                        <Col span={6} >
+                            <IndexCpuData data={data} />
+                        </Col>
+                        <Col span={6} >
+                            <IndexMemoryData data={data} />
+                        </Col>
+                        <Col span={6} >
+                            <IndexSwapData data={data} />
+                        </Col>
+                        <Col span={6} >
+                            <IndexNetworkData data={data} />
+                        </Col>
+                    </Row>
+                    <Divider orientation="left">Docker资源统计</Divider>
+                    <Row justify="space-around" gutter={[16, 16]}>
+                        <Col span={8} >
+                            <IndexContainerData data={data_docker} />
+                        </Col>
+                        <Col span={8} >
+                            <IndexImageData data={data_docker} />
+                        </Col>
+                        <Col span={8} >
+                            <IndexVolumeData data={data_docker} />
+                        </Col>
 
-                </Row>
-            </div>
+                    </Row>
+                </div>
+            </Spin>
         );
     }
 }

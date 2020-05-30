@@ -40,7 +40,6 @@ export default class ContainerSearchImage extends React.Component {
                     });
                     return;
                 }
-
                 this.setState({
                     items: data.data.data.data,
                 })
@@ -72,7 +71,7 @@ export default class ContainerSearchImage extends React.Component {
                 )}
             >
                 {items.map(d => (
-                    <Option key={d.Id}>{d.RepoTags.join(" | ")}</Option>
+                    <Option key={d.Id} value={d.RepoTags[0]}>{d.RepoTags.join(" | ")}</Option>
                 ))}
             </Select>
         )
