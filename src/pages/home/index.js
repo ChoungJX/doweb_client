@@ -11,16 +11,24 @@ export default class HomePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true
+            loading: true,
+            screen_high: 1080
         }
+    }
+
+    componentWillMount() {
+        this.setState({
+            screen_high: document.body.clientHeight
+        })
     }
 
     render() {
         const { Content, Footer } = Layout;
+        const { screen_high } = this.state
         return (
             <Layout className="layout">
                 <AllHeader number={'1'} />
-                <Content style={{ padding: '0 50px', marginTop: 64 }}>
+                <Content style={{ padding: '0 50px', marginTop: 64, minHeight: screen_high-64 }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>主页</Breadcrumb.Item>
                     </Breadcrumb>

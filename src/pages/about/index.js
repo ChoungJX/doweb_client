@@ -32,16 +32,17 @@ export default class AboutPage extends React.Component {
 
     render() {
         const { version } = this.state;
+        let screen_high = document.body.clientHeight;
 
         const { Content, Footer } = Layout;
         return (
             <Layout className="layout">
                 <AllHeader number={'3'} />
-                <Content style={{ padding: '0 50px', marginTop: 64 }}>
+                <Content style={{ padding: '0 50px', marginTop: 64, minHeight: screen_high - 64 - 70 }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>关于</Breadcrumb.Item>
                     </Breadcrumb>
-                    <div className="site-layout-content">
+                    <div style={{ height: `${screen_high - 64 - 70 - 70}px` }} className="site-layout-content">
                         <Result
                             icon={<ControlTwoTone style={{ fontSize: "72px" }} />}
                             title="可视化Docker容器管理系统"
@@ -52,7 +53,7 @@ export default class AboutPage extends React.Component {
                         />
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}><a rel="noopener noreferrer" href="https://github.com/ChoungJX/doweb_server" target="_blank"><GithubOutlined /></a> ChoungJX毕业作品</Footer>
+                <Footer style={{ textAlign: 'center', height: "70px" }}><a rel="noopener noreferrer" href="https://github.com/ChoungJX/doweb_server" target="_blank"><GithubOutlined /></a> ChoungJX毕业作品</Footer>
             </Layout>
         )
     }

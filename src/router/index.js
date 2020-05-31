@@ -32,8 +32,8 @@ export default class App extends React.Component {
                 })
             }).catch(err => {
                 Modal.error({
-                    title: '错误：与服务器连接失败！',
-                    content: '可能服务器处于离线状态，请稍后再试。',
+                    title: '错误：与控制服务器连接失败！',
+                    content: '可能控制服务器现在处于维护状态，请稍后再尝试连接。',
                     onOk() {
                         window.location.replace("/")
                     },
@@ -78,7 +78,7 @@ export default class App extends React.Component {
 
 
 function PrivateRoute({ children, ...rest }) {
-    //console.log(rest.isSend)
+    let screen_high = document.body.clientHeight;
     return (
         <Route
             {...rest}
@@ -95,8 +95,8 @@ function PrivateRoute({ children, ...rest }) {
                             />
                         )
                 ) : (
-                        <div align="center" style={{ "marginTop": "20%" }}>
-                            <Spin size="large" />
+                        <div align="center" style={{ "marginTop": `${screen_high / 2 - 25}px` }}>
+                            <Spin size="large" tip="与服务器通讯中，请稍后" />
                         </div>
 
                     )

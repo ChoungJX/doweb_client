@@ -147,7 +147,7 @@ export default function IndexMenu(props) {
                 });
             } else {
                 error({
-                    title: '错误：与目标服务器连接失败！',
+                    title: '错误：与目标节点服务器连接失败！',
                     content: '可能该服务器已经离线或是您输入了一个错误的服务器ID。',
                     onOk() {
                         window.location.replace("/")
@@ -156,7 +156,7 @@ export default function IndexMenu(props) {
             }
         }).catch(err => {
             error({
-                title: '错误：与目标服务器连接失败！',
+                title: '错误：与目标节点服务器连接失败！',
                 content: '可能该服务器已经离线或是您输入了一个错误的服务器ID。',
                 onOk() {
                     window.location.replace("/")

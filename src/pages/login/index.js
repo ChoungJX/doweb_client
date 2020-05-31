@@ -67,10 +67,11 @@ export default class Login extends React.Component {
 
     render() {
         const { loading, welcome } = this.state;
+        let screen_high = document.body.clientHeight;
         if (loading) {
             return (
-                <div align="center" style={{ "marginTop": "20%" }}>
-                    <Spin size="large" />
+                <div align="center" style={{ "marginTop": `${screen_high / 2 - 25}px` }}>
+                    <Spin size="large" tip="查询登录状态" />
                 </div>
             )
         } else {
@@ -80,10 +81,10 @@ export default class Login extends React.Component {
             } else {
                 return (
                     <div style={{
-                        background: `linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7) ),url(/static/img/IMG_2702.JPG)`,
-                        backgroundSize: "100% 100%",
-                        height: "100%",
-                        width: "100%"
+                        background: `linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7) ),url(/static/img/6FDB48A6-8CAB-49C9-A1DB-3301D4955D2A.jpeg)`,
+                        backgroundSize: "100%",
+                        width: "100%",
+                        height: `${screen_high}px`
                     }}>
                         <div style={{
                             height: "25%"
@@ -94,7 +95,7 @@ export default class Login extends React.Component {
                             <Col span={1} />
                             <Col >
                                 <Result
-                                    icon={<ControlTwoTone style={{fontSize:"72px"}}/>}
+                                    icon={<ControlTwoTone style={{ fontSize: "72px" }} />}
                                     title={<div style={{ color: "white" }}>欢迎来到可视化Docker容器管理系统</div>}
                                 />
                             </Col>

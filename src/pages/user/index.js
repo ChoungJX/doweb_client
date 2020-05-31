@@ -1,24 +1,24 @@
+import { Breadcrumb, Layout } from 'antd';
 import React from 'react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom'
-
-
-import { Layout, Breadcrumb } from 'antd';
-import { GithubOutlined } from '@ant-design/icons';
-
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { AllHeader } from '../../components/header';
+import UserChangeMount from '../../components/user_change';
+import UserCreate from '../../components/user_create';
+import UserInfo from '../../components/user_info';
+import UserLoginhistory from '../../components/user_loginhistory';
+import UserMenu from '../../components/user_menu';
 import './index.css';
-import { AllHeader } from '../../components/header'
-import UserMenu from '../../components/user_menu'
-import UserInfo from '../../components/user_info'
-import UserCreate from '../../components/user_create'
-import UserChangeMount from '../../components/user_change'
-import UserLoginhistory from '../../components/user_loginhistory'
 
 
-const { Content, Footer } = Layout;
+
+
+
+const { Content } = Layout;
 
 
 export default function UserPage() {
     let { url } = useRouteMatch();
+    let screen_high = document.body.clientHeight;
 
     return (
         <Layout>
@@ -49,7 +49,7 @@ export default function UserPage() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32,
                                 }}
                             >
                                 <UserInfo />
@@ -64,7 +64,7 @@ export default function UserPage() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32,
                                 }}
                             >
                                 <UserCreate />
@@ -79,7 +79,7 @@ export default function UserPage() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32,
                                 }}
                             >
                                 <UserChangeMount />
@@ -94,7 +94,7 @@ export default function UserPage() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32,
                                 }}
                             >
                                 <UserLoginhistory />
@@ -103,7 +103,6 @@ export default function UserPage() {
                     </Switch>
                 </Layout>
             </Layout>
-            <Footer style={{ textAlign: 'center' }}><a rel="noopener noreferrer" href="https://github.com/ChoungJX/doweb_server" target="_blank"><GithubOutlined /></a> ChoungJX毕业作品</Footer>
         </Layout>
     );
 }

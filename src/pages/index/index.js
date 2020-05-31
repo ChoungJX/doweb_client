@@ -1,35 +1,35 @@
-import React from 'react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom'
+import { Breadcrumb, Layout } from 'antd';
 import 'antd/dist/antd.css';
+import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import ContainerCreate from '../../components/container_create';
+import { ContainerOne } from '../../components/container_info';
+import ContainerOneServer from '../../components/container_table/one_container_table';
+import { AllHeader } from '../../components/header';
+import ImageOneServer from '../../components/image_table/one_server_image';
+import IndexData from '../../components/index_data';
+import IndexMenu from '../../components/index_menu';
+import NetworkCreate from '../../components/network_create';
+import NetworkOneServer from '../../components/network_table/one_network';
+import ServerInfo from '../../components/server_info';
+import ServerPsw from '../../components/server_psw';
+import VolumeOneServer from '../../components/volume_table';
 import './index.css';
-import { Layout, Breadcrumb } from 'antd';
-import { GithubOutlined } from '@ant-design/icons';
-
-import { AllHeader } from '../../components/header'
-import IndexMenu from '../../components/index_menu'
-import { ContainerOne } from '../../components/container_info'
-import ContainerOneServer from '../../components/container_table/one_container_table'
-import ContainerCreate from '../../components/container_create'
-import ImageOneServer from '../../components/image_table/one_server_image'
-import NetworkOneServer from '../../components/network_table/one_network'
-import NetworkCreate from '../../components/network_create'
-import IndexData from '../../components/index_data'
-import ServerInfo from '../../components/server_info'
-import ServerPsw from '../../components/server_psw'
-import VolumeOneServer from '../../components/volume_table'
 
 
 
-const { Content, Footer } = Layout;
+
+const { Content } = Layout;
 
 
 export default function Index() {
     let { url } = useRouteMatch();
+    let screen_high = document.body.clientHeight;
 
     return (
         <Layout>
             <AllHeader number={'1'} />
-            <Layout style={{marginTop: 64}}>
+            <Layout style={{ marginTop: 64 }}>
                 <Switch>
                     <Route exact path={`${url}/:server_id`}>
                         <IndexMenu selectOptins='0' />
@@ -64,7 +64,7 @@ export default function Index() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32
                                 }}
                             >
                                 <IndexData />
@@ -80,7 +80,7 @@ export default function Index() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32
                                 }}
                             >
                                 <ServerInfo />
@@ -96,7 +96,7 @@ export default function Index() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32
                                 }}
                             >
                                 <ServerPsw />
@@ -112,7 +112,7 @@ export default function Index() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32
                                 }}
                             >
                                 <ContainerOneServer />
@@ -128,7 +128,7 @@ export default function Index() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32
                                 }}
                             >
                                 <ContainerCreate />
@@ -145,7 +145,7 @@ export default function Index() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32
                                 }}
                             >
                                 <ContainerOne />
@@ -161,7 +161,7 @@ export default function Index() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32
                                 }}
                             >
                                 <ImageOneServer />
@@ -177,7 +177,7 @@ export default function Index() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32
                                 }}
                             >
                                 <NetworkOneServer />
@@ -193,7 +193,7 @@ export default function Index() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32
                                 }}
                             >
                                 <NetworkCreate />
@@ -209,7 +209,7 @@ export default function Index() {
                                 style={{
                                     padding: 24,
                                     margin: 0,
-                                    minHeight: 280,
+                                    minHeight: screen_high - 64 - 48 - 32
                                 }}
                             >
                                 <VolumeOneServer />
@@ -218,7 +218,6 @@ export default function Index() {
                     </Switch>
                 </Layout>
             </Layout>
-            <Footer style={{ textAlign: 'center' }}><a rel="noopener noreferrer" href="https://github.com/ChoungJX/doweb_server" target="_blank"><GithubOutlined /></a> ChoungJX毕业作品</Footer>
         </Layout>
     );
 }
