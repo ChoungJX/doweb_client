@@ -155,7 +155,7 @@ class NetworkCreatePage extends React.Component {
                     notification.open({
                         message: '创建成功！',
                         description:
-                            `网络:${data.data.data.data.Id}创建成功！`,
+                            `网络创建成功！`,
                         icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                     });
                     window.history.back();

@@ -1,8 +1,8 @@
-import { EyeOutlined, FundProjectionScreenOutlined, PlayCircleOutlined, PoweroffOutlined, ReloadOutlined } from '@ant-design/icons';
-import { Badge, Button, Descriptions, Drawer, message, Modal, Skeleton, Tooltip } from 'antd';
+import { EyeOutlined, FundProjectionScreenOutlined, PlayCircleOutlined, PoweroffOutlined, ReloadOutlined, SnippetsOutlined } from '@ant-design/icons';
+import { Badge, Button, Descriptions, Drawer, List, message, Modal, Skeleton, Tooltip } from 'antd';
 import axios from 'axios';
 import React from 'react';
-
+import ReactJson from 'react-json-view';
 
 
 
@@ -14,7 +14,9 @@ export default class ContainerInspect extends React.Component {
         this.state = {
             visible: false,
             loading: false,
-            data: {}
+            data: {},
+            childrenDrawer: false,
+            log_data: {}
         }
     }
 
@@ -38,6 +40,30 @@ export default class ContainerInspect extends React.Component {
 
                 this.setState({
                     data: data.data.data.data
+                })
+            });
+    }
+
+    fetch_log() {
+        axios.post('/api',
+            {
+                api: 'container_log',
+                server_id: this.props.server_id,
+                container_id: this.props.container_id
+            }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
+                this.setState({
+                    log_data: data.data
                 })
             });
     }
@@ -191,14 +217,29 @@ export default class ContainerInspect extends React.Component {
         this.fetch();
     };
 
+    handleShowChildDrawer = () => {
+        this.setState({
+            childrenDrawer: true,
+        })
+        this.fetch_log();
+    }
+
+    onChildClose = () => {
+        this.setState({
+            childrenDrawer: false,
+            log_data: {}
+        })
+    }
+
     onClose = () => {
         this.setState({
             visible: false,
+            data: {},
         });
     };
 
     render() {
-        const { data, loading } = this.state;
+        const { data, loading, log_data } = this.state;
         if (data.NetworkSettings) {
             const network_drive = Object.keys(data.NetworkSettings.Networks)[0]
             return (
@@ -237,6 +278,33 @@ export default class ContainerInspect extends React.Component {
                                 <Tooltip placement="top" title="结束容器">
                                     <Button loading={loading} style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<PoweroffOutlined />} size="large" danger onClick={() => this.handleStop()} />
                                 </Tooltip>
+                                <Tooltip placement="top" title="查看日志">
+                                    <Button style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<SnippetsOutlined />} size="large" onClick={() => this.handleShowChildDrawer()} />
+                                </Tooltip>
+                                <Drawer
+                                    title="容器日志"
+                                    width={600}
+                                    closable={false}
+                                    onClose={this.onChildClose}
+                                    visible={this.state.childrenDrawer}
+                                >
+                                    {log_data.status == 0 ?
+                                        <List
+                                            size="small"
+                                            header={<div>日志</div>}
+                                            footer={<div>到尾了</div>}
+                                            bordered
+                                            dataSource={log_data.data}
+                                            renderItem={item => (
+                                                <List.Item>
+                                                    {item}
+                                                </List.Item>
+                                            )}
+                                        />
+                                        :
+                                        <Skeleton active />
+                                    }
+                                </Drawer>
                                 <Tooltip placement="top" title="启动终端">
                                     {data.State.Status === "running" ?
                                         <Button loading={loading} style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<FundProjectionScreenOutlined />} size="large" onClick={() => this.handelGotoTerminal()} />
@@ -276,6 +344,9 @@ export default class ContainerInspect extends React.Component {
                                 }
                             </Descriptions.Item>
                         </Descriptions>
+                        <br /><br />
+                        <h3><strong>原始数据</strong></h3>
+                        <ReactJson src={data} />
                     </Drawer>
                 </div>
             );
@@ -293,8 +364,13 @@ export default class ContainerInspect extends React.Component {
                         visible={this.state.visible}
                         width={720}
                     >
+                        <h3><strong>基本信息</strong></h3>
                         <Skeleton active />
                         <br /><br />
+                        <h3><strong>详细参数</strong></h3>
+                        <Skeleton active />
+                        <br /><br />
+                        <h3><strong>原始数据</strong></h3>
                         <Skeleton active />
                     </Drawer>
                 </div>

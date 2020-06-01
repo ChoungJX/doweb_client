@@ -71,7 +71,7 @@ export default class Login extends React.Component {
         if (loading) {
             return (
                 <div align="center" style={{ "marginTop": `${screen_high / 2 - 25}px` }}>
-                    <Spin size="large" tip="查询登录状态" />
+                    <Spin size="large" tip="检测登录状态" />
                 </div>
             )
         } else {

@@ -1,5 +1,9 @@
 # doweb_client
-a docker visual interface(client)
+a docker visual interface (client)
+
+Docker可视化界面 (客户端)
+
+Docker ビジュアルインターフェイス (client)
 
 Only the client's code is included here.
 If you want to know the integral code, please go to [doweb_server](https://github.com/ChoungJX/doweb_server) and [doweb_controller](https://github.com/ChoungJX/doweb_controller)

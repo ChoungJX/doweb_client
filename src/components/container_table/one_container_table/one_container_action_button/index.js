@@ -82,7 +82,7 @@ export default class OneContainerActionButton extends React.Component {
                         notification.open({
                             message: '重启成功！',
                             description:
-                                `容器:${this.props.selected[i]}重启成功！`,
+                                `容器重启成功！`,
                             icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                         });
                     });
@@ -109,7 +109,7 @@ export default class OneContainerActionButton extends React.Component {
                         notification.open({
                             message: '停止成功！',
                             description:
-                                `容器:${this.props.selected[i]}停止成功！`,
+                                `容器停止成功！`,
                             icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                         });
                     });
@@ -136,7 +136,7 @@ export default class OneContainerActionButton extends React.Component {
                         notification.open({
                             message: '删除成功！',
                             description:
-                                `容器:${this.props.selected[i]}删除成功！`,
+                                `容器删除成功！`,
                             icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                         });
                     });

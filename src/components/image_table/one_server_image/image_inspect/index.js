@@ -48,6 +48,7 @@ export default class ImageInspect extends React.Component {
     onClose = () => {
         this.setState({
             visible: false,
+            data: {},
         });
     };
 
@@ -104,6 +105,7 @@ export default class ImageInspect extends React.Component {
                         visible={this.state.visible}
                         width={720}
                     >
+                        <h3><strong>基本信息</strong></h3>
                         <Skeleton active />
                     </Drawer>
                 </div>

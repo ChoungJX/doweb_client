@@ -1,5 +1,5 @@
 import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
-import { Button, Modal, notification, Popconfirm } from 'antd';
+import { Button, message, Modal, notification, Popconfirm } from 'antd';
 import axios from 'axios';
 import React from 'react';
 
@@ -37,7 +37,7 @@ export default class UserDeleteButton extends React.Component {
                         notification.open({
                             message: '删除成功！',
                             description:
-                                `用户:${this.props.selected[i]} 删除成功！`,
+                                `用户删除成功！`,
                             icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                         });
                     } else if (data.data.status === 1) {
@@ -54,6 +54,8 @@ export default class UserDeleteButton extends React.Component {
                                 `该用户不存在`,
                             icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                         });
+                    } else if (data.data.status === -2) {
+                        message.error("您的权限不足！无法删除用户！");
                     }
                 });
         }

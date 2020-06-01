@@ -143,7 +143,7 @@ class IndexDataControl extends React.Component {
     render() {
         const { data, data_docker, ifLoaded } = this.state
         return (
-            <Spin size="large" tip="加载中..." spinning={!ifLoaded}>
+            <Spin size="large" tip="加载中" spinning={!ifLoaded}>
                 <div>
                     <Divider orientation="left">系统资源统计</Divider>
                     <Row justify="space-around" gutter={[16, 16]}>
