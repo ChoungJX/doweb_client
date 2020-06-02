@@ -1,5 +1,5 @@
-import { CloudUploadOutlined, EyeOutlined, FundProjectionScreenOutlined, PlayCircleOutlined, PoweroffOutlined, ReloadOutlined, SnippetsOutlined } from '@ant-design/icons';
-import { Badge, Button, Descriptions, Drawer, Input, List, message, Modal, Skeleton, Space, Tooltip } from 'antd';
+import { CloudUploadOutlined, EyeOutlined, FundProjectionScreenOutlined, LoadingOutlined, PlayCircleOutlined, PoweroffOutlined, ReloadOutlined, SnippetsOutlined } from '@ant-design/icons';
+import { Badge, Button, Descriptions, Drawer, Input, message, Modal, Skeleton, Space, Spin, Statistic, Timeline, Tooltip } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import ReactJson from 'react-json-view';
@@ -314,6 +314,8 @@ export default class ContainerInspect extends React.Component {
 
     render() {
         const { data, loading, log_data, ModalInputImageName, ModalInputVersionName } = this.state;
+        const antIcon = <LoadingOutlined style={{ fontSize: 48 }} spin />;
+        let screen_high = document.body.clientHeight;
         if (data.NetworkSettings) {
             const network_drive = Object.keys(data.NetworkSettings.Networks)[0]
             return (
@@ -357,26 +359,25 @@ export default class ContainerInspect extends React.Component {
                                 </Tooltip>
                                 <Drawer
                                     title="容器日志"
-                                    width={600}
+                                    width={840}
                                     closable={false}
                                     onClose={this.onChildClose}
                                     visible={this.state.childrenDrawer}
                                 >
                                     {log_data.status === 0 ?
-                                        <List
-                                            size="small"
-                                            header={<div>日志</div>}
-                                            footer={<div>到尾了</div>}
-                                            bordered
-                                            dataSource={log_data.data}
-                                            renderItem={item => (
-                                                <List.Item>
-                                                    {item}
-                                                </List.Item>
-                                            )}
-                                        />
+                                        <div>
+                                            <Statistic title="记录日志数" value={log_data.data.length} />
+                                            <br />
+                                            <Timeline>
+                                                {log_data.data.map((item) => (
+                                                    <Timeline.Item>{item}</Timeline.Item>
+                                                ))}
+                                            </Timeline>
+                                        </div>
                                         :
-                                        <Skeleton active />
+                                        <div align="center" style={{ "marginTop": `${screen_high / 2 - 48}px` }}>
+                                            <Spin indicator={antIcon} />
+                                        </div>
                                     }
                                 </Drawer>
                                 <Tooltip placement="top" title="启动终端">
