@@ -56,6 +56,14 @@ export default class ServerAddButton extends React.Component {
                     return;
                 }
 
+                if (data.data.status === -1) {
+                    message.error("添加失败！该节点已被绑定!");
+                    this.setState({
+                        loading: false
+                    })
+                    return;
+                }
+
                 this.setState({
                     loading: false,
                     input_server_ip: "",

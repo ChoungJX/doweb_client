@@ -1,5 +1,5 @@
-import { EyeOutlined, FundProjectionScreenOutlined, PlayCircleOutlined, PoweroffOutlined, ReloadOutlined, SnippetsOutlined } from '@ant-design/icons';
-import { Badge, Button, Descriptions, Drawer, List, message, Modal, Skeleton, Tooltip } from 'antd';
+import { CloudUploadOutlined, EyeOutlined, FundProjectionScreenOutlined, PlayCircleOutlined, PoweroffOutlined, ReloadOutlined, SnippetsOutlined } from '@ant-design/icons';
+import { Badge, Button, Descriptions, Drawer, Input, List, message, Modal, Skeleton, Space, Tooltip } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import ReactJson from 'react-json-view';
@@ -16,6 +16,11 @@ export default class ContainerInspect extends React.Component {
             loading: false,
             data: {},
             childrenDrawer: false,
+            ModalVisible: false,
+            ModalLoading: false,
+            ModalInputImageName: "",
+            ModalInputVersionName: "",
+
             log_data: {}
         }
     }
@@ -238,8 +243,77 @@ export default class ContainerInspect extends React.Component {
         });
     };
 
+    showModal = () => {
+        this.setState({
+            ModalVisible: true,
+        })
+    }
+
+    handleModalOk = () => {
+        this.setState({
+            ModalLoading: true
+        })
+        const { ModalInputImageName, ModalInputVersionName } = this.state;
+
+        if (ModalInputImageName.length < 1 || ModalInputVersionName.length < 1) {
+            message.warning("信息没有填写完整！");
+            return;
+        }
+
+        message.loading({ content: '打包镜像中...', key: 'updatable', duration: 0 });
+
+        axios.post('/api',
+            {
+                api: 'image_create_from_container',
+                server_id: this.props.server_id,
+                container_id: this.props.container_id,
+                image_name: ModalInputImageName,
+                version: ModalInputVersionName
+            }).then(data => {
+                if (data.data.status === -666) {
+                    Modal.error({
+                        title: '错误：登录已经失效！',
+                        content: '请重新登录！',
+                        onOk() {
+                            window.location.replace("/")
+                        },
+                    });
+                    return;
+                }
+
+                setTimeout(() => {
+                    message.success({ content: '打包成功！', key: 'updatable', duration: 2 });
+                }, 1000);
+
+                this.setState({
+                    ModalLoading: false,
+                    ModalInputImageName: "",
+                    ModalInputVersionName: "",
+                    ModalVisible: false
+                })
+            });
+    }
+
+    handleModalCancel = () => {
+        this.setState({
+            ModalVisible: false,
+        })
+    }
+
+    handleModalInputImageName = (e) => {
+        this.setState({
+            ModalInputImageName: e.target.value
+        })
+    }
+
+    handleModalInputVersion = (e) => {
+        this.setState({
+            ModalInputVersionName: e.target.value
+        })
+    }
+
     render() {
-        const { data, loading, log_data } = this.state;
+        const { data, loading, log_data, ModalInputImageName, ModalInputVersionName } = this.state;
         if (data.NetworkSettings) {
             const network_drive = Object.keys(data.NetworkSettings.Networks)[0]
             return (
@@ -288,7 +362,7 @@ export default class ContainerInspect extends React.Component {
                                     onClose={this.onChildClose}
                                     visible={this.state.childrenDrawer}
                                 >
-                                    {log_data.status == 0 ?
+                                    {log_data.status === 0 ?
                                         <List
                                             size="small"
                                             header={<div>日志</div>}
@@ -313,6 +387,21 @@ export default class ContainerInspect extends React.Component {
                                     }
 
                                 </Tooltip>
+                                <Tooltip placement="top" title="将该容器打包为镜像">
+                                    <Button style={{ marginLeft: 12 }} type="primary" shape="circle" icon={<CloudUploadOutlined />} size="large" onClick={() => this.showModal()} />
+                                </Tooltip>
+                                <Modal
+                                    title="填写镜像信息"
+                                    visible={this.state.ModalVisible}
+                                    onOk={this.handleModalOk}
+                                    confirmLoading={this.state.ModalLoading}
+                                    onCancel={this.handleModalCancel}
+                                >
+                                    <Space direction="vertical" size="large">
+                                        <Input addonBefore="请输入镜像名：" value={ModalInputImageName} onChange={(e) => this.handleModalInputImageName(e)} />
+                                        <Input addonBefore="请输入版本名：" value={ModalInputVersionName} onChange={(e) => this.handleModalInputVersion(e)} />
+                                    </Space>
+                                </Modal>
                             </Descriptions.Item>
                         </Descriptions>
                         <br /><br />

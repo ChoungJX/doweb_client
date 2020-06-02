@@ -1,7 +1,7 @@
 import { Button, Descriptions, Drawer, Modal, Skeleton, Tooltip } from 'antd';
 import axios from 'axios';
 import React from 'react';
-
+import ReactJson from 'react-json-view';
 
 
 
@@ -85,6 +85,9 @@ export default class NetworkInspect extends React.Component {
                                 }
                             </Descriptions.Item>
                         </Descriptions>
+                        <br /><br />
+                        <h3><strong>原始数据</strong></h3>
+                        <ReactJson src={data} />
                     </Drawer>
                 </div>
             );
@@ -103,6 +106,8 @@ export default class NetworkInspect extends React.Component {
                         width={720}
                     >
                         <h3><strong>基本信息</strong></h3>
+                        <Skeleton active />
+                        <h3><strong>原始数据</strong></h3>
                         <Skeleton active />
                     </Drawer>
                 </div>
