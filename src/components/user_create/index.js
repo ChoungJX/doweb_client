@@ -42,6 +42,7 @@ export default class UserCreate extends React.Component {
                 this.setState({
                     loading: false
                 })
+                window.history.back("/user");
             });
     }
 

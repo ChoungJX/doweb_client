@@ -94,6 +94,7 @@ class UserChange extends React.Component {
                 this.setState({
                     loading: false
                 })
+                window.history.back("/user");
             });
     }
 

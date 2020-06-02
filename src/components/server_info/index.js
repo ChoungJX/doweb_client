@@ -262,8 +262,11 @@ class ServerInfoShow extends React.Component {
         } else {
             return (
                 <div>
+                    <h3><strong>用户设定</strong></h3>
                     <Skeleton active />
+                    <h3><strong>系统信息</strong></h3>
                     <Skeleton active />
+                    <h3><strong>Docker信息</strong></h3>
                     <Skeleton active />
                 </div>
             );
