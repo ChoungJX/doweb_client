@@ -40,7 +40,7 @@ export default class ServerDeleteButton extends React.Component {
                 notification.open({
                     message: '删除成功！',
                     description:
-                        `节点:${this.props.server_id}删除成功！`,
+                        `节点删除成功！`,
                     icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                 });
             });

@@ -38,11 +38,11 @@ export default class AboutPage extends React.Component {
         return (
             <Layout className="layout">
                 <AllHeader number={'3'} />
-                <Content style={{ padding: '0 50px', marginTop: 64, minHeight: screen_high - 64 - 70 }}>
+                <Content style={{ padding: '0 50px 0 50px', marginTop: 64, minHeight: screen_high - 64 - 70 }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>关于</Breadcrumb.Item>
                     </Breadcrumb>
-                    <div style={{ height: `${screen_high - 64 - 70 - 70}px` }} className="site-layout-content">
+                    <div style={{ height: `${screen_high - 64 - 75 - 50}px` }} className="site-layout-content">
                         <Result
                             icon={<ControlTwoTone style={{ fontSize: "72px" }} />}
                             title="可视化Docker容器管理系统"

@@ -28,7 +28,7 @@ export default class HomePage extends React.Component {
         return (
             <Layout className="layout">
                 <AllHeader number={'1'} />
-                <Content style={{ padding: '0 50px', marginTop: 64, minHeight: screen_high-64 }}>
+                <Content style={{ padding: '0 50px 0 50px', marginTop: 64, minHeight: screen_high - 64 - 70 }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>主页</Breadcrumb.Item>
                     </Breadcrumb>
@@ -49,7 +49,7 @@ export default class HomePage extends React.Component {
                         <Divider />
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}><a rel="noopener noreferrer" href="https://github.com/ChoungJX/doweb_server" target="_blank"><GithubOutlined /></a> ChoungJX毕业作品</Footer>
+                <Footer style={{ textAlign: 'center', height: "70px" }}><a rel="noopener noreferrer" href="https://github.com/ChoungJX/doweb_server" target="_blank"><GithubOutlined /></a> ChoungJX毕业作品</Footer>
             </Layout>
         )
     }

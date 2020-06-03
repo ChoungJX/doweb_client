@@ -3,21 +3,21 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'https://docker.rabbitravel.xyz',
+            target: 'http://127.0.0.1:4000',
             changeOrigin: true,
         })
     );
     app.use(
         '/welcome_api',
         createProxyMiddleware({
-            target: 'https://docker.rabbitravel.xyz',
+            target: 'http://127.0.0.1:4000',
             changeOrigin: true,
         })
     );
     app.use(
         '/version',
         createProxyMiddleware({
-            target: 'https://docker.rabbitravel.xyz',
+            target: 'http://127.0.0.1:4000',
             changeOrigin: true,
         })
     );
