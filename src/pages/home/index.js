@@ -32,7 +32,7 @@ export default class HomePage extends React.Component {
                     <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>主页</Breadcrumb.Item>
                     </Breadcrumb>
-                    <div className="site-layout-content">
+                    <div className="site-layout-content" style={{ height: screen_high - 64 - 70 - 50 - 16 }}>
                         <Divider orientation="left">欢迎</Divider>
                         <Row justify="center" gutter={[16, 16]}>
                             <Col span={24} >

@@ -42,7 +42,7 @@ export default class AboutPage extends React.Component {
                     <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>关于</Breadcrumb.Item>
                     </Breadcrumb>
-                    <div style={{ height: `${screen_high - 64 - 75 - 50}px` }} className="site-layout-content">
+                    <div style={{ height: `${screen_high - 64 - 75 - 50 - 16}px` }} className="site-layout-content">
                         <Result
                             icon={<ControlTwoTone style={{ fontSize: "72px" }} />}
                             title="可视化Docker容器管理系统"
