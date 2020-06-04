@@ -1,4 +1,4 @@
-import { CloudUploadOutlined, EyeOutlined, FundProjectionScreenOutlined, LoadingOutlined, PlayCircleOutlined, PoweroffOutlined, ReloadOutlined, SnippetsOutlined } from '@ant-design/icons';
+import { CloudUploadOutlined, RedoOutlined, EyeOutlined, FundProjectionScreenOutlined, LoadingOutlined, PlayCircleOutlined, PoweroffOutlined, ReloadOutlined, SnippetsOutlined } from '@ant-design/icons';
 import { Badge, Button, Descriptions, Drawer, Input, message, Modal, Skeleton, Space, Spin, Statistic, Timeline, Tooltip } from 'antd';
 import axios from 'axios';
 import React from 'react';
@@ -21,7 +21,9 @@ export default class ContainerInspect extends React.Component {
             ModalInputImageName: "",
             ModalInputVersionName: "",
 
-            log_data: {}
+            log_data: {},
+            reloading: false,
+            max_log_number: 20
         }
     }
 
@@ -312,8 +314,28 @@ export default class ContainerInspect extends React.Component {
         })
     }
 
+    handlereloadingButton = () => {
+        this.setState({
+            reloading: "加载中..."
+        });
+        setTimeout(() => {
+            const { max_log_number, log_data } = this.state;
+            if (log_data.data.length > max_log_number) {
+                this.setState({
+                    max_log_number: max_log_number + 20,
+                    reloading: false
+                })
+            } else {
+                message.warning("已经加载完了！");
+                this.setState({
+                    reloading: false
+                })
+            }
+        }, 500);
+    }
+
     render() {
-        const { data, loading, log_data, ModalInputImageName, ModalInputVersionName } = this.state;
+        const { data, loading, reloading, log_data, ModalInputImageName, ModalInputVersionName, max_log_number } = this.state;
         const antIcon = <LoadingOutlined style={{ fontSize: 48 }} spin />;
         let screen_high = document.body.clientHeight;
         if (data.NetworkSettings) {
@@ -368,11 +390,19 @@ export default class ContainerInspect extends React.Component {
                                         <div>
                                             <Statistic title="记录日志数" value={log_data.data.length} />
                                             <br />
-                                            <Timeline>
-                                                {log_data.data.map((item) => (
-                                                    <Timeline.Item>{item}</Timeline.Item>
-                                                ))}
+                                            <Timeline pending={reloading} >
+                                                {log_data.data.map((item, index) => {
+                                                    if (max_log_number >= index) {
+                                                        return (<Timeline.Item>{item}</Timeline.Item>)
+                                                    } else {
+                                                        return false;
+                                                    }
+                                                })
+                                                }
                                             </Timeline>
+                                            <Button type="primary" shape="round" loading={reloading} icon={<RedoOutlined />} onClick={() => this.handlereloadingButton()} size="small">
+                                                加载更多
+                                            </Button>
                                         </div>
                                         :
                                         <div align="center" style={{ "marginTop": `${screen_high / 2 - 48}px` }}>
