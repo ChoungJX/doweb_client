@@ -68,7 +68,7 @@ class WelcomeBindServer extends React.Component {
             message.error("输入长度大于限制！");
             return;
         }
-        if (server_name_input.length<1){
+        if (server_name_input.length < 1) {
             message.warning("请为服务器定义一个名字");
             return;
         }
@@ -96,6 +96,9 @@ class WelcomeBindServer extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 

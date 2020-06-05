@@ -1,5 +1,5 @@
 import { ApartmentOutlined } from '@ant-design/icons';
-import { Button, Card, Modal, PageHeader, Table, Tag } from 'antd';
+import { Button, Card, message, Modal, PageHeader, Table, Tag } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { Link, useParams, useRouteMatch } from 'react-router-dom';
@@ -83,6 +83,9 @@ class NetworlOneServerTable extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 

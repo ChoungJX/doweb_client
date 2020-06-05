@@ -1,4 +1,4 @@
-import { Card, Modal, PageHeader, Table } from 'antd';
+import { Card, message, Modal, PageHeader, Table } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { useParams, useRouteMatch } from 'react-router-dom';
@@ -73,6 +73,9 @@ class VolumeOneServerTable extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 

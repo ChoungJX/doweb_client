@@ -37,6 +37,9 @@ export default class ImageAddButton extends React.Component {
                         },
                     });
                     return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
+                    return;
                 }
 
                 setTimeout(() => {

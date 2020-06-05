@@ -1,5 +1,5 @@
 import { ApartmentOutlined, AppstoreOutlined, ArrowLeftOutlined, CloudServerOutlined, DashboardOutlined, FolderOpenOutlined, SaveOutlined } from '@ant-design/icons';
-import { Layout, Menu, Modal } from 'antd';
+import { Layout, Menu, message, Modal } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { Link, useParams } from "react-router-dom";
@@ -145,6 +145,9 @@ export default function IndexMenu(props) {
                         window.location.replace("/")
                     },
                 });
+            } else if (d2.data.status === -999) {
+                message.warning(d2.data.message);
+                return;
             } else {
                 error({
                     title: '错误：与目标节点服务器连接失败！',

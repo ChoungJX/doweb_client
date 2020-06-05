@@ -1,4 +1,4 @@
-import { Card, Modal, PageHeader, Table, Tag } from 'antd';
+import { Card, message, Modal, PageHeader, Table, Tag } from 'antd';
 import axios from 'axios';
 import moment from "moment";
 import React from 'react';
@@ -134,6 +134,9 @@ class ContainerOneServerTable extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 

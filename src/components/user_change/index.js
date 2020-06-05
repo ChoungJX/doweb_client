@@ -45,6 +45,9 @@ class UserChange extends React.Component {
                         },
                     });
                     return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
+                    return;
                 }
 
                 this.setState({
@@ -79,6 +82,9 @@ class UserChange extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 

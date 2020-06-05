@@ -1,5 +1,5 @@
 import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
-import { Button, Modal, notification } from 'antd';
+import { Button, message, Modal, notification } from 'antd';
 import axios from 'axios';
 import React from 'react';
 
@@ -32,6 +32,9 @@ export default class ImageDeleteButton extends React.Component {
                                 window.location.replace("/")
                             },
                         });
+                        return;
+                    } else if (data.data.status === -999) {
+                        message.warning(data.data.message);
                         return;
                     }
 

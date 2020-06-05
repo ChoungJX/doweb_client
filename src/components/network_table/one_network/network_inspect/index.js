@@ -1,4 +1,4 @@
-import { Button, Descriptions, Drawer, Modal, Skeleton, Tooltip } from 'antd';
+import { Button, Descriptions, Drawer, message, Modal, Skeleton, Tooltip } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import ReactJson from 'react-json-view';
@@ -29,6 +29,9 @@ export default class NetworkInspect extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 

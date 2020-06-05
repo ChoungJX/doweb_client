@@ -54,6 +54,9 @@ export default class ServerAddButton extends React.Component {
                         },
                     });
                     return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
+                    return;
                 }
 
                 if (data.data.status === -1) {

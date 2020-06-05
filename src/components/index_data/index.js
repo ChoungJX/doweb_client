@@ -1,4 +1,4 @@
-import { Col, Divider, Modal, PageHeader, Row, Spin } from 'antd';
+import { Col, Divider, Modal, PageHeader, Row, Spin, message } from 'antd';
 //import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import React from 'react';
@@ -92,6 +92,9 @@ class IndexDataControl extends React.Component {
                     });
                     this.setState({ flag: 1 });
                     return;
+                } else if (d.data.status === -999) {
+                    message.warning(d.data.message);
+                    return;
                 }
 
                 const { data } = this.state;
@@ -126,6 +129,9 @@ class IndexDataControl extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (d.data.status === -999) {
+                    message.warning(d.data.message);
                     return;
                 }
 

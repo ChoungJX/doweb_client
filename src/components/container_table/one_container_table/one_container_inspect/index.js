@@ -43,6 +43,9 @@ export default class ContainerInspect extends React.Component {
                         },
                     });
                     return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
+                    return;
                 }
 
                 this.setState({
@@ -66,6 +69,9 @@ export default class ContainerInspect extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 
@@ -93,6 +99,9 @@ export default class ContainerInspect extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 
@@ -129,6 +138,9 @@ export default class ContainerInspect extends React.Component {
                         },
                     });
                     return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
+                    return;
                 }
 
                 this.setState({
@@ -164,6 +176,9 @@ export default class ContainerInspect extends React.Component {
                         },
                     });
                     return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
+                    return;
                 }
 
                 this.setState({
@@ -198,6 +213,9 @@ export default class ContainerInspect extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 
@@ -280,6 +298,9 @@ export default class ContainerInspect extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 

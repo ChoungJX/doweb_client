@@ -1,5 +1,5 @@
 import { FullscreenOutlined } from '@ant-design/icons';
-import { Button, Card, Modal, Table, Tag, Tooltip } from 'antd';
+import { Button, Card, message, Modal, Table, Tag, Tooltip } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
@@ -106,6 +106,9 @@ export class ServerTable extends React.Component {
                         },
                     });
                     return;
+                } else if (d.data.status === -999) {
+                    message.warning(d.data.message);
+                    return;
                 }
 
                 this.setState({
@@ -126,6 +129,9 @@ export class ServerTable extends React.Component {
                                         window.location.replace("/")
                                     },
                                 });
+                                return;
+                            } else if (d2.data.status === -999) {
+                                message.warning(data.data.message);
                                 return;
                             }
 

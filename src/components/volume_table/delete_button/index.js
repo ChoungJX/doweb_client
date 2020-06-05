@@ -1,5 +1,5 @@
 import { DeleteOutlined, SmileOutlined } from '@ant-design/icons';
-import { Button, Modal, notification, Popconfirm } from 'antd';
+import { Button, message, Modal, notification, Popconfirm } from 'antd';
 import axios from 'axios';
 import React from 'react';
 
@@ -29,6 +29,9 @@ export default class VolumeDeleteButton extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 

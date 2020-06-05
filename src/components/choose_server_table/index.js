@@ -1,5 +1,5 @@
 import { ControlTwoTone } from '@ant-design/icons';
-import { Button, Card, Modal, Table } from 'antd';
+import { Button, Card, message, Modal, Table } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
@@ -67,6 +67,9 @@ export class CommonTable extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 

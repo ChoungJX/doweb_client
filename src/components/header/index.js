@@ -77,7 +77,7 @@ export class AllHeader extends React.Component {
                             <Dropdown overlay={
                                 <Menu>
                                     <Menu.Item>
-                                        身份: {ifadmin === "100" ? "管理员" : "普通用户"}
+                                        身份: {ifadmin === "100" ? "管理员" : ifadmin === "-1" ? "游客" : "普通用户"}
                                     </Menu.Item>
                                     <Menu.Divider />
                                     <Menu.Item>

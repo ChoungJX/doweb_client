@@ -50,6 +50,9 @@ class ServerPswShow extends React.Component {
                         },
                     });
                     return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
+                    return;
                 }
 
                 this.setState({
@@ -69,6 +72,9 @@ class ServerPswShow extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 
@@ -106,6 +112,9 @@ class ServerPswShow extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 
@@ -149,6 +158,9 @@ class ServerPswShow extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 

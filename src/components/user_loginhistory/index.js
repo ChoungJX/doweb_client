@@ -1,4 +1,4 @@
-import { Card, Modal, Table } from 'antd';
+import { Card, message, Modal, Table } from 'antd';
 import axios from 'axios';
 import React from 'react';
 
@@ -41,6 +41,9 @@ class UserLoginHistoryTable extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 

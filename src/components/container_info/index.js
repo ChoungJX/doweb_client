@@ -1,4 +1,4 @@
-import { Modal, PageHeader, Skeleton } from 'antd';
+import { message, Modal, PageHeader, Skeleton } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { useParams } from 'react-router-dom';
@@ -44,6 +44,9 @@ export class ContainerInfo extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 

@@ -1,4 +1,4 @@
-import { Card, Modal, Table, Tag } from 'antd';
+import { Card, message, Modal, Table, Tag } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import UserDeleteButton from './delete_button';
@@ -51,6 +51,10 @@ class UserInfoTable extends React.Component {
                         return (
                             <Tag color="red">管理员</Tag>
                         )
+                    } else if (record.ifadmin === "-1") {
+                        return (
+                            <Tag color="gold">游客</Tag>
+                        )
                     } else {
                         return (
                             <Tag color="geekblue">普通用户</Tag>
@@ -78,6 +82,9 @@ class UserInfoTable extends React.Component {
                             window.location.replace("/")
                         },
                     });
+                    return;
+                } else if (data.data.status === -999) {
+                    message.warning(data.data.message);
                     return;
                 }
 
