@@ -1,5 +1,5 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Card, Form, Input, message } from 'antd';
+import { Button, Card, Form, Input, Modal } from 'antd';
 import axios from 'axios';
 import React from 'react';
 
@@ -39,16 +39,22 @@ export class LoginForm extends React.Component {
                 if (data.data.status === 0) {
                     this.props.Login()
                 } else {
-                    message.info('用户或密码错误！');
-                    this.setState({
-                        loading: false,
+                    Modal.warning({
+                        title: '登录失败',
+                        content: '用户名或密码错误！',
                     });
                 }
             });
+        this.setState({
+            loading: false,
+        });
     }
 
     onFinishFailed() {
-        ////console.log('Failed:');
+        Modal.warning({
+            title: '登录失败',
+            content: '连接服务器失败！',
+        });
     }
 
     render() {

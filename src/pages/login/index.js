@@ -87,7 +87,7 @@ export default class Login extends React.Component {
                         height: `${screen_high}px`
                     }}>
                         <div style={{
-                            height: "25%"
+                            height: `${screen_high/2-125}px`
                         }}>
 
                         </div>
