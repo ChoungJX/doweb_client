@@ -32,11 +32,15 @@ export default class UserCreate extends React.Component {
                     return;
                 } else if (data.data.status === -999) {
                     message.warning(data.data.message);
+                    this.setState({
+                        loading: false
+                    })
                     return;
                 }
 
                 if (data.data.status === 0) {
                     message.success("用户创建成功！");
+                    window.history.back("/user");
                 } else if (data.data.status === -1) {
                     message.warning('用户名重复，请重新设置！');
                 } else if (data.data.status === -2) {
@@ -45,7 +49,6 @@ export default class UserCreate extends React.Component {
                 this.setState({
                     loading: false
                 })
-                window.history.back("/user");
             });
     }
 

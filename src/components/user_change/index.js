@@ -85,11 +85,15 @@ class UserChange extends React.Component {
                     return;
                 } else if (data.data.status === -999) {
                     message.warning(data.data.message);
+                    this.setState({
+                        loading: false
+                    })
                     return;
                 }
 
                 if (data.data.status === 0) {
                     message.success("信息修改成功！")
+                    window.history.back("/user");
                 } else if (data.data.status === -1) {
                     message.warning('用户名重复，请重新设置！');
                 } else if (data.data.status === -2) {
@@ -100,7 +104,6 @@ class UserChange extends React.Component {
                 this.setState({
                     loading: false
                 })
-                window.history.back("/user");
             });
     }
 

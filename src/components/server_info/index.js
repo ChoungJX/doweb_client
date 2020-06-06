@@ -121,7 +121,9 @@ class ServerInfoShow extends React.Component {
                     });
                     return;
                 } else if (data.data.status === -999) {
-                    message.warning(data.data.message);
+                    this.setState({
+                        ssh: "暂无权限查看！"
+                    })
                     return;
                 }
 

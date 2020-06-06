@@ -137,9 +137,6 @@ class NetworkCreatePage extends React.Component {
                 gateway: network_gateway_input,
                 option: network_type_option_input_new,
             }).then(data => {
-                setTimeout(() => {
-                    message.success({ content: '客户端已接收数据！', key: 'updatable', duration: 2 });
-                }, 1000);
                 if (data.data.status === -666) {
                     Modal.error({
                         title: '错误：登录已经失效！',
@@ -150,10 +147,13 @@ class NetworkCreatePage extends React.Component {
                     });
                     return;
                 } else if (data.data.status === -999) {
-                    message.warning(data.data.message);
+                    message.warning({ content: data.data.message, key: 'updatable', duration: 2 });
+                    this.setState({ loading: false })
                     return;
                 }
-
+                setTimeout(() => {
+                    message.success({ content: '客户端已接收数据！', key: 'updatable', duration: 2 });
+                }, 1000);
                 if (!data.data.data.data.message) {
                     notification.open({
                         message: '创建成功！',

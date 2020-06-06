@@ -34,12 +34,16 @@ export default class ServerDeleteButton extends React.Component {
                     return;
                 } else if (data.data.status === -999) {
                     message.warning(data.data.message);
+                    this.setState({
+                        loading: false,
+                    })
                     return;
                 }
 
                 this.setState({
                     loading: false,
                 })
+                this.props.onFresh();
                 notification.open({
                     message: '删除成功！',
                     description:
@@ -47,7 +51,6 @@ export default class ServerDeleteButton extends React.Component {
                     icon: <SmileOutlined style={{ color: '#108ee9' }} />,
                 });
             });
-        this.props.onFresh();
     }
 
     render() {

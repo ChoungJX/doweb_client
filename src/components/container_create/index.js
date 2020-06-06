@@ -231,7 +231,10 @@ class ContainerCreatePage extends React.Component {
                     });
                     return;
                 } else if (data.data.status === -999) {
-                    message.warning(data.data.message);
+                    message.warning({ content: data.data.message, key: 'updatable', duration: 2 });
+                    this.setState({
+                        loading: false,
+                    })
                     return;
                 }
 
@@ -267,7 +270,10 @@ class ContainerCreatePage extends React.Component {
                                 });
                                 return;
                             } else if (data.data.status === -999) {
-                                message.warning(data.data.message);
+                                message.warning({ content: data.data.message, key: 'updatable', duration: 2 });
+                                this.setState({
+                                    loading: false,
+                                })
                                 return;
                             }
 

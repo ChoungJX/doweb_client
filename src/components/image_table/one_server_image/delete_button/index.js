@@ -35,6 +35,9 @@ export default class ImageDeleteButton extends React.Component {
                         return;
                     } else if (data.data.status === -999) {
                         message.warning(data.data.message);
+                        this.setState({
+                            loading: false
+                        })
                         return;
                     }
 
