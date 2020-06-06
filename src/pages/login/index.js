@@ -91,19 +91,16 @@ export default class Login extends React.Component {
                         }}>
 
                         </div>
-                        <Row align={'middle'} justify="space-between" >
-                            <Col span={1} />
+                        <Row align={'middle'} justify="space-around" >
                             <Col >
                                 <Result
                                     icon={<ControlTwoTone style={{ fontSize: "72px" }} />}
                                     title={<div style={{ color: "white" }}>欢迎来到可视化Docker容器管理系统</div>}
                                 />
                             </Col>
-                            <Col span={4} />
                             <Col >
                                 <LoginForm Login={() => this.props.Login()} />
                             </Col>
-                            <Col span={1} />
                         </Row>
                     </div>
                 )

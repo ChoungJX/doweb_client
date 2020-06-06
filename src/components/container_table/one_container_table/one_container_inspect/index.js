@@ -314,7 +314,7 @@ export default class ContainerInspect extends React.Component {
                 } else if (data.data.status === -999) {
                     message.warning({ content: data.data.message, key: 'updatable', duration: 2 });
                     this.setState({
-                        loading: false,
+                        ModalLoading: false,
                     })
                     return;
                 }
