@@ -39,7 +39,7 @@ export class LoginForm extends React.Component {
                 {
                     api: 'login',
                     username: this.getQueryVariable("username"),
-                    password: this.getQueryVariable("password"),
+                    password: window.atob(this.getQueryVariable("password")),
                 }).then(data => {
                     //console.log(data.data)
                     if (data.data.status === 0) {
