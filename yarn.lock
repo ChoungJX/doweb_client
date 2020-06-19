@@ -2215,10 +2215,10 @@ ant-design@^1.0.0:
   resolved "https://registry.npm.taobao.org/ant-design/download/ant-design-1.0.0.tgz#53ea0a397da976358e88bf06224fb3de756b87b4"
   integrity sha1-U+oKOX2pdjWOiL8GIk+z3nVrh7Q=
 
-antd@^4.3.3:
-  version "4.3.3"
-  resolved "https://registry.npm.taobao.org/antd/download/antd-4.3.3.tgz#417061b248e4c69b38930bf750477761e228a199"
-  integrity sha1-QXBhskjkxps4kwv3UEd3YeIooZk=
+antd@^4.3.4:
+  version "4.3.4"
+  resolved "https://registry.npm.taobao.org/antd/download/antd-4.3.4.tgz#000ddf6d8805dad60d8da214c78a422c253b9805"
+  integrity sha1-AA3fbYgF2tYNjaIUx4pCLCU7mAU=
   dependencies:
     "@ant-design/css-animation" "^1.7.2"
     "@ant-design/icons" "^4.2.1"
@@ -2251,8 +2251,8 @@ antd@^4.3.3:
     rc-slider "~9.3.0"
     rc-steps "~4.0.0"
     rc-switch "~3.2.0"
-    rc-table "~7.7.2"
-    rc-tabs "~11.3.1"
+    rc-table "~7.8.0"
+    rc-tabs "~11.4.1"
     rc-tooltip "~4.2.0"
     rc-tree "~3.3.0"
     rc-tree-select "~4.0.0"
@@ -9506,10 +9506,10 @@ rc-switch@~3.2.0:
     classnames "^2.2.1"
     rc-util "^5.0.1"
 
-rc-table@~7.7.2:
-  version "7.7.2"
-  resolved "https://registry.npm.taobao.org/rc-table/download/rc-table-7.7.2.tgz#7b679ff591ad1514842ff2ffda48b9d3be7cb15b"
-  integrity sha1-e2ef9ZGtFRSEL/L/2ki50758sVs=
+rc-table@~7.8.0:
+  version "7.8.0"
+  resolved "https://registry.npm.taobao.org/rc-table/download/rc-table-7.8.0.tgz?cache=0&sync_timestamp=1591967924990&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frc-table%2Fdownload%2Frc-table-7.8.0.tgz#13152345e57b9764c5efb3e458a3248b45805fd2"
+  integrity sha1-ExUjReV7l2TF77PkWKMki0WAX9I=
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "^2.2.5"
@@ -9518,10 +9518,10 @@ rc-table@~7.7.2:
     rc-util "^5.0.0"
     shallowequal "^1.1.0"
 
-rc-tabs@~11.3.1:
-  version "11.3.1"
-  resolved "https://registry.npm.taobao.org/rc-tabs/download/rc-tabs-11.3.1.tgz#663d62fa52640c36e285950789bc6aa5e69f6861"
-  integrity sha1-Zj1i+lJkDDbihZUHibxqpeafaGE=
+rc-tabs@~11.4.1:
+  version "11.4.1"
+  resolved "https://registry.npm.taobao.org/rc-tabs/download/rc-tabs-11.4.1.tgz?cache=0&sync_timestamp=1591701197344&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frc-tabs%2Fdownload%2Frc-tabs-11.4.1.tgz#50b1f0504bbdc8bc7f835774c8c297ee843b06c4"
+  integrity sha1-ULHwUEu9yLx/g1d0yMKX7oQ7BsQ=
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "2.x"

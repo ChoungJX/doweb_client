@@ -289,6 +289,9 @@ export default class ContainerInspect extends React.Component {
 
         if (ModalInputImageName.length < 1 || ModalInputVersionName.length < 1) {
             message.warning("信息没有填写完整！");
+            this.setState({
+                ModalLoading: false
+            })
             return;
         }
 
