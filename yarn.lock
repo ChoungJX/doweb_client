@@ -2215,10 +2215,10 @@ ant-design@^1.0.0:
   resolved "https://registry.npm.taobao.org/ant-design/download/ant-design-1.0.0.tgz#53ea0a397da976358e88bf06224fb3de756b87b4"
   integrity sha1-U+oKOX2pdjWOiL8GIk+z3nVrh7Q=
 
-antd@^4.3.4:
-  version "4.3.4"
-  resolved "https://registry.npm.taobao.org/antd/download/antd-4.3.4.tgz#000ddf6d8805dad60d8da214c78a422c253b9805"
-  integrity sha1-AA3fbYgF2tYNjaIUx4pCLCU7mAU=
+antd@^4.3.5:
+  version "4.3.5"
+  resolved "https://registry.npm.taobao.org/antd/download/antd-4.3.5.tgz#1bafbc2920a1b5266bcd46496532578b2fd0f98e"
+  integrity sha1-G6+8KSChtSZrzUZJZTJXiy/Q+Y4=
   dependencies:
     "@ant-design/css-animation" "^1.7.2"
     "@ant-design/icons" "^4.2.1"
@@ -2257,7 +2257,7 @@ antd@^4.3.4:
     rc-tree "~3.3.0"
     rc-tree-select "~4.0.0"
     rc-trigger "~4.3.0"
-    rc-upload "~3.1.0"
+    rc-upload "~3.2.0"
     rc-util "^5.0.1"
     scroll-into-view-if-needed "^2.2.25"
     warning "^4.0.3"
@@ -9604,10 +9604,10 @@ rc-trigger@^4.2.0, rc-trigger@^4.2.1, rc-trigger@^4.3.0, rc-trigger@~4.3.0:
     rc-animate "^3.0.0"
     rc-util "^5.0.1"
 
-rc-upload@~3.1.0:
-  version "3.1.1"
-  resolved "https://registry.npm.taobao.org/rc-upload/download/rc-upload-3.1.1.tgz#be5b33fabfa32abc2415095efb0f85a2acedae96"
-  integrity sha1-vlsz+r+jKrwkFQle+w+FoqztrpY=
+rc-upload@~3.2.0:
+  version "3.2.0"
+  resolved "https://registry.npm.taobao.org/rc-upload/download/rc-upload-3.2.0.tgz?cache=0&sync_timestamp=1592472694826&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frc-upload%2Fdownload%2Frc-upload-3.2.0.tgz#251fc3c9105902e808600a414f368f285d63bfba"
+  integrity sha1-JR/DyRBZAugIYApBTzaPKF1jv7o=
   dependencies:
     classnames "^2.2.5"
 
